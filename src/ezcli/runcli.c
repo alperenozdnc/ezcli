@@ -14,12 +14,13 @@ void runcli(struct cli *cli, int argc, char *argv[]) {
 
         for (size_t j = 0; j < cli->opts_len; j++) {
             struct opt *opt = cli->opts[j];
-            char *actual_opt = expand(opt);
 
-            if (strcmp(token, actual_opt) != 0)
+            char *exp_opt = expand(opt);
+
+            if (strcmp(token, exp_opt) != 0)
                 continue;
 
-            free(actual_opt);
+            free(exp_opt);
 
             enum rtype ret;
 
