@@ -1,11 +1,19 @@
 #include <ezcli.h>
 
-#include <stdio.h>
+#include <stdbool.h>
 
-void hello_world() {
-    printf("hello world");
+void initcli(struct cli *cli, char *cmd, char **aliases, bool gen_help,
+             struct opt **opts) {
 }
 
-void bye_world() {
-    printf("bye world");
+void runcli(struct cli *cli, int argc, char *argv[]) {
+}
+
+void cliadd_opt(struct cli *cli_p, struct opt opt_a) {
+}
+
+void cliadd_alias(struct cli *cli_p, char *alias) {
+}
+
+void freecli(struct cli *cli_p) {
 }
