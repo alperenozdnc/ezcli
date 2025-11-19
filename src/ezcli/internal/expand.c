@@ -1,4 +1,4 @@
-#include <ezcli/expand.h>
+#include "expand.h"
 
 #include <stdlib.h>
 #include <string.h>
