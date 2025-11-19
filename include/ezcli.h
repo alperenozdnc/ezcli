@@ -3,6 +3,7 @@
 
 #include <ezcli/cli.h>
 #include <ezcli/opt.h>
+#include <ezcli/print.h>
 
 #include <stdbool.h>
 
