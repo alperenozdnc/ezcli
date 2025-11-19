@@ -8,7 +8,7 @@
 /*
  * initializes a general command line interface struct. see `struct cli` for
  * arguments.
- * `opts` can also be populated with `cliadd_opt`
+ * `opts` can also be populated with `addopt`
  *
  * ezcli is responsible for allocating but you are responsible to free. make
  * sure you run `freecli` after usage.
