@@ -3,6 +3,10 @@
 
 enum rtype _eat(char *food) {
     if (!food) {
+        cliprint(CLI_HINT, "human: ",
+                 "i can't eat air, man. you should try to give me something to "
+                 "work with here.\n");
+
         return RET_FAIL;
     }
 
