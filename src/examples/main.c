@@ -34,5 +34,7 @@ int main(int argc, char *argv[]) {
 
     initcli(&cli, "human", NULL, true, opts);
 
+    runcli(&cli, argc, argv);
+
     freecli(&cli);
 }
