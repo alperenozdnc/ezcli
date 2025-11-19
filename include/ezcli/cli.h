@@ -2,6 +2,7 @@
 #define EZCLI_CLI_H
 
 #include <stdbool.h>
+#include <stddef.h>
 
 /*
  * keeps the information about the general command line interface.
@@ -10,11 +11,14 @@
  * `gen_help`: if `true`, generates a default help option that also
  * allows searching for help on individual options.
  * `opts`: list of options the command line interface supports.
+ * `opts_len`: length of `opts`. this is automatically filled by `initcli()`.
+ * note that for this to be accurate, your `opts` MUST terminate with `NULL`.
  */
 struct cli {
     char *cmd;
     bool gen_help;
     struct opt **opts;
+    size_t opts_len;
 };
 
 #endif
