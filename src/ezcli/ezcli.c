@@ -3,8 +3,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-void initcli(struct cli *cli, char *cmd, char **aliases, bool gen_help,
-             struct opt **opts) {
+void initcli(struct cli *cli, char *cmd, bool gen_help, struct opt **opts) {
 }
 
 void runcli(struct cli *cli, int argc, char *argv[]) {
@@ -22,9 +21,6 @@ void runcli(struct cli *cli, int argc, char *argv[]) {
 }
 
 void cliadd_opt(struct cli *cli_p, struct opt *opt_a) {
-}
-
-void cliadd_alias(struct cli *cli_p, char *alias) {
 }
 
 void freecli(struct cli *cli_p) {
