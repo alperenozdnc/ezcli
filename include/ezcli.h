@@ -21,7 +21,7 @@ void initcli(struct cli *cli_p, char *cmd, char **aliases, bool gen_help,
 /*
  * adds an option to the `opts` dynamic array in a `cli` struct.
  */
-void cliadd_opt(struct cli *cli_p, struct opt opt_a);
+void cliadd_opt(struct cli *cli_p, struct opt *opt_a);
 
 /*
  * adds an alias to the cmd name in a`cli` struct.
