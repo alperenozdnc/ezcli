@@ -25,12 +25,11 @@ void runcli(struct cli *cli, int argc, char *argv[]) {
             enum rtype ret;
 
             if (i + 1 < argc) {
-                printf("ezcli: running %s with val %s\n", opt->name,
-                       argv[i + 1]);
+                printf("ezcli: %s -> %s\n", opt->name, argv[i + 1]);
 
                 ret = opt->body(argv[i + 1]);
             } else {
-                printf("ezcli: running %s no val\n", opt->name);
+                printf("ezcli: %s -> NULL\n", opt->name);
 
                 ret = opt->body(NULL);
             }
