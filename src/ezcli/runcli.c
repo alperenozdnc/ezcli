@@ -16,9 +16,8 @@ void runcli(struct cli *cli, int argc, char *argv[]) {
             struct opt *opt = cli->opts[j];
             char *actual_opt = expand(opt);
 
-            if (strcmp(token, actual_opt) != 0) {
+            if (strcmp(token, actual_opt) != 0)
                 continue;
-            }
 
             free(actual_opt);
 
