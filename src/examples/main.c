@@ -5,7 +5,7 @@ enum rtype _eat(char *food) {
     if (!food) {
         cliprint(CLI_HINT, "human: ",
                  "i can't eat air, man. you should try to give me something to "
-                 "work with here.\n");
+                 "work with here.");
 
         return RET_FAIL;
     }
@@ -17,8 +17,7 @@ enum rtype _eat(char *food) {
 
 enum rtype _sleep(char *str) {
     if (str) {
-        cliprint(CLI_ERROR,
-                 "human: ", "don't need input on 'sleep', asshole.\n");
+        cliprint(CLI_ERROR, "human: ", "don't need input on 'sleep', asshole.");
 
         return RET_FAIL;
     }
@@ -30,7 +29,7 @@ enum rtype _sleep(char *str) {
 
 enum rtype _secret(char *secret_str) {
     if (!secret_str) {
-        cliprint(CLI_ERROR, "human: ", "need a secret to tell, asshole.\n");
+        cliprint(CLI_ERROR, "human: ", "need a secret to tell, asshole.");
 
         return RET_FAIL;
     }
