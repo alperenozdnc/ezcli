@@ -46,25 +46,22 @@ enum rtype _unwanted(char *name) {
     return RET_NORMAL;
 }
 
+struct opt eat = {.type = OPTION_BARE, .name = "eat", .body = *_eat};
+
+struct opt sleep = {.type = OPTION_BARE, .name = "sleep", .body = *_sleep};
+
+struct opt secret = {.type = OPTION_DOUBLE, .name = "secret", .body = *_secret};
+
+struct opt __secret = {.type = OPTION_SINGLE, .name = "S", .body = *_secret};
+
+struct opt unwanted = {
+    .type = OPTION_BARE, .name = "unwanted", .body = *_unwanted};
+
 int main(int argc, char *argv[]) {
     struct cli cli;
-
-    struct opt eat = {.type = OPTION_BARE, .name = "eat", .body = *_eat};
-
-    struct opt sleep = {.type = OPTION_BARE, .name = "sleep", .body = *_sleep};
-
-    struct opt secret = {
-        .type = OPTION_DOUBLE, .name = "secret", .body = *_secret};
-
-    struct opt __secret = {
-        .type = OPTION_SINGLE, .name = "S", .body = *_secret};
-
     struct opt *opts[] = {&eat, &sleep, &secret, &__secret, NULL};
 
     initcli(&cli, "human", true, opts);
-
-    struct opt unwanted = {
-        .type = OPTION_BARE, .name = "unwanted", .body = *_unwanted};
 
     addopt(&cli, &unwanted);
 
