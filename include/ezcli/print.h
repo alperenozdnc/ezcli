@@ -14,6 +14,6 @@ enum print_type { CLI_HINT, CLI_WARN, CLI_ERROR };
  * `enum print_type` has to be `CLI_HINT`, `CLI_WARNING`, or `CLI_ERROR`.
  * a hint is blue, a warning is yellow, and an error is red.
  */
-void cliprint(enum print_type type, char *prefix, char *msg);
+void cliprint(enum print_type type, char *prefix, char *msg, ...);
 
 #endif
