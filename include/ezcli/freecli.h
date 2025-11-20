@@ -4,8 +4,7 @@
 #include <ezcli/cli.h>
 
 /*
- * frees all allocated memory. this is the only function you need to
- * run for cleanup.
+ * frees all internally allocated memory.
  */
 void freecli(struct cli *cli_p);
 
