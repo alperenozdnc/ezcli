@@ -25,4 +25,6 @@ void addopt(struct cli *cli, struct opt *opt_a) {
 
         memcpy(&cli->opts[i], &opt, sizeof(struct opt *));
     }
+
+    free(new_opts);
 }
