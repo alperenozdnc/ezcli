@@ -1,6 +1,8 @@
 #ifndef EZCLI_OPT_H
 #define EZCLI_OPT_H
 
+#include <stdbool.h>
+
 /*
  * keeps track of the type of an option.
  *
@@ -23,12 +25,15 @@ enum rtype { RET_NORMAL, RET_WARN, RET_FAIL };
  * keeps the information about an option.
  * `type`: type of option (see enum otype)
  * `name`: name of option
- * `body`: functionality of option. this is the function that is feeded the
- * word that comes after an option.
+ * `want_input`: true if option requires an input. if not filled, undefined
+ * parsing behaviour may occur.
+ * `body`: functionality of option. this is the
+ * function that is feeded the word that comes after an option.
  */
 struct opt {
     enum otype type;
     char *name;
+    bool want_input;
     enum rtype (*body)(char *);
 };
 
