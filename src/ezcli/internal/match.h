@@ -1,0 +1,22 @@
+#ifndef EZCLI_MATCH_H
+#define EZCLI_MATCH_H
+
+#include <ezcli/cli.h>
+#include <ezcli/opt.h>
+
+#include <stdbool.h>
+
+/*
+ * stands for option_token_match.
+ * checks if the given token and option name match.
+ */
+bool ot_match(struct opt *opt, char *token);
+
+/*
+ * stands for option_token_match_any.
+ * checks if the given token and any option names match. returns the option
+ * if any matches are found.
+ */
+struct opt *ot_match_any(struct cli *cli, char *token);
+
+#endif
