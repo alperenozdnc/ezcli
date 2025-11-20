@@ -6,6 +6,8 @@
 #define ANSI_BLUE "\x1b[34m"
 #define ANSI_RESET "\x1b[0m"
 
+#define EZCLI_EMPTY_PREFIX ""
+
 enum print_type { CLI_HINT, CLI_WARN, CLI_ERROR };
 
 /*
