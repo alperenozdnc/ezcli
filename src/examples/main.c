@@ -44,6 +44,11 @@ struct opt unwanted = {.type = OPTION_BARE,
                        .body = *_unwanted,
                        .want_input = true};
 
+struct opt __unwanted = {.type = OPTION_BARE,
+                         .name = "unwanted2",
+                         .body = *_unwanted,
+                         .want_input = true};
+
 int main(int argc, char *argv[]) {
     struct cli cli;
     struct opt *opts[] = {&eat, &sleep, &secret, &__secret, NULL};
@@ -51,6 +56,7 @@ int main(int argc, char *argv[]) {
     initcli(&cli, "human", true, opts);
 
     addopt(&cli, &unwanted);
+    addopt(&cli, &__unwanted);
 
     runcli(&cli, argc, argv);
 
