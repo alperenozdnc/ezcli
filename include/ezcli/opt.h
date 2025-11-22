@@ -21,6 +21,8 @@ enum otype { OPTION_BARE, OPTION_SINGLE, OPTION_DOUBLE };
  */
 enum rtype { RET_NORMAL, RET_WARN, RET_FAIL };
 
+#define EZCLI_NONOPT "NONOPT"
+
 /*
  * keeps the information about an option.
  * `type`: type of option (see enum otype)

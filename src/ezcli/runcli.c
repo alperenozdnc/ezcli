@@ -27,7 +27,36 @@ void check_ret(struct cli *cli, enum rtype ret) {
     }
 }
 
+bool handle_nonopt(struct cli *cli, char *tok, bool is_unrecog,
+                   bool any_option_seen) {
+    if (!is_unrecog)
+        return false;
+
+    if (!cli->allow_non_opt) {
+        cliprint(CLI_ERROR, EZCLI_EMPTY_PREFIX, "%s: unrecognized option '%s'.",
+                 cli->cmd, tok);
+
+        exit(EXIT_FAILURE);
+    }
+
+    if (any_option_seen) {
+        cliprint(CLI_ERROR, EZCLI_EMPTY_PREFIX,
+                 "%s: can't chain non-option '%s' after any options.", cli->cmd,
+                 tok);
+
+        exit(EXIT_FAILURE);
+    }
+
+    struct opt *nonopt = match_nonopt(cli);
+
+    nonopt->body(tok);
+
+    return true;
+}
+
 void runcli(struct cli *cli, int argc, char *argv[]) {
+    bool any_option_seen = false;
+
     // 0-th index is the command name itself
     for (int i = 1; i < argc; i++) {
         char *tok = argv[i];
@@ -36,13 +65,10 @@ void runcli(struct cli *cli, int argc, char *argv[]) {
 
         bool is_tok_arg = !opt;
         bool is_prev_tok_arg = !opt_prev;
+        bool is_unrecog = is_tok_arg && is_prev_tok_arg;
 
-        if (is_tok_arg && is_prev_tok_arg) {
-            cliprint(CLI_ERROR, EZCLI_EMPTY_PREFIX,
-                     "%s: unrecognized option '%s'.", cli->cmd, tok);
-
-            exit(EXIT_FAILURE);
-        }
+        if (handle_nonopt(cli, tok, is_unrecog, any_option_seen))
+            continue;
 
         if (is_tok_arg && !is_prev_tok_arg && !opt_prev->want_input) {
             cliprint(CLI_ERROR, EZCLI_EMPTY_PREFIX,
@@ -67,6 +93,7 @@ void runcli(struct cli *cli, int argc, char *argv[]) {
             cliprint(CLI_HINT, "ezcli: ", "%s -> NULL", opt->name);
 
             check_ret(cli, opt->body(NULL));
+            any_option_seen = true;
 
             break;
         }
@@ -86,6 +113,7 @@ void runcli(struct cli *cli, int argc, char *argv[]) {
                  arg ? arg : "NULL");
 
         check_ret(cli, opt->body(arg));
+        any_option_seen = true;
     }
 
     printf("\n");

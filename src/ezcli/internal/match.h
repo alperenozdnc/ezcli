@@ -19,4 +19,11 @@ bool ot_match(struct opt *opt, char *token);
  */
 struct opt *ot_match_any(struct cli *cli, char *token);
 
+/*
+ * stands for option_match_non_option.
+ * finds a 'non-option' (default) argument if it exists and returns `NULL` if it
+ * doesn't
+ */
+struct opt *match_nonopt(struct cli *cli);
+
 #endif
