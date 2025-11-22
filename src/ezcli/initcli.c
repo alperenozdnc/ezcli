@@ -20,9 +20,7 @@ void initcli(struct cli *cli, char *cmd, bool allow_non_opt, bool gen_help,
     cli->opts = malloc(opts_size(cli->opts_len));
 
     for (size_t i = 0; i < cli->opts_len; i++) {
-        struct opt *opt = opts[i];
-
-        memcpy(&cli->opts[i], &opt, sizeof(struct opt *));
+        cli->opts[i] = opts[i];
     }
 
     cli->opts[cli->opts_len] = NULL;

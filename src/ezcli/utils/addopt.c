@@ -12,10 +12,10 @@ void addopt(struct cli *cli, struct opt *opt_a) {
     for (size_t i = 0; i < cli->opts_len; i++) {
         struct opt *opt = cli->opts[i];
 
-        memcpy(&new_opts[i], &opt, sizeof(struct opt *));
+        new_opts[i] = opt;
     }
 
-    memcpy(&new_opts[cli->opts_len++], &opt_a, sizeof(struct opt *));
+    new_opts[cli->opts_len++] = opt_a;
     new_opts[cli->opts_len] = NULL;
 
     cli->opts = realloc(cli->opts, opts_size(cli->opts_len + 1));
@@ -23,7 +23,7 @@ void addopt(struct cli *cli, struct opt *opt_a) {
     for (size_t i = 0; i < cli->opts_len; i++) {
         struct opt *opt = new_opts[i];
 
-        memcpy(&cli->opts[i], &opt, sizeof(struct opt *));
+        cli->opts[i] = opt;
     }
 
     free(new_opts);
