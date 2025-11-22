@@ -62,7 +62,7 @@ int main(int argc, char *argv[]) {
     struct cli cli;
     struct opt *opts[] = {&eat, &sleep, &secret, &__secret, &nonopt, NULL};
 
-    initcli(&cli, "human", true, opts);
+    initcli(&cli, "human", true, true, opts);
 
     addopt(&cli, &unwanted);
     addopt(&cli, &__unwanted);

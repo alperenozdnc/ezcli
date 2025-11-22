@@ -6,8 +6,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-void initcli(struct cli *cli, char *cmd, bool gen_help, struct opt **opts) {
+void initcli(struct cli *cli, char *cmd, bool allow_non_opt, bool gen_help,
+             struct opt **opts) {
     cli->cmd = cmd;
+    cli->allow_non_opt = allow_non_opt;
     cli->gen_help = gen_help;
     cli->opts_len = 0;
 
