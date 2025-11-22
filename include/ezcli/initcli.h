@@ -15,7 +15,6 @@
  *
  * NOTE: `opts` MUST be terminated with a NULL.
  */
-void initcli(struct cli *cli, char *cmd, bool allow_non_opt, bool gen_help,
-             struct opt **opts);
-
+void initcli(struct cli *cli, char *cmd, bool allow_non_opt, struct opt **opts,
+             char *help_aliases[]);
 #endif

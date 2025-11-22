@@ -41,3 +41,16 @@ struct opt *match_nonopt(struct cli *cli) {
 
     return NULL;
 }
+
+bool match_str(char **arr, char *str) {
+    int i = 0;
+
+    while (arr[i]) {
+        if (strcmp(arr[i], str) == 0)
+            return true;
+
+        i++;
+    }
+
+    return false;
+}

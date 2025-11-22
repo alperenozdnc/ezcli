@@ -26,4 +26,9 @@ struct opt *ot_match_any(struct cli *cli, char *token);
  */
 struct opt *match_nonopt(struct cli *cli);
 
+/*
+ * checks if a string exists at least once inside of an array.
+ */
+bool match_str(char **arr, char *str);
+
 #endif

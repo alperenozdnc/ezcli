@@ -27,6 +27,10 @@ void check_ret(struct cli *cli, enum rtype ret) {
     }
 }
 
+/*
+ * handles non-optional (positional) arguments. if true, a `continue` keyword
+ * should be thrown, and if false, the program should continue normally.
+ */
 bool handle_nonopt(struct cli *cli, char *tok, bool is_unrecog,
                    bool any_option_seen) {
     if (!is_unrecog)
@@ -66,6 +70,12 @@ void runcli(struct cli *cli, int argc, char *argv[]) {
         bool is_tok_arg = !opt;
         bool is_prev_tok_arg = !opt_prev;
         bool is_unrecog = is_tok_arg && is_prev_tok_arg;
+
+        if (i == 1 && match_str(cli->help_aliases, tok)) {
+            cli->help(cli, cli->opts);
+
+            break;
+        }
 
         if (handle_nonopt(cli, tok, is_unrecog, any_option_seen))
             continue;

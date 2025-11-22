@@ -61,8 +61,9 @@ struct opt nonopt = {
 int main(int argc, char *argv[]) {
     struct cli cli;
     struct opt *opts[] = {&eat, &sleep, &secret, &__secret, &nonopt, NULL};
+    char *help_aliases[] = {"help", "--help", NULL};
 
-    initcli(&cli, "human", true, true, opts);
+    initcli(&cli, "human", true, opts, help_aliases);
 
     addopt(&cli, &unwanted);
     addopt(&cli, &__unwanted);

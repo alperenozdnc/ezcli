@@ -1,17 +1,21 @@
 #include <ezcli/cli.h>
 #include <ezcli/initcli.h>
 
+#include "internal/help.h"
 #include "internal/opts_size.h"
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-void initcli(struct cli *cli, char *cmd, bool allow_non_opt, bool gen_help,
-             struct opt **opts) {
+void initcli(struct cli *cli, char *cmd, bool allow_non_opt, struct opt **opts,
+             char **help_aliases) {
     cli->cmd = cmd;
     cli->allow_non_opt = allow_non_opt;
-    cli->gen_help = gen_help;
     cli->opts_len = 0;
+
+    cli->help = cli_help;
+    cli->help_aliases = help_aliases;
 
     while (opts[cli->opts_len] != NULL) {
         cli->opts_len++;
