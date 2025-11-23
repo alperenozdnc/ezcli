@@ -13,11 +13,7 @@
  * `usage`: usage of the command. kind of like a man page synopsis.
  * `footer`: this is the string that is printed below all options in help.
  * optional, leave NULL if you don't want it.
- * `allow_non_opt`: if `true` it
- * allows non for option-preceded arguments, like `ls /home` where
- * `/home` is the non option-preceded argument. you should create an opt in
- * `opts` that has name `EZCLI_NONOPT` and type `OPTION_BARE` to handle these
- * inputs. `opts`: list of options the command line interface supports.
+ * `opts`: list of options the command line interface supports.
  * `opts_len`: length of `opts`. this is automatically filled by `initcli()`.
  * note that for this to be accurate, your `opts` MUST terminate with `NULL`.
  *
@@ -25,14 +21,18 @@
  * kind of parsing/requirement error is printed as a warning instead and the
  * program isn't halted. this is pretty useful for creating interactive programs
  * with ezcli.
- */
+ *
+ * `EZCLI_ALLOW_NONOPT`: setting for the allowing of non option-preceded
+ * arguments, (positional options). like `ls /home` where `/home` is the non
+ * option-preceded argument. you should create an opt in `opts` that has name
+ * `EZCLI_NONOPT` and type `OPTION_BARE` to handle these inputs.
+ * */
 struct cli {
     char *cmd;
     char *desc;
     char *usage;
     char *footer;
 
-    bool allow_non_opt;
     struct opt **opts;
     size_t opts_len;
 

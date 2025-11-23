@@ -16,4 +16,4 @@
  * NOTE: `opts` MUST be terminated with a NULL.
  */
 void initcli(struct cli *cli, char *cmd, char *desc, char *usage, char *footer,
-             bool allow_non_opt, struct opt **opts, char *help_aliases[]);
+             struct opt **opts, char *help_aliases[]);

@@ -1,4 +1,5 @@
 #include <ezcli/cli.h>
+#include <ezcli/extern.h>
 #include <ezcli/opt.h>
 #include <ezcli/print.h>
 
@@ -14,7 +15,7 @@ bool handle_nonopt(struct cli *cli, char *tok, bool is_unrecog,
     if (!is_unrecog)
         return false;
 
-    if (!cli->allow_non_opt) {
+    if (!EZCLI_ALLOW_NONOPT) {
         cliprint(CLI_ERROR, EZCLI_EMPTY_PREFIX, "%s: unrecognized option '%s'.",
                  cli->cmd, tok);
 
