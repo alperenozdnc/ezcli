@@ -27,9 +27,11 @@ struct cli {
     char *desc;
     char *usage;
     char *footer;
+
     bool allow_non_opt;
     struct opt **opts;
     size_t opts_len;
+
     char **help_aliases;
     void (*help)(struct cli *cli, struct opt **opts);
 };
