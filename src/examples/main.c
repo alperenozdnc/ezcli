@@ -1,4 +1,3 @@
-#include "ezcli/opt.h"
 #include <ezcli.h>
 #include <stdio.h>
 
@@ -28,6 +27,12 @@ enum rtype _unwanted(char *name) {
 
 enum rtype _nonopt(char *arg) {
     printf("%s", arg);
+
+    return RET_NORMAL;
+}
+
+enum rtype __default(__attribute((unused)) char *_) {
+    printf("wassup dawg");
 
     return RET_NORMAL;
 }
@@ -77,15 +82,18 @@ struct opt __unwanted = {
 };
 
 struct opt nonopt = {
+    .type = OPTION_BARE, .name = EZCLI_NONOPT, .body = *_nonopt};
+
+struct opt _default = {
     .type = OPTION_BARE,
-    .name = EZCLI_NONOPT,
-    .body = *_nonopt,
-    .desc = "this is for when you feel even more unwanted.",
+    .name = EZCLI_DEFAULT_OPT,
+    .body = *__default,
 };
 
 int main(int argc, char *argv[]) {
     struct cli cli;
-    struct opt *opts[] = {&eat, &sleep, &secret, &__secret, &nonopt, NULL};
+    struct opt *opts[] = {&eat,    &sleep,    &secret, &__secret,
+                          &nonopt, &_default, NULL};
     char *help_aliases[] = {"help", "--help", NULL};
 
     initcli(&cli, "human", "This program mimicks human-like behaviours.",
