@@ -9,7 +9,8 @@
 #include <string.h>
 
 void initcli(struct cli *cli, char *cmd, char *desc, char *usage, char *footer,
-             bool allow_non_opt, struct opt **opts, char *help_aliases[]) {
+             bool allow_non_opt, struct opt **opts, char *help_aliases[],
+             bool laidback) {
     cli->cmd = cmd;
     cli->desc = desc;
     cli->usage = usage;
@@ -20,6 +21,8 @@ void initcli(struct cli *cli, char *cmd, char *desc, char *usage, char *footer,
 
     cli->help = cli_help;
     cli->help_aliases = help_aliases;
+
+    cli->laidback = laidback;
 
     while (opts[cli->opts_len] != NULL) {
         cli->opts_len++;

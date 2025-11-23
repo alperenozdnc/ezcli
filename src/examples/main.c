@@ -100,7 +100,7 @@ int main(int argc, char *argv[]) {
             "[command] [args]",
             "For documentation: <https://github.com/alperenozdnc/ezcli>\nFor "
             "license: <https://www.gnu.org/licenses/gpl-3.0.en.html>",
-            true, opts, help_aliases);
+            true, opts, help_aliases, false);
 
     addopt(&cli, &unwanted);
     addopt(&cli, &__unwanted);

@@ -21,6 +21,10 @@
  * inputs. `opts`: list of options the command line interface supports.
  * `opts_len`: length of `opts`. this is automatically filled by `initcli()`.
  * note that for this to be accurate, your `opts` MUST terminate with `NULL`.
+ * `laidback`: setting this true enables 'laidback' mode where any kind of
+ * parsing/requirement error is printed as a warning instead and the program
+ * isn't halted. this is pretty useful for creating interactive programs with
+ * ezcli.
  */
 struct cli {
     char *cmd;
@@ -34,6 +38,8 @@ struct cli {
 
     char **help_aliases;
     void (*help)(struct cli *cli, struct opt **opts);
+
+    bool laidback;
 };
 
 #endif
