@@ -3,6 +3,7 @@
 #include <ezcli/print.h>
 #include <ezcli/runcli.h>
 
+#include "internal/context.h"
 #include "internal/handle_nonopt.h"
 #include "internal/match.h"
 
@@ -46,7 +47,7 @@ void runcli(struct cli *cli, int argc, char *argv[]) {
         struct opt *opt_default = ot_match_any(cli, EZCLI_DEFAULT_OPT);
 
         if (opt_default) {
-            opt_default->body(NULL);
+            opt_default->body(__CONTEXT(opt_default), NULL);
         } else {
             cli->help(cli, cli->opts);
         }
@@ -93,7 +94,7 @@ void runcli(struct cli *cli, int argc, char *argv[]) {
         if (argc == i + 1) {
             cliprint(CLI_HINT, "ezcli: ", "%s -> NULL", opt->name);
 
-            check_ret(cli, opt->body(NULL), &any_warnings);
+            check_ret(cli, opt->body(__CONTEXT(opt), NULL), &any_warnings);
             any_option_seen = true;
 
             break;
@@ -113,7 +114,7 @@ void runcli(struct cli *cli, int argc, char *argv[]) {
         cliprint(CLI_HINT, "ezcli: ", "%s -> %s", opt->name,
                  arg ? arg : "NULL");
 
-        check_ret(cli, opt->body(arg), &any_warnings);
+        check_ret(cli, opt->body(__CONTEXT(opt), arg), &any_warnings);
         any_option_seen = true;
     }
 

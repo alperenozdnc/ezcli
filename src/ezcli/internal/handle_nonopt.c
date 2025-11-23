@@ -2,6 +2,7 @@
 #include <ezcli/opt.h>
 #include <ezcli/print.h>
 
+#include "context.h"
 #include "handle_nonopt.h"
 #include "match.h"
 
@@ -30,7 +31,7 @@ bool handle_nonopt(struct cli *cli, char *tok, bool is_unrecog,
 
     struct opt *nonopt = match_nonopt(cli);
 
-    nonopt->body(tok);
+    nonopt->body(__CONTEXT(nonopt), tok);
 
     return true;
 }

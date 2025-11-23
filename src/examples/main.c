@@ -1,37 +1,38 @@
 #include <ezcli.h>
 #include <stdio.h>
 
-enum rtype _eat(char *food) {
+enum rtype _eat(EZCLI_IGNORE_CTX, char *food) {
     printf("human: consuming %s\n", food);
 
     return RET_NORMAL;
 }
 
-enum rtype _sleep(__attribute((unused)) char *str) {
+enum rtype _sleep(EZCLI_IGNORE_ARGS) {
     printf("human: sleeping...\n");
 
     return RET_NORMAL;
 }
 
-enum rtype _secret(char *secret_str) {
+enum rtype _secret(void *ctx, char *secret_str) {
     printf("human: %s...\n", secret_str);
+    printf("%s", (char *)ctx);
 
     return RET_NORMAL;
 }
 
-enum rtype _unwanted(char *name) {
+enum rtype _unwanted(EZCLI_IGNORE_CTX, char *name) {
     printf("human: my name is %s, and nobody wants me...\n", name);
 
     return RET_NORMAL;
 }
 
-enum rtype _nonopt(char *arg) {
+enum rtype _nonopt(EZCLI_IGNORE_CTX, char *arg) {
     printf("%s", arg);
 
     return RET_NORMAL;
 }
 
-enum rtype __default(__attribute((unused)) char *_) {
+enum rtype __default(EZCLI_IGNORE_ARGS) {
     printf("wassup dawg");
 
     return RET_NORMAL;
@@ -53,6 +54,7 @@ struct opt sleep = {.type = OPTION_BARE,
 
 struct opt secret = {.type = OPTION_DOUBLE,
                      .name = "secret",
+                     .ctx = "i use contexts!",
                      .desc = "hey, lemme tell you b secret.",
                      .body = *_secret,
                      .want_input = true};
@@ -61,6 +63,7 @@ struct opt __secret = {
     .type = OPTION_SINGLE,
     .name = "S",
     .body = *_secret,
+    .ctx = "i use contexts!",
     .want_input = true,
     .desc = "hey, lemme tell you a secret.",
 };
