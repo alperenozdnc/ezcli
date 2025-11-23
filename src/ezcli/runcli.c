@@ -31,6 +31,18 @@ void check_ret(struct cli *cli, enum rtype ret) {
 void runcli(struct cli *cli, int argc, char *argv[]) {
     bool any_option_seen = false;
 
+    // not a return point because the default case also needs the printf("\n")
+    // on the bottom. the for loop is omitted anyways.
+    if (argc == 1) {
+        struct opt *opt_default = ot_match_any(cli, EZCLI_DEFAULT_OPT);
+
+        if (opt_default) {
+            opt_default->body(NULL);
+        } else {
+            cli->help(cli, cli->opts);
+        }
+    }
+
     // 0-th index is the command name itself
     for (int i = 1; i < argc; i++) {
         char *tok = argv[i];

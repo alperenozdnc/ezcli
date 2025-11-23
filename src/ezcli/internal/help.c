@@ -4,6 +4,7 @@
 
 #include "expand.h"
 #include "help.h"
+#include "match.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -19,6 +20,7 @@ void __print_header(struct cli *cli) {
 
 void __print_options(struct cli *cli, struct opt **opts) {
     int i = 0;
+    char *blacklist[] = {EZCLI_NONOPT, EZCLI_DEFAULT_OPT, NULL};
 
     while (cli->help_aliases[i]) {
         if (i == 0)
@@ -38,7 +40,7 @@ void __print_options(struct cli *cli, struct opt **opts) {
     for (size_t i = 0; i < cli->opts_len; i++) {
         struct opt *opt = opts[i];
 
-        if (strcmp(opt->name, EZCLI_NONOPT) == 0)
+        if (match_str(blacklist, opt->name))
             continue;
 
         printf(PADDING_LEFT ANSI_BLUE "%s" ANSI_RESET " -> %s", expand(opt),
