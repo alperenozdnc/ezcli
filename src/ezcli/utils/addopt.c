@@ -7,7 +7,8 @@
 #include <string.h>
 
 void addopt(struct cli *cli, struct opt *opt_a) {
-    struct opt **new_opts = malloc(opts_size(cli->opts_len + 1));
+    size_t new_len = cli->opts_len + 1;
+    struct opt **new_opts = malloc(opts_size(new_len));
 
     for (size_t i = 0; i < cli->opts_len; i++) {
         struct opt *opt = cli->opts[i];
@@ -15,10 +16,12 @@ void addopt(struct cli *cli, struct opt *opt_a) {
         new_opts[i] = opt;
     }
 
-    new_opts[cli->opts_len++] = opt_a;
-    new_opts[cli->opts_len] = NULL;
+    new_opts[new_len - 1] = opt_a;
+    new_opts[new_len] = NULL;
 
-    cli->opts = realloc(cli->opts, opts_size(cli->opts_len + 1));
-    memcpy(cli->opts, new_opts, opts_size(cli->opts_len + 1));
+    cli->opts = realloc(cli->opts, opts_size(new_len));
+    memcpy(cli->opts, new_opts, opts_size(new_len));
     free(new_opts);
+
+    cli->opts_len++;
 }
