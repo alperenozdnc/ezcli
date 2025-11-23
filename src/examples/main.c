@@ -99,11 +99,13 @@ int main(int argc, char *argv[]) {
                           &nonopt, &_default, NULL};
     char *help_aliases[] = {"help", "--help", NULL};
 
+    EZCLI_ALLOW_NONOPT = true;
+
     initcli(&cli, "human", "This program mimicks human-like behaviours.",
             "[command] [args]",
             "For documentation: <https://github.com/alperenozdnc/ezcli>\nFor "
             "license: <https://www.gnu.org/licenses/gpl-3.0.en.html>",
-            true, opts, help_aliases);
+            opts, help_aliases);
 
     addopt(&cli, &unwanted);
     addopt(&cli, &__unwanted);
