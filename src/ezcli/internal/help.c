@@ -11,6 +11,22 @@ void cli_help(struct cli *cli, struct opt **opts) {
     printf("[USAGE]: %s %s\n", cli->cmd, cli->usage);
     printf("%s\n\n", cli->desc);
 
+    int i = 0;
+
+    printf("    ");
+
+    while (cli->help_aliases[i]) {
+        printf("%s", cli->help_aliases[i]);
+
+        if (cli->help_aliases[i + 1]) {
+            printf(", ");
+        }
+
+        i++;
+    }
+
+    printf(" -> prints this menu.\n");
+
     for (size_t i = 0; i < cli->opts_len; i++) {
         struct opt *opt = opts[i];
 
