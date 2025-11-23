@@ -12,12 +12,14 @@ void cli_help(struct cli *cli, struct opt **opts) {
     printf("%s\n\n", cli->desc);
 
     for (size_t i = 0; i < cli->opts_len; i++) {
-        if (strcmp(opts[i]->name, EZCLI_NONOPT) == 0) {
+        struct opt *opt = opts[i];
+
+        if (strcmp(opt->name, EZCLI_NONOPT) == 0) {
             continue;
         }
 
         printf("    ");
-        printf("%s -> desc", expand(opts[i]));
+        printf("%s -> %s", expand(opt), opt->desc);
 
         if (i != cli->opts_len - 1) {
             printf("\n");

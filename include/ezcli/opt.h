@@ -27,14 +27,16 @@ enum rtype { RET_NORMAL, RET_WARN, RET_FAIL };
  * keeps the information about an option.
  * `type`: type of option (see enum otype)
  * `name`: name of option
- * `want_input`: true if option requires an input. if not filled, undefined
- * parsing behaviour may occur.
- * `body`: functionality of option. this is the
- * function that is feeded the word that comes after an option.
+ * `desc`: description of option. this is printed in help in format `opt ->
+ * desc`.
+ * `want_input`: true if option requires an input. if not filled,
+ * undefined parsing behaviour may occur. `body`: functionality of option. this
+ * is the function that is feeded the word that comes after an option.
  */
 struct opt {
     enum otype type;
     char *name;
+    char *desc;
     bool want_input;
     enum rtype (*body)(char *);
 };

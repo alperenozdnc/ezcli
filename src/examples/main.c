@@ -1,3 +1,4 @@
+#include "ezcli/opt.h"
 #include <ezcli.h>
 #include <stdio.h>
 
@@ -32,31 +33,55 @@ enum rtype _nonopt(char *arg) {
 }
 
 struct opt eat = {
-    .type = OPTION_BARE, .name = "eat", .body = *_eat, .want_input = true};
+    .type = OPTION_BARE,
+    .name = "eat",
+    .body = *_eat,
+    .want_input = true,
+    .desc = "hey!",
+};
 
-struct opt sleep = {
-    .type = OPTION_BARE, .name = "sleep", .body = *_sleep, .want_input = false};
+struct opt sleep = {.type = OPTION_BARE,
+                    .name = "sleep",
+                    .body = *_sleep,
+                    .want_input = false,
+                    .desc = "hey!"};
 
 struct opt secret = {.type = OPTION_DOUBLE,
                      .name = "secret",
+                     .desc = "hey!",
                      .body = *_secret,
                      .want_input = true};
 
 struct opt __secret = {
-    .type = OPTION_SINGLE, .name = "S", .body = *_secret, .want_input = true};
+    .type = OPTION_SINGLE,
+    .name = "S",
+    .body = *_secret,
+    .want_input = true,
+    .desc = "hey!",
+};
 
-struct opt unwanted = {.type = OPTION_BARE,
-                       .name = "unwanted",
-                       .body = *_unwanted,
-                       .want_input = true};
+struct opt unwanted = {
+    .type = OPTION_BARE,
+    .name = "unwanted",
+    .body = *_unwanted,
+    .want_input = true,
+    .desc = "hey!",
+};
 
-struct opt __unwanted = {.type = OPTION_BARE,
-                         .name = "unwanted2",
-                         .body = *_unwanted,
-                         .want_input = true};
+struct opt __unwanted = {
+    .type = OPTION_BARE,
+    .name = "unwanted2",
+    .body = *_unwanted,
+    .want_input = true,
+    .desc = "hey!",
+};
 
 struct opt nonopt = {
-    .type = OPTION_BARE, .name = EZCLI_NONOPT, .body = *_nonopt};
+    .type = OPTION_BARE,
+    .name = EZCLI_NONOPT,
+    .body = *_nonopt,
+    .desc = "hey!",
+};
 
 int main(int argc, char *argv[]) {
     struct cli cli;
