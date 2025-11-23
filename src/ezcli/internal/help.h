@@ -1,5 +1,4 @@
-#ifndef EZCLI_HELP_H
-#define EZCLI_HELP_H
+#pragma once
 
 #include <ezcli/cli.h>
 #include <ezcli/opt.h>
@@ -11,5 +10,3 @@
  * and information about options.
  */
 void cli_help(struct cli *cli, struct opt **opts);
-
-#endif

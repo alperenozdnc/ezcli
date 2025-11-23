@@ -1,5 +1,4 @@
-#ifndef EZCLI_INITCLI_H
-#define EZCLI_INITCLI_H
+#pragma once
 
 #include <ezcli/cli.h>
 
@@ -19,4 +18,3 @@
 void initcli(struct cli *cli, char *cmd, char *desc, char *usage, char *footer,
              bool allow_non_opt, struct opt **opts, char *help_aliases[],
              bool laidback);
-#endif

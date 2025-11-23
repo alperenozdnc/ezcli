@@ -1,5 +1,4 @@
-#ifndef EZCLI_RUNCLI_H
-#define EZCLI_RUNCLI_H
+#pragma once
 
 #include <ezcli/cli.h>
 
@@ -10,5 +9,3 @@
  * runcli.
  */
 void runcli(struct cli *cli_p, int argc, char *argv[]);
-
-#endif

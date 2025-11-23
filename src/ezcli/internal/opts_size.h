@@ -1,6 +1,3 @@
-#ifndef EZCLI_OPTS_SIZE_H
-#define EZCLI_OPTS_SIZE_H
+#pragma once
 
 #define opts_size(x) (sizeof(struct opt *)) * (x) + sizeof(NULL)
-
-#endif

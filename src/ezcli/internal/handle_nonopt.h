@@ -1,3 +1,5 @@
+#pragma once
+
 #include <ezcli/cli.h>
 #include <ezcli/opt.h>
 

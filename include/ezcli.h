@@ -1,5 +1,4 @@
-#ifndef EZCLI_H
-#define EZCLI_H
+#pragma once
 
 #include <ezcli/cli.h>
 #include <ezcli/opt.h>
@@ -9,5 +8,3 @@
 #include <ezcli/initcli.h>
 #include <ezcli/print.h>
 #include <ezcli/runcli.h>
-
-#endif

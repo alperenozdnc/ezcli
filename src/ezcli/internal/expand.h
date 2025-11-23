@@ -1,5 +1,4 @@
-#ifndef EZCLI_EXPAND_H
-#define EZCLI_EXPAND_H
+#pragma once
 
 #include <ezcli/opt.h>
 
@@ -8,5 +7,3 @@
  * responsibility of freeing is with the caller.
  */
 char *expand(struct opt *opt);
-
-#endif

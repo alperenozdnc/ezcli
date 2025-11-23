@@ -1,5 +1,4 @@
-#ifndef EZCLI_PRINT_H
-#define EZCLI_PRINT_H
+#pragma once
 
 #define ANSI_RED "\x1b[31m"
 #define ANSI_YELLOW "\x1b[33m"
@@ -17,5 +16,3 @@ enum print_type { CLI_HINT, CLI_WARN, CLI_ERROR };
  * a hint is blue, a warning is yellow, and an error is red.
  */
 void cliprint(enum print_type type, char *prefix, char *fmt, ...);
-
-#endif

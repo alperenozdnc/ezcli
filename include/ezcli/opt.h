@@ -1,5 +1,4 @@
-#ifndef EZCLI_OPT_H
-#define EZCLI_OPT_H
+#pragma once
 
 #include <stdbool.h>
 
@@ -53,5 +52,3 @@ struct opt {
     void *ctx;
     enum rtype (*body)(void *ctx, char *tok);
 };
-
-#endif

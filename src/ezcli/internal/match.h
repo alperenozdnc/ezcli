@@ -1,5 +1,4 @@
-#ifndef EZCLI_MATCH_H
-#define EZCLI_MATCH_H
+#pragma once
 
 #include <ezcli/cli.h>
 #include <ezcli/opt.h>
@@ -30,5 +29,3 @@ struct opt *match_nonopt(struct cli *cli);
  * checks if a string exists at least once inside of an array.
  */
 bool match_str(char **arr, char *str);
-
-#endif

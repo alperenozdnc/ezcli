@@ -1,5 +1,4 @@
-#ifndef EZCLI_CLI_H
-#define EZCLI_CLI_H
+#pragma once
 
 #include <stdbool.h>
 #include <stddef.h>
@@ -41,5 +40,3 @@ struct cli {
 
     bool laidback;
 };
-
-#endif
