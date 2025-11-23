@@ -3,6 +3,7 @@
 #include <ezcli/print.h>
 #include <ezcli/runcli.h>
 
+#include "internal/handle_nonopt.h"
 #include "internal/match.h"
 
 #include <stdbool.h>
@@ -25,37 +26,6 @@ void check_ret(struct cli *cli, enum rtype ret) {
         cliprint(CLI_WARN, EZCLI_EMPTY_PREFIX, "%s: there are some warnings.",
                  cli->cmd);
     }
-}
-
-/*
- * handles non-optional (positional) arguments. if true, a `continue` keyword
- * should be thrown, and if false, the program should continue normally.
- */
-bool handle_nonopt(struct cli *cli, char *tok, bool is_unrecog,
-                   bool any_option_seen) {
-    if (!is_unrecog)
-        return false;
-
-    if (!cli->allow_non_opt) {
-        cliprint(CLI_ERROR, EZCLI_EMPTY_PREFIX, "%s: unrecognized option '%s'.",
-                 cli->cmd, tok);
-
-        exit(EXIT_FAILURE);
-    }
-
-    if (any_option_seen) {
-        cliprint(CLI_ERROR, EZCLI_EMPTY_PREFIX,
-                 "%s: can't chain non-option '%s' after any options.", cli->cmd,
-                 tok);
-
-        exit(EXIT_FAILURE);
-    }
-
-    struct opt *nonopt = match_nonopt(cli);
-
-    nonopt->body(tok);
-
-    return true;
 }
 
 void runcli(struct cli *cli, int argc, char *argv[]) {
