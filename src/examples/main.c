@@ -64,7 +64,7 @@ int main(int argc, char *argv[]) {
     char *help_aliases[] = {"help", "--help", NULL};
 
     initcli(&cli, "human", "Description of the programme.", "this is the usage",
-            true, opts, help_aliases);
+            "footer!", true, opts, help_aliases);
 
     addopt(&cli, &unwanted);
     addopt(&cli, &__unwanted);

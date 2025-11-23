@@ -25,10 +25,9 @@ void cli_help(struct cli *cli, struct opt **opts) {
     }
 
     printf("\n");
-    printf("\n");
 
-    printf(
-        "For online documentation: <https://github.com/alperenozdnc/ezcli>\n");
-    printf("For seeing the license: "
-           "  <https://www.gnu.org/licenses/gpl-3.0.en.html>\n");
+    if (cli->footer) {
+        printf("\n");
+        printf("%s", cli->footer);
+    }
 }

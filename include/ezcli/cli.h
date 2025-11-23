@@ -12,8 +12,10 @@
  * options.
  * `desc`: description of the command.
  * `usage`: usage of the command. kind of like a man page synopsis.
- * `allow_non_opt`: if `true` it allows non for option-preceded arguments, like
- * `ls /home` where
+ * `footer`: this is the string that is printed below all options in help.
+ * optional, leave NULL if you don't want it.
+ * `allow_non_opt`: if `true` it
+ * allows non for option-preceded arguments, like `ls /home` where
  * `/home` is the non option-preceded argument. you should create an opt in
  * `opts` that has name `EZCLI_NONOPT` and type `OPTION_BARE` to handle these
  * inputs. `opts`: list of options the command line interface supports.
@@ -24,6 +26,7 @@ struct cli {
     char *cmd;
     char *desc;
     char *usage;
+    char *footer;
     bool allow_non_opt;
     struct opt **opts;
     size_t opts_len;
