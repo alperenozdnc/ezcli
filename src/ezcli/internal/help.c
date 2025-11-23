@@ -8,8 +8,8 @@
 #include <string.h>
 
 void cli_help(struct cli *cli, struct opt **opts) {
-    printf("[USAGE]: %s [command] [args]\n", cli->cmd);
-    printf("A program to mimick human-like behaviour.\n\n");
+    printf("[USAGE]: %s %s\n", cli->cmd, cli->usage);
+    printf("%s\n\n", cli->desc);
 
     for (size_t i = 0; i < cli->opts_len; i++) {
         if (strcmp(opts[i]->name, EZCLI_NONOPT) == 0) {

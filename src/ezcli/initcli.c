@@ -8,10 +8,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-void initcli(struct cli *cli, char *cmd, char *desc, bool allow_non_opt,
-             struct opt **opts, char **help_aliases) {
+void initcli(struct cli *cli, char *cmd, char *desc, char *usage,
+             bool allow_non_opt, struct opt **opts, char **help_aliases) {
     cli->cmd = cmd;
     cli->desc = desc;
+    cli->usage = usage;
     cli->allow_non_opt = allow_non_opt;
     cli->opts_len = 0;
 
