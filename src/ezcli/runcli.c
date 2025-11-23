@@ -1,4 +1,5 @@
 #include <ezcli/cli.h>
+#include <ezcli/extern.h>
 #include <ezcli/opt.h>
 #include <ezcli/print.h>
 #include <ezcli/runcli.h>
@@ -15,8 +16,8 @@
 /*
  * panic with a warning/error based on laidback value.
  */
-enum rtype panic(bool laidback) {
-    if (laidback)
+enum rtype panic() {
+    if (EZCLI_MODE_LAIDBACK)
         return RET_WARN;
 
     return RET_FAIL;
@@ -78,7 +79,7 @@ void runcli(struct cli *cli, int argc, char *argv[]) {
                      "arguments.",
                      cli->cmd, tok, opt_prev->name);
 
-            check_ret(cli, panic(cli->laidback), &any_warnings);
+            check_ret(cli, panic(), &any_warnings);
         }
 
         if (is_tok_arg)
@@ -88,7 +89,7 @@ void runcli(struct cli *cli, int argc, char *argv[]) {
             cliprint(CLI_ERROR, EZCLI_EMPTY_PREFIX,
                      "%s: '%s' requires an argument.", cli->cmd, tok);
 
-            check_ret(cli, panic(cli->laidback), &any_warnings);
+            check_ret(cli, panic(), &any_warnings);
         }
 
         if (argc == i + 1) {
@@ -106,7 +107,7 @@ void runcli(struct cli *cli, int argc, char *argv[]) {
             cliprint(CLI_ERROR, EZCLI_EMPTY_PREFIX,
                      "%s: unallowed argument '%s'.", cli->cmd, tok_next);
 
-            check_ret(cli, panic(cli->laidback), &any_warnings);
+            check_ret(cli, panic(), &any_warnings);
         }
 
         char *arg = opt->want_input ? tok_next : NULL;
@@ -119,7 +120,7 @@ void runcli(struct cli *cli, int argc, char *argv[]) {
     }
 
     if (any_warnings) {
-        if (cli->laidback) {
+        if (EZCLI_MODE_LAIDBACK) {
             cliprint(CLI_WARN, EZCLI_EMPTY_PREFIX,
                      "%s: there are some warnings/errors.", cli->cmd);
         } else {
