@@ -63,7 +63,8 @@ int main(int argc, char *argv[]) {
     struct opt *opts[] = {&eat, &sleep, &secret, &__secret, &nonopt, NULL};
     char *help_aliases[] = {"help", "--help", NULL};
 
-    initcli(&cli, "human", true, opts, help_aliases);
+    initcli(&cli, "human", "Description of the programme.", "this is the usage",
+            true, opts, help_aliases);
 
     addopt(&cli, &unwanted);
     addopt(&cli, &__unwanted);
