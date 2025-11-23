@@ -37,18 +37,18 @@ struct opt eat = {
     .name = "eat",
     .body = *_eat,
     .want_input = true,
-    .desc = "hey!",
+    .desc = "every human needs something to consoom.",
 };
 
 struct opt sleep = {.type = OPTION_BARE,
                     .name = "sleep",
                     .body = *_sleep,
                     .want_input = false,
-                    .desc = "hey!"};
+                    .desc = "zzzzzz. i'm always sleepy, man."};
 
 struct opt secret = {.type = OPTION_DOUBLE,
                      .name = "secret",
-                     .desc = "hey!",
+                     .desc = "hey, lemme tell you b secret.",
                      .body = *_secret,
                      .want_input = true};
 
@@ -57,7 +57,7 @@ struct opt __secret = {
     .name = "S",
     .body = *_secret,
     .want_input = true,
-    .desc = "hey!",
+    .desc = "hey, lemme tell you a secret.",
 };
 
 struct opt unwanted = {
@@ -65,22 +65,22 @@ struct opt unwanted = {
     .name = "unwanted",
     .body = *_unwanted,
     .want_input = true,
-    .desc = "hey!",
+    .desc = "this is for when you feel unwanted.",
 };
 
 struct opt __unwanted = {
-    .type = OPTION_BARE,
-    .name = "unwanted2",
+    .type = OPTION_DOUBLE,
+    .name = "unwanted",
     .body = *_unwanted,
     .want_input = true,
-    .desc = "hey!",
+    .desc = "this is for when you feel even more unwanted.",
 };
 
 struct opt nonopt = {
     .type = OPTION_BARE,
     .name = EZCLI_NONOPT,
     .body = *_nonopt,
-    .desc = "hey!",
+    .desc = "this is for when you feel even more unwanted.",
 };
 
 int main(int argc, char *argv[]) {
@@ -88,8 +88,11 @@ int main(int argc, char *argv[]) {
     struct opt *opts[] = {&eat, &sleep, &secret, &__secret, &nonopt, NULL};
     char *help_aliases[] = {"help", "--help", NULL};
 
-    initcli(&cli, "human", "Description of the programme.", "this is the usage",
-            "footer!", true, opts, help_aliases);
+    initcli(&cli, "human", "This program mimicks human-like behaviours.",
+            "[command] [args]",
+            "For documentation: <https://github.com/alperenozdnc/ezcli>\nFor "
+            "license: <https://www.gnu.org/licenses/gpl-3.0.en.html>",
+            true, opts, help_aliases);
 
     addopt(&cli, &unwanted);
     addopt(&cli, &__unwanted);
