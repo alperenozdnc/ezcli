@@ -11,7 +11,8 @@
  * `opts` can also be populated with `addopt`
  *
  * ezcli is responsible for allocating but you are responsible to free. make
- * sure you run `freecli` after usage.
+ * sure you run `freecli` after usage. also, make sure any arguments passed to
+ * this live for the entire program.
  *
  * NOTE: `opts` MUST be terminated with a NULL.
  */
