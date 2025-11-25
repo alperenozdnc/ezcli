@@ -230,7 +230,7 @@ comes across a non-option option. this lets you create programs that take
 arguments that can't be known before being ran. for example, in the comamnd
 `ls home/ etc/`, the `home/` and `etc/` are non-option options.
 
-if setting the name to `EZCLI_DEFAULT_OPT` lets you define behaviour when no
+if the name is set to `EZCLI_DEFAULT_OPT` lets you define behaviour when no
 external input is given. if not defined, ezcli will print out the result of calling
 help. (note that you can set your own help behaviour by writing your own help fn
 and pointing it to `cli->help`. the help function is passed the cli struct and opts.
@@ -286,7 +286,7 @@ struct opt version_opt = {
 ``` 
 
 this is the version option, the default option and the nonopt aren't
-printed in help, so no need to bother. you will also see how the value in
+printed in help, so no need to bother setting `desc`. you will also see how the value in
 `ctx` comes to play.
 
 ```c
