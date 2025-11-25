@@ -25,13 +25,13 @@ using the cli library.
 #### (1) obviously, you probably want to clone this.
 
 ```bash
-    % git clone https://github.com/alperenozdnc/ezcli
+% git clone https://github.com/alperenozdnc/ezcli
 ```
 
 #### (2) now, it's time to build.
 
 ```bash
-    % make all
+% make all
 ```
 
 this command creates the shared object for the library
@@ -43,7 +43,7 @@ an idea on things you can create using ezcli.
 #### (3) and finally, the reason you're reading this section. 
 
 ```bash
-    % sudo make install
+% sudo make install
 ```
 
 this command puts the shared object file `libezcli.so` in
@@ -54,7 +54,7 @@ you can now just `#include <ezcli.h>` from anywhere
 if you also use flag `-lezcli` when compiling.
 
 ```bash
-    % sudo make uninstall
+% sudo make uninstall
 ```
 
 you can also do this if you decide you don't like it.
