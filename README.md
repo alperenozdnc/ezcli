@@ -228,9 +228,9 @@ contexts that require them.
 setting the name to `EZCLI_NONOPT` lets you define behaviour when the parsing
 comes across a non-option option. this lets you create programs that take
 arguments that can't be known before being ran. for example, in the comamnd
-`ls home/ etc/`, the `home/` and `etc/` are non-option options. if 
+`ls home/ etc/`, the `home/` and `etc/` are non-option options.
 
-setting the name to `EZCLI_DEFAULT_OPT` lets you define behaviour when no
+if setting the name to `EZCLI_DEFAULT_OPT` lets you define behaviour when no
 external input is given. if not defined, ezcli will print out the result of calling
 help. (note that you can set your own help behaviour by writing your own help fn
 and pointing it to `cli->help`. the help function is passed the cli struct and opts.
