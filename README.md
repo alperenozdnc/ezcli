@@ -262,7 +262,7 @@ struct opt default_opt = {
 
 this is the default option. the `enum rtype` has three values, `RET_NORMAL`
 just continues parsing, `RET_WARN` warns the user that they probably did
-something wrong, and `RET_ERROR` just flat out exits the program. i like to
+something wrong, and `RET_FAIL` just flat out exits the program. i like to
 name like this for clarity, you may like to do it some other way, and that's
 totally okay.
 
