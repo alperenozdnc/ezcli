@@ -124,3 +124,12 @@ the arguments, so you can inject any arguments you want. this allows for creatio
 of interactive cli's, and maybe even might make ezcli kind of a 'programming interface'.
 you could do recursion, calculations, and other weird things you don't expect a cli
 library to be able to do.
+
+---
+
+### contributing
+
+i accept any kind of feedback as a contribution. here are some ways though;
+- opening an issue talking about something in (or not in) ezcli you don't like.
+- forking ezcli and opening a pull request.
+- tossing a star.
