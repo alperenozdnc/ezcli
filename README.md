@@ -133,3 +133,17 @@ i accept any kind of feedback as a contribution. here are some ways though;
 - opening an issue talking about something in (or not in) ezcli you don't like.
 - forking ezcli and opening a pull request.
 - tossing a star.
+
+---
+
+### license
+
+i think all software should be free and open-source, and even if there needs
+to be a paywall, the user should know the code that is running on their device.
+pirating exists alongside proprietary code and open-source is generally safer
+to use because of the sheer amount of workforce that open-source projects have,
+so why would anybody want to make proprietary software if it's not malicious or
+behind a paywall?
+
+for those reasons, i use `GPLv3` in all of my projects. see `LICENSE` in the
+root directory for details.
