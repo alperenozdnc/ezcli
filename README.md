@@ -227,7 +227,7 @@ contexts that require them.
 
 setting the name to `EZCLI_NONOPT` lets you define behaviour when the parsing
 comes across a non-option option. this lets you create programs that take
-arguments that can't be known before being ran. for example, in the comamnd
+arguments that can't be known before being ran. for example, in the command 
 `ls home/ etc/`, the `home/` and `etc/` are non-option options.
 
 if the name is set to `EZCLI_DEFAULT_OPT` lets you define behaviour when no
@@ -373,6 +373,10 @@ i accept any kind of feedback as a contribution. here are some ways though;
 - opening an issue talking about something in (or not in) ezcli you don't like.
 - forking ezcli and opening a pull request.
 - tossing a star.
+
+any code written with a nice idea is good enough for me, i will migrate any
+contributions to my own code style preferences, so do as you want. but please,
+please, no more than 3 indentations.
 
 ---
 
