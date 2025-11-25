@@ -133,7 +133,7 @@ so, we start by defining a `cli` struct. this is where all of the information
 about your command line interface lives:
 
 ```c
-struct cli () {
+struct cli {
     char *cmd;
     char *desc;
     char *usage;
