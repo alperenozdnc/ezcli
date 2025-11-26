@@ -6,12 +6,12 @@
 #include <stdlib.h>
 #include <string.h>
 
-void addopt(struct cli *cli, struct opt *opt_a) {
+void addopt(cli_s *cli, opt_s *opt_a) {
     size_t new_len = cli->opts_len + 1;
-    struct opt **new_opts = malloc(opts_size(new_len));
+    opt_s **new_opts = malloc(OPTS_SIZE(new_len));
 
     for (size_t i = 0; i < cli->opts_len; i++) {
-        struct opt *opt = cli->opts[i];
+        opt_s *opt = cli->opts[i];
 
         new_opts[i] = opt;
     }
@@ -19,8 +19,8 @@ void addopt(struct cli *cli, struct opt *opt_a) {
     new_opts[new_len - 1] = opt_a;
     new_opts[new_len] = NULL;
 
-    cli->opts = realloc(cli->opts, opts_size(new_len));
-    memcpy(cli->opts, new_opts, opts_size(new_len));
+    cli->opts = realloc(cli->opts, OPTS_SIZE(new_len));
+    memcpy(cli->opts, new_opts, OPTS_SIZE(new_len));
     free(new_opts);
 
     cli->opts_len++;

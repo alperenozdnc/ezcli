@@ -3,6 +3,6 @@
 
 #include <stdlib.h>
 
-void freecli(struct cli *cli_p) {
-    free(cli_p->opts);
+void freecli(cli_s *cli) {
+    free(cli->opts);
 }

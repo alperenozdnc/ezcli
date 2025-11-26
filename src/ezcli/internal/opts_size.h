@@ -1,3 +1,3 @@
 #pragma once
 
-#define opts_size(x) (sizeof(struct opt *)) * (x) + sizeof(NULL)
+#define OPTS_SIZE(x) (sizeof(opt_s *)) * (x) + sizeof(NULL)

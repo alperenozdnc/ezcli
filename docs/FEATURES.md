@@ -61,5 +61,5 @@ you could do recursion, calculations, and other weird things you don't expect a 
 library to be able to do.
 
 ## debug mode
-setting `EZCLI_MODE_DEBUG` to true enables all prints ezcli creates about
+setting `CLI_MODE_DEBUG` to true enables all prints ezcli creates about
 parsing. these are printed in blue color. and formatted as `opt -> input`.

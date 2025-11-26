@@ -5,7 +5,7 @@
 #include <stdbool.h>
 
 /*
- * initializes a general command line interface struct. see `struct cli` for
+ * initializes a general command line interface struct. see `struct cli_s` for
  * arguments.
  * `opts` can also be populated with `addopt`
  *
@@ -15,5 +15,5 @@
  *
  * NOTE: `opts` MUST be terminated with a NULL.
  */
-void initcli(struct cli *cli, char *cmd, char *desc, char *usage, char *footer,
-             struct opt **opts, char *help_aliases[]);
+void initcli(cli_s *cli, char *cmd, char *desc, char *usage, char *footer,
+             opt_s **opts, char *help_aliases[]);

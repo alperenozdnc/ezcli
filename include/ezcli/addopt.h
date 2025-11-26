@@ -6,4 +6,4 @@
 /*
  * adds an option to the `opts` dynamic array in a `cli` struct.
  */
-void addopt(struct cli *cli, struct opt *opt_a);
+void addopt(cli_s *cli, opt_s *opt_a);

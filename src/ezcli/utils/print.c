@@ -6,7 +6,7 @@
 const char *PREFIXES[] = {"HINT: ", "WARN: ", "ERROR: "};
 const char *COLORS[] = {ANSI_BLUE, ANSI_YELLOW, ANSI_RED};
 
-void cliprint(enum print_type type, char *prefix, char *fmt, ...) {
+void cliprint(print_e type, char *prefix, char *fmt, ...) {
     const char *_prefix = prefix ? prefix : PREFIXES[type];
 
     printf("%s%s", COLORS[type], _prefix);

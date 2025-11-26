@@ -8,4 +8,4 @@
  * should inject command names when injecting non-inputted arguments into
  * runcli.
  */
-void runcli(struct cli *cli_p, int argc, char *argv[]);
+void runcli(cli_s *cli_p, int argc, char *argv[]);

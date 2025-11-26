@@ -6,4 +6,4 @@
 /*
  * deletes an option from the `opts` dynamic array in a `cli` struct.
  */
-void delopt(struct cli *cli, struct opt *opt_d);
+void delopt(cli_s *cli, opt_s *opt_d);

@@ -6,7 +6,7 @@
 #include <ezcli/opt.h>
 
 #define DEBUG_ONLY(fn)                                                         \
-    if (EZCLI_MODE_DEBUG)                                                      \
+    if (CLI_MODE_DEBUG)                                                        \
         fn;
 
 /*
@@ -21,25 +21,25 @@
  * `opts_len`: length of `opts`. this is automatically filled by `initcli()`.
  * note that for this to be accurate, your `opts` MUST terminate with `NULL`.
  *
- * `EZCLI_MODE_LAIDBACK`: setting this true enables 'laidback' mode where any
+ * `CLI_MODE_LAIDBACK`: setting this true enables 'laidback' mode where any
  * kind of parsing/requirement error is printed as a warning instead and the
  * program isn't halted. this is pretty useful for creating interactive programs
  * with ezcli.
  *
- * `EZCLI_ALLOW_NONOPT`: setting for the allowing of non option-preceded
+ * `CLI_ALLOW_NONOPT`: setting for the allowing of non option-preceded
  * arguments, (positional options). like `ls /home` where `/home` is the non
  * option-preceded argument. you should create an opt in `opts` that has name
- * `EZCLI_NONOPT` and type `OPTION_BARE` to handle these inputs.
+ * `CLI_NONOPT` and type `OPTION_BARE` to handle these inputs.
  * */
-struct cli {
+typedef struct __cli_s {
     char *cmd;
     char *desc;
     char *usage;
     char *footer;
 
-    struct opt **opts;
+    opt_s **opts;
     size_t opts_len;
 
     char **help_aliases;
-    void (*help)(struct cli *cli, struct opt **opts);
-};
+    void (*help)(struct __cli_s *cli, opt_s **opts);
+} cli_s;

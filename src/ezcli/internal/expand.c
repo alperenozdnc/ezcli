@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-char *expand(struct opt *opt) {
+char *expand(opt_s *opt) {
     // enum otype directly corresponds to how much hyphens are needed
     int hyphen_len = opt->type;
     char *token = malloc(strlen(opt->name) + hyphen_len + 1);

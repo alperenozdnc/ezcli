@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-bool ot_match(struct opt *opt, char *token) {
+bool ot_match(opt_s *opt, char *token) {
     char *exp_opt = expand(opt);
 
     bool ret = strcmp(token, exp_opt) == 0;
@@ -18,9 +18,9 @@ bool ot_match(struct opt *opt, char *token) {
     return ret;
 }
 
-struct opt *ot_match_any(struct cli *cli, char *token) {
+opt_s *ot_match_any(cli_s *cli, char *token) {
     for (size_t i = 0; i < cli->opts_len; i++) {
-        struct opt *opt = cli->opts[i];
+        opt_s *opt = cli->opts[i];
 
         if (ot_match(opt, token)) {
             return opt;
@@ -30,11 +30,11 @@ struct opt *ot_match_any(struct cli *cli, char *token) {
     return NULL;
 }
 
-struct opt *match_nonopt(struct cli *cli) {
+opt_s *match_nonopt(cli_s *cli) {
     for (size_t i = 0; i < cli->opts_len; i++) {
-        struct opt *opt = cli->opts[i];
+        opt_s *opt = cli->opts[i];
 
-        if (strcmp(opt->name, EZCLI_NONOPT) == 0) {
+        if (strcmp(opt->name, CLI_NONOPT) == 0) {
             return opt;
         }
     }

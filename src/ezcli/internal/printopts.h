@@ -2,4 +2,7 @@
 
 #include <ezcli/cli.h>
 
-void printopts(struct cli *cli);
+/*
+ * prints all options with their values in cli->opts.
+ */
+void printopts(cli_s *cli);

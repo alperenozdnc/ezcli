@@ -17,8 +17,8 @@
 /*
  * panic with a warning/error based on laidback value.
  */
-enum rtype panic() {
-    if (EZCLI_MODE_LAIDBACK)
+ret_e panic() {
+    if (CLI_MODE_LAIDBACK)
         return RET_WARN;
 
     return RET_FAIL;
@@ -27,9 +27,9 @@ enum rtype panic() {
 /*
  * prints/exits appropriately for warnings/errors.
  */
-void check_ret(struct cli *cli, enum rtype ret, bool *any_warnings) {
+void check_ret(cli_s *cli, ret_e ret, bool *any_warnings) {
     if (ret == RET_FAIL) {
-        cliprint(CLI_ERROR, EZCLI_EMPTY_PREFIX, "%s: exited with an error.",
+        cliprint(CLI_ERROR, CLI_EMPTY_PREFIX, "%s: exited with an error.",
                  cli->cmd);
 
         freecli(cli);
@@ -41,14 +41,14 @@ void check_ret(struct cli *cli, enum rtype ret, bool *any_warnings) {
         *any_warnings = true;
 }
 
-void runcli(struct cli *cli, int argc, char *argv[]) {
+void runcli(cli_s *cli, int argc, char *argv[]) {
     bool any_option_seen = false;
     bool any_warnings = false;
 
     // not a return point because the default case also needs the printf("\n")
     // on the bottom. the for loop is omitted anyways.
     if (argc == 1) {
-        struct opt *opt_default = ot_match_any(cli, EZCLI_DEFAULT_OPT);
+        opt_s *opt_default = ot_match_any(cli, CLI_DEFAULT_OPT);
 
         if (opt_default) {
             opt_default->body(__CONTEXT(opt_default), NULL);
@@ -60,8 +60,8 @@ void runcli(struct cli *cli, int argc, char *argv[]) {
     // 0-th index is the command name itself
     for (int i = 1; i < argc; i++) {
         char *tok = argv[i];
-        struct opt *opt = ot_match_any(cli, tok);
-        struct opt *opt_prev = ot_match_any(cli, argv[i - 1]);
+        opt_s *opt = ot_match_any(cli, tok);
+        opt_s *opt_prev = ot_match_any(cli, argv[i - 1]);
 
         bool is_tok_arg = !opt;
         bool is_prev_tok_arg = !opt_prev;
@@ -77,7 +77,7 @@ void runcli(struct cli *cli, int argc, char *argv[]) {
             continue;
 
         if (is_tok_arg && !is_prev_tok_arg && !opt_prev->want_input) {
-            cliprint(CLI_ERROR, EZCLI_EMPTY_PREFIX,
+            cliprint(CLI_ERROR, CLI_EMPTY_PREFIX,
                      "%s: '%s' cannot be passed to '%s' as it requires no "
                      "arguments.",
                      cli->cmd, tok, opt_prev->name);
@@ -89,7 +89,7 @@ void runcli(struct cli *cli, int argc, char *argv[]) {
             continue;
 
         if (argc == i + 1 && opt->want_input) {
-            cliprint(CLI_ERROR, EZCLI_EMPTY_PREFIX,
+            cliprint(CLI_ERROR, CLI_EMPTY_PREFIX,
                      "%s: '%s' requires an argument.", cli->cmd, tok);
 
             check_ret(cli, panic(), &any_warnings);
@@ -107,7 +107,7 @@ void runcli(struct cli *cli, int argc, char *argv[]) {
         char *tok_next = argv[i + 1];
 
         if (ot_match_any(cli, tok_next) && opt->want_input) {
-            cliprint(CLI_ERROR, EZCLI_EMPTY_PREFIX,
+            cliprint(CLI_ERROR, CLI_EMPTY_PREFIX,
                      "%s: unallowed argument '%s'.", cli->cmd, tok_next);
 
             check_ret(cli, panic(), &any_warnings);
@@ -123,12 +123,12 @@ void runcli(struct cli *cli, int argc, char *argv[]) {
     }
 
     if (any_warnings) {
-        if (EZCLI_MODE_LAIDBACK) {
-            cliprint(CLI_WARN, EZCLI_EMPTY_PREFIX,
+        if (CLI_MODE_LAIDBACK) {
+            cliprint(CLI_WARN, CLI_EMPTY_PREFIX,
                      "%s: there are some warnings/errors.", cli->cmd);
         } else {
-            cliprint(CLI_WARN, EZCLI_EMPTY_PREFIX,
-                     "%s: there are some warnings.", cli->cmd);
+            cliprint(CLI_WARN, CLI_EMPTY_PREFIX, "%s: there are some warnings.",
+                     cli->cmd);
         }
     }
 

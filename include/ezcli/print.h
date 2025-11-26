@@ -5,9 +5,9 @@
 #define ANSI_BLUE "\x1b[34m"
 #define ANSI_RESET "\x1b[0m"
 
-#define EZCLI_EMPTY_PREFIX ""
+#define CLI_EMPTY_PREFIX ""
 
-enum print_type { CLI_HINT, CLI_WARN, CLI_ERROR };
+typedef enum { CLI_HINT, CLI_WARN, CLI_ERROR } print_e;
 
 /*
  * prints a hint, a warning, or an error.
@@ -15,4 +15,4 @@ enum print_type { CLI_HINT, CLI_WARN, CLI_ERROR };
  * `enum print_type` has to be `CLI_HINT`, `CLI_WARNING`, or `CLI_ERROR`.
  * a hint is blue, a warning is yellow, and an error is red.
  */
-void cliprint(enum print_type type, char *prefix, char *fmt, ...);
+void cliprint(print_e type, char *prefix, char *fmt, ...);

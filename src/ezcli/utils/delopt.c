@@ -6,14 +6,14 @@
 #include <stdlib.h>
 #include <string.h>
 
-void delopt(struct cli *cli, struct opt *opt_d) {
+void delopt(cli_s *cli, opt_s *opt_d) {
     size_t new_len = cli->opts_len - 1;
-    struct opt **new_opts = malloc(opts_size(new_len));
+    opt_s **new_opts = malloc(OPTS_SIZE(new_len));
 
     int j = 0;
 
     for (size_t i = 0; i < cli->opts_len; i++) {
-        struct opt *opt = cli->opts[i];
+        opt_s *opt = cli->opts[i];
 
         if (strcmp(opt_d->name, opt->name) == 0)
             continue;
@@ -24,7 +24,7 @@ void delopt(struct cli *cli, struct opt *opt_d) {
     new_opts[j] = NULL;
 
     int k = 0;
-    cli->opts = realloc(cli->opts, opts_size(new_len));
+    cli->opts = realloc(cli->opts, OPTS_SIZE(new_len));
 
     while (new_opts[k]) {
         cli->opts[k] = new_opts[k];

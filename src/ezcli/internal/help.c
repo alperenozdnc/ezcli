@@ -11,16 +11,16 @@
 
 #define PADDING_LEFT "    " // 4 spaces
 
-void __print_header(struct cli *cli) {
-    cliprint(CLI_HINT, EZCLI_EMPTY_PREFIX, "[USAGE]: %s %s", cli->cmd,
+void __print_header(cli_s *cli) {
+    cliprint(CLI_HINT, CLI_EMPTY_PREFIX, "[USAGE]: %s %s", cli->cmd,
              cli->usage);
 
     printf("%s\n\n", cli->desc);
 }
 
-void __print_options(struct cli *cli, struct opt **opts) {
+void __print_options(cli_s *cli, opt_s **opts) {
     int i = 0;
-    char *blacklist[] = {EZCLI_NONOPT, EZCLI_DEFAULT_OPT, NULL};
+    char *blacklist[] = {CLI_NONOPT, CLI_DEFAULT_OPT, NULL};
 
     while (cli->help_aliases[i]) {
         if (i == 0)
@@ -38,7 +38,7 @@ void __print_options(struct cli *cli, struct opt **opts) {
     }
 
     for (size_t i = 0; i < cli->opts_len; i++) {
-        struct opt *opt = opts[i];
+        opt_s *opt = opts[i];
 
         if (match_str(blacklist, opt->name))
             continue;
@@ -51,7 +51,7 @@ void __print_options(struct cli *cli, struct opt **opts) {
     }
 }
 
-void __print_footer(struct cli *cli) {
+void __print_footer(cli_s *cli) {
     if (!cli->footer)
         return;
 
@@ -59,7 +59,7 @@ void __print_footer(struct cli *cli) {
     printf("%s", cli->footer);
 }
 
-void cli_help(struct cli *cli, struct opt **opts) {
+void clihelp(cli_s *cli, opt_s **opts) {
     __print_header(cli);
     __print_options(cli, opts);
     __print_footer(cli);

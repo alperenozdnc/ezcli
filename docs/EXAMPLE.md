@@ -42,11 +42,11 @@ void initcli(struct cli *cli, char *cmd, char *desc, char *usage, char *footer,
 
 after initializing your cli instance, you can set how ezcli will behave.
 
-`EZCLI_ALLOW_NONOPT`, if set to true, will allow for the 'non-option options'
+`CLI_ALLOW_NONOPT`, if set to true, will allow for the 'non-option options'
 i was talking about earlier in features. else, ezcli will throw an error for
 these nonopts.
 
-`EZCLI_MODE_LAIDBACK`, if set to true, will enable 'laidback' mode, which
+`CLI_MODE_LAIDBACK`, if set to true, will enable 'laidback' mode, which
 doesn't terminate when parsing errors are found. you can also read about that
 in features.
 
@@ -91,17 +91,17 @@ almost any kind of cli you want. interactive, non-interactive, game, utility,
 etc.
 
 there are two special cases for names you cant take: `"NONOPT"`, and `"DEFAULT"`,
-these live under the macros names respectively, `EZCLI_NONOPT` and `EZCLI_DEFAULT_OPT`.
+these live under the macros names respectively, `CLI_NONOPT` and `CLI_DEFAULT_OPT`.
 
 any opt struct named these macros are now special options and will be used in
 contexts that require them.
 
-setting the name to `EZCLI_NONOPT` lets you define behaviour when the parsing
+setting the name to `CLI_NONOPT` lets you define behaviour when the parsing
 comes across a non-option option. this lets you create programs that take
 arguments that can't be known before being ran. for example, in the command 
 `ls home/ etc/`, the `home/` and `etc/` are non-option options.
 
-if the name is set to `EZCLI_DEFAULT_OPT` lets you define behaviour when no
+if the name is set to `CLI_DEFAULT_OPT` lets you define behaviour when no
 external input is given. if not defined, ezcli will print out the result of calling
 help. (note that you can set your own help behaviour by writing your own help fn
 and pointing it to `cli->help`. the help function is passed the cli struct and opts.
@@ -120,14 +120,14 @@ struct cli cli;
 then, lets define our options:
 
 ```c
-enum rtype _default_opt(EZCLI_IGNORE_ARGS) {
+enum rtype _default_opt(CLI_IGNORE_ARGS) {
     printf("hello, world");
 
     return RET_NORMAL;
 }
 
 struct opt default_opt = {
-    .type = OPTION_BARE, .name = EZCLI_DEFAULT_OPT, .body = _default_opt};
+    .type = OPTION_BARE, .name = CLI_DEFAULT_OPT, .body = _default_opt};
 
 ```
 
@@ -138,7 +138,7 @@ name like this for clarity, you may like to do it some other way, and that's
 totally okay.
 
 ```c
-enum rtype _version_opt(void *ctx, EZCLI_IGNORE_TOK) {
+enum rtype _version_opt(void *ctx, CLI_IGNORE_TOK) {
     char *prefix = (char *)ctx;
 
     printf("%s, v1.0.0", prefix);
@@ -161,7 +161,7 @@ printed in help, so no need to bother setting `desc`. you will also see how the 
 `ctx` comes to play.
 
 ```c
-enum rtype _nonopt(EZCLI_IGNORE_CTX, char *tok) {
+enum rtype _nonopt(CLI_IGNORE_CTX, char *tok) {
     printf("hello, %s", tok);
 
     return RET_NORMAL;
@@ -169,7 +169,7 @@ enum rtype _nonopt(EZCLI_IGNORE_CTX, char *tok) {
 
 struct opt nonopt = {
     .type = OPTION_BARE,
-    .name = EZCLI_NONOPT,
+    .name = CLI_NONOPT,
     .body = _nonopt,
 };
 ```
@@ -178,7 +178,7 @@ this is the non-option option. now, we should allow for them to be able to
 implement this functionality.
 
 ```c
-EZCLI_ALLOW_NONOPT = true;
+CLI_ALLOW_NONOPT = true;
 ```
 
 ok, so now, we should compile together our cli struct with inputs we have created.

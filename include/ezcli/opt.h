@@ -9,7 +9,7 @@
  * `OPTION_SINGLE` -> `-option`
  * `OPTION_DOUBLE` -> `--option`
  */
-enum otype { OPTION_BARE, OPTION_SINGLE, OPTION_DOUBLE };
+typedef enum { OPTION_BARE, OPTION_SINGLE, OPTION_DOUBLE } opt_e;
 
 /*
  * keeps track of the return type of an option.
@@ -18,20 +18,20 @@ enum otype { OPTION_BARE, OPTION_SINGLE, OPTION_DOUBLE };
  * `RET_WARN` -> returns 0, prints as a warning.
  * `RET_FAIL` -> returns -1, prints as an error, exits.
  */
-enum rtype { RET_NORMAL, RET_WARN, RET_FAIL };
+typedef enum { RET_NORMAL, RET_WARN, RET_FAIL } ret_e;
 
-#define EZCLI_NONOPT "NONOPT"
-#define EZCLI_DEFAULT_OPT "DEFAULT"
+#define CLI_NONOPT "NONOPT"
+#define CLI_DEFAULT_OPT "DEFAULT"
 
-#define EZCLI_IGNORE_ARGS                                                      \
+#define CLI_IGNORE_ARGS                                                        \
     __attribute((unused)) void *_, __attribute((unused)) char *__
 
-#define EZCLI_IGNORE_TOK __attribute((unused)) char *_
-#define EZCLI_IGNORE_CTX __attribute((unused)) void *_
+#define CLI_IGNORE_TOK __attribute((unused)) char *_
+#define CLI_IGNORE_CTX __attribute((unused)) void *_
 
 /*
  * keeps the information about an option.
- * `type`: type of option (see enum otype)
+ * `type`: type of option (see enum opt_e)
  * `name`: name of option
  * `desc`: description of option. this is printed in help in format `opt ->
  * desc`.
@@ -42,13 +42,13 @@ enum rtype { RET_NORMAL, RET_WARN, RET_FAIL };
  * etc. `body`: functionality of option. this is the function that is feeded
  * the word that comes after an option.
  */
-struct opt {
-    enum otype type;
+typedef struct {
+    opt_e type;
     char *name;
     char *desc;
 
     bool want_input;
 
     void *ctx;
-    enum rtype (*body)(void *ctx, char *tok);
-};
+    ret_e (*body)(void *ctx, char *tok);
+} opt_s;
