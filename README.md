@@ -10,7 +10,7 @@ a cli library shouldn't police the programmer. the
 programmer should police the user for correct input,
 using the cli library.
 
-read [`docs/`](https://github.com/alperenozdnc/ezcli/tree/master/docs) in the root directory for details.
+read [`ezcli/docs/`](https://github.com/alperenozdnc/ezcli/tree/master/docs) for details.
 
 ---
 
