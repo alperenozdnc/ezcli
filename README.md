@@ -36,5 +36,4 @@ to use because of the sheer amount of workforce that open-source projects have,
 so why would anybody want to make proprietary software if it's not malicious or
 behind a paywall?
 
-for those reasons, i use [`GPLv3`](https://www.gnu.org/licenses/gpl-3.0.en.html) in all of my projects. see [`ezcli/LICENSE`](https://github.com/alperenozdnc/ezcli/blob/master/LICENSE) in the
-root directory for details.
+for those reasons, i use [`GPLv3`](https://www.gnu.org/licenses/gpl-3.0.en.html) in all of my projects. see [`ezcli/LICENSE`](https://github.com/alperenozdnc/ezcli/blob/master/LICENSE) for details.
