@@ -1,8 +1,6 @@
 #include <ezcli.h>
 #include <stdio.h>
 
-#include "../ezcli/internal/printopts.h"
-
 enum rtype _eat(EZCLI_IGNORE_CTX, char *food) {
     printf("human: consuming %s\n", food);
 
