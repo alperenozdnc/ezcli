@@ -402,8 +402,8 @@ most bugs).
 
 #### there is a philosophy to c many people forget
 
-i recently saw a library that used macros to let someone,
-create artificial function defitions, and nest them in order too (cli>arg>usage),
+i recently saw a library that used macros to let someone create artificial
+function definitions, and nest them in order too (cli>arg>usage),
 and names, the usages, the descriptions were all taken inside a single string
 as an argument to some of those "functions".
 
