@@ -6,6 +6,7 @@
 #include <ezcli/extern.h>
 
 #include <ezcli/addopt.h>
+#include <ezcli/delopt.h>
 #include <ezcli/freecli.h>
 #include <ezcli/initcli.h>
 #include <ezcli/print.h>
