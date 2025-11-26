@@ -1,6 +1,8 @@
 #include <ezcli.h>
 #include <stdio.h>
 
+#include "../ezcli/internal/printopts.h"
+
 enum rtype _eat(EZCLI_IGNORE_CTX, char *food) {
     printf("human: consuming %s\n", food);
 
@@ -78,7 +80,7 @@ struct opt unwanted = {
 
 struct opt __unwanted = {
     .type = OPTION_DOUBLE,
-    .name = "unwanted",
+    .name = "unwanted2",
     .body = *_unwanted,
     .want_input = true,
     .desc = "this is for when you feel even more unwanted.",
@@ -110,6 +112,7 @@ int main(int argc, char *argv[]) {
 
     addopt(&cli, &unwanted);
     addopt(&cli, &__unwanted);
+    delopt(&cli, &__secret);
 
     runcli(&cli, argc, argv);
 
