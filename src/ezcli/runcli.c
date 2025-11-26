@@ -1,5 +1,6 @@
 #include <ezcli/cli.h>
 #include <ezcli/extern.h>
+#include <ezcli/freecli.h>
 #include <ezcli/opt.h>
 #include <ezcli/print.h>
 #include <ezcli/runcli.h>
@@ -30,6 +31,8 @@ void check_ret(struct cli *cli, enum rtype ret, bool *any_warnings) {
     if (ret == RET_FAIL) {
         cliprint(CLI_ERROR, EZCLI_EMPTY_PREFIX, "%s: exited with an error.",
                  cli->cmd);
+
+        freecli(cli);
 
         exit(EXIT_FAILURE);
     }
