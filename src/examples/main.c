@@ -100,6 +100,7 @@ int main(int argc, char *argv[]) {
     char *help_aliases[] = {"help", "--help", NULL};
 
     EZCLI_ALLOW_NONOPT = true;
+    EZCLI_MODE_DEBUG = true;
 
     initcli(&cli, "human", "This program mimicks human-like behaviours.",
             "[command] [args]",
