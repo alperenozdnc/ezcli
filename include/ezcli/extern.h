@@ -16,3 +16,9 @@ extern bool EZCLI_MODE_LAIDBACK;
  * `OPTION_BARE` to handle these inputs.
  * */
 extern bool EZCLI_ALLOW_NONOPT;
+
+/*
+ * setting for the debug.
+ * if set to true, all hints ezcli gives during parsing will be printing.
+ */
+extern bool EZCLI_MODE_DEBUG;

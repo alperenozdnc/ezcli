@@ -5,6 +5,10 @@
 
 #include <ezcli/opt.h>
 
+#define DEBUG_ONLY(fn)                                                         \
+    if (EZCLI_MODE_DEBUG)                                                      \
+        fn;
+
 /*
  * keeps the information about the general command line interface.
  * `cmd`: name of the command. this is used for parsing and generating help

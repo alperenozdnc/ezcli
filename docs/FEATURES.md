@@ -59,3 +59,7 @@ the arguments, so you can inject any arguments you want. this allows for creatio
 of interactive cli's, and maybe even might make ezcli kind of a 'programming interface'.
 you could do recursion, calculations, and other weird things you don't expect a cli
 library to be able to do.
+
+## debug mode
+setting `EZCLI_MODE_DEBUG` to true enables all prints ezcli creates about
+parsing. these are printed in blue color. and formatted as `opt -> input`.

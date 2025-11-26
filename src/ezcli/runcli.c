@@ -96,7 +96,7 @@ void runcli(struct cli *cli, int argc, char *argv[]) {
         }
 
         if (argc == i + 1) {
-            cliprint(CLI_HINT, "ezcli: ", "%s -> NULL", opt->name);
+            DEBUG_ONLY(cliprint(CLI_HINT, "ezcli: ", "%s -> NULL", opt->name));
 
             check_ret(cli, opt->body(__CONTEXT(opt), NULL), &any_warnings);
             any_option_seen = true;
@@ -115,8 +115,8 @@ void runcli(struct cli *cli, int argc, char *argv[]) {
 
         char *arg = opt->want_input ? tok_next : NULL;
 
-        cliprint(CLI_HINT, "ezcli: ", "%s -> %s", opt->name,
-                 arg ? arg : "NULL");
+        DEBUG_ONLY(cliprint(CLI_HINT, "ezcli: ", "%s -> %s", opt->name,
+                            arg ? arg : "NULL"));
 
         check_ret(cli, opt->body(__CONTEXT(opt), arg), &any_warnings);
         any_option_seen = true;
