@@ -19,6 +19,7 @@ if you don't really like the philosophy behind it.
 ezcli strictly forbids any syntax errors in inputs, but there exists a laidback
 mode if you want ezcli to omit all errors, but still print them. every option
 also can set branching with;
+
 - continuing
 - sending warnings
 - making errors and panicking
@@ -54,5 +55,6 @@ you could do recursion, calculations, and other weird things you don't expect a 
 library to be able to do.
 
 ## debug mode
+
 setting `CLI_MODE_DEBUG` to true enables all prints ezcli creates about
 parsing. these are printed in blue color. and formatted as `opt -> input`.
