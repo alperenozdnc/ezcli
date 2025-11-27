@@ -30,12 +30,19 @@
  * arguments, (positional options). like `ls /home` where `/home` is the non
  * option-preceded argument. you should create an opt in `opts` that has alias
  * `CLI_NONOPT` to handle these inputs.
+ *
+ * do not touch `tok_idx`, `argc`, and `argv`. these are internal, and you might
+ * get some unexpected behaviour if you decide to play with them.
  * */
 typedef struct __cli_s {
     char *cmd;
     char *desc;
     char *usage;
     char *footer;
+
+    int tok_idx;
+    int argc;
+    char **argv;
 
     opt_s **opts;
     size_t opts_len;

@@ -44,6 +44,9 @@ void check_ret(cli_s *cli, ret_e ret, bool *any_warnings) {
 }
 
 void runcli(cli_s *cli, int argc, char *argv[]) {
+    cli->argc = argc;
+    cli->argv = argv;
+
     bool any_option_seen = false;
     bool any_warnings = false;
 
@@ -60,7 +63,7 @@ void runcli(cli_s *cli, int argc, char *argv[]) {
     }
 
     // 0-th index is the command name itself
-    for (int i = 1; i < argc; i++) {
+    for (int i = 1; i < argc; i++, cli->tok_idx++) {
         char *tok = argv[i];
         opt_s *opt = ot_match_any(cli, tok);
         opt_s *opt_prev = ot_match_any(cli, argv[i - 1]);

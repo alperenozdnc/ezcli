@@ -18,6 +18,7 @@ void initcli(cli_s *cli, char *cmd, char *desc, char *usage, char *footer,
     cli->footer = footer ? footer : NULL;
 
     cli->opts_len = 0;
+    cli->tok_idx = 1;
 
     cli->help = clihelp;
     cli->help_aliases = help_aliases;
