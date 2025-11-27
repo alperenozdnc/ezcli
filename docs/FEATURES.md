@@ -49,6 +49,12 @@ of interactive clis, and maybe might even make ezcli kind of a 'programming inte
 you could do recursion, calculations, and other weird things you don't expect a cli
 library to be able to do.
 
+> [!CAUTION]
+yes, you can do recursion. but you MUST restore `cli->tok_idx`, `cli->argc`, and `cli->argv`
+before and after any nested `runcli()` call to prevent undefined behaviour
+(notably, in token peeking utilities).
+> 
+
 ## debug mode
 
 setting `CLI_MODE_DEBUG` to true enables all prints ezcli creates about
