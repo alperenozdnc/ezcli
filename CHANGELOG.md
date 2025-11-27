@@ -16,6 +16,6 @@
 - alias system for options using a macro (`CLI_ALIASES()`)
 - runtime option manipulation with `addopt` and `delopt`
 - default, changeable help system with `help_aliases[]` and `clihelp()`
-- `runcli()` and `freecli()` for starting and killing a cli instance
+- `initcli()` and `freecli()` for starting and killing a cli instance
 - example cli program demonstrating aliases, nonopts, and default options.
 - comprehensive documentation including example usage, philosophy, features, and installation.
