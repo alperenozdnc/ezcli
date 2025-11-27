@@ -1,12 +1,5 @@
 # features
 
-## expandable option types (wut?)
-
-the number of leading hyphens for an option depends on an enum value you
-set yourself (either `OPTION_BARE`, `OPTION_SINGLE` or `OPTION_DOUBLE`).
-i believe this is prettier than just including the hyphens in the
-option definition.
-
 ## options are context-aware behaviour containers
 
 not only can you define what an option does, but you can optionally pass

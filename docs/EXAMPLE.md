@@ -1,24 +1,24 @@
 # example usage
 
-so, we start by defining a `cli` struct. this is where all of the information
+so, we start by defining a `cli_s` struct. this is where all of the information
 about your command line interface lives:
 
 ```c
-struct cli {
+typedef struct __cli_s {
     char *cmd;
     char *desc;
     char *usage;
     char *footer;
 
-    struct opt **opts;
+    opt_s **opts;
     size_t opts_len;
 
     char **help_aliases;
-    void (*help)(struct cli *cli, struct opt **opts);
-}
+    void (*help)(struct __cli_s *cli, opt_s **opts);
+} cli_s;
 ```
 
-a `cli` struct consists of:
+`cli_s` consists of:
 - 1) information that concerns the user (cmd, desc, usage, footer)
 - 2) information that concerns ezcli (opts, opts_len, help_aliases, help)
 
@@ -26,7 +26,7 @@ you can go check out `include/ezcli/cli.h` for information on what each field
 represents.
 
 you must use the `initcli` function (code present in `src/ezcli/initcli.c`) to
-initialize your instance of the cli struct.
+initialize your instance of `cli_s`.
 
 this function will allocate memory for your options, define a default help command,
 and copy all other information.
@@ -36,8 +36,8 @@ note that `**opts` and `*help_aliases[]` MUST be null terminated.
 > 
 
 ```c
-void initcli(struct cli *cli, char *cmd, char *desc, char *usage, char *footer,
-             struct opt **opts, char *help_aliases[]);
+void initcli(cli_s *cli, char *cmd, char *desc, char *usage, char *footer,
+             opt_s **opts, char *help_aliases[]);
 ```
 
 after initializing your cli instance, you can set how ezcli will behave.
@@ -53,28 +53,35 @@ in features.
 ## ok, i get it. but what i do even fill `**opts` with?
 
 here comes the part where we define our options. every option is defined using
-an `opt` struct.
+an `opt_s` struct.
 
 ```c
-struct opt {
-    enum otype type;
-    char *name;
+typedef struct {
+    char **aliases;
     char *desc;
 
     bool want_input;
 
     void *ctx;
-    enum rtype (*body)(void *ctx, char *tok);
-};
+    ret_e (*body)(void *ctx, char *tok);
+} opt_s;
 ```
 
 these options are the little bits and pieces that make up our program.
-you can think of the `type`, `name`, and description as the labels on a box, the context (`*ctx`)
+you can think of the `aliases`, and `desc` as the labels on a box, the context (`*ctx`)
 and the `*body` as the stuff inside that box, and `want_input` as a guard waiting
 to punish you if you do the wrong thing.
 
-the `enum otype type` specifies how many hyphens come before `name`.
-`OPTION_BARE` is for none, `OPTION_SINGLE` is for one, and `OPTION_DOUBLE` is for two.
+the aliases are defined using the `CLI_ALIASES` macro provided in `include/opt.h`.
+
+it expands to:
+```c
+// CLI_ALIASES(a, b, c, d)
+(char *[]){a, b, c, d, NULL};
+```
+
+this macro is just to save you time wasted creating variables / casting, you
+you don't really have to use it if you don't want.
 
 the description is what's shown in the help command, and `want_input` obviously
 specifies if the option wants input or not.
@@ -109,36 +116,35 @@ and pointing it to `cli->help`. the help function is passed the cli struct and o
 now, with all of this info, lets create a simple cli that has version `v1.0.0`,
 prints "hello, world" when being ran with no input, and replaces the 'world'
 in hello world with the given nonopt if any is given.
-to start, import ezcli and create an empty `cli` struct:
+to start, import ezcli and create an empty `cli_s` struct:
 
 ```c
 #include <ezcli.h>
 
-struct cli cli;
+cli_s cli;
 ```
 
 then, lets define our options:
 
 ```c
-enum rtype _default_opt(CLI_IGNORE_ARGS) {
+ret_e _default_opt(CLI_IGNORE_ARGS) {
     printf("hello, world");
 
     return RET_NORMAL;
 }
 
-struct opt default_opt = {
-    .type = OPTION_BARE, .name = CLI_DEFAULT_OPT, .body = _default_opt};
-
+opt_s default_opt = {
+    .name = CLI_ALIASES(CLI_DEFAULT_OPT), .body = _default_opt};
 ```
 
-this is the default option. the `enum rtype` has three values, `RET_NORMAL`
+this is the default option. the `ret_e` enum has three values, `RET_NORMAL`
 just continues parsing, `RET_WARN` warns the user that they probably did
 something wrong, and `RET_FAIL` just flat out exits the program. i like to
 name like this for clarity, you may like to do it some other way, and that's
 totally okay.
 
 ```c
-enum rtype _version_opt(void *ctx, CLI_IGNORE_TOK) {
+ret_e _version_opt(void *ctx, CLI_IGNORE_TOK) {
     char *prefix = (char *)ctx;
 
     printf("%s, v1.0.0", prefix);
@@ -146,9 +152,8 @@ enum rtype _version_opt(void *ctx, CLI_IGNORE_TOK) {
     return RET_NORMAL;
 }
 
-struct opt version_opt = {
-    .type = OPTION_DOUBLE,
-    .name = "version",
+opt_s version_opt = {
+    .aliases = CLI_ALIASES("-v", "--version"),
     .desc = "prints out the version.",
     .want_input = false,
     .ctx = "my program is version",
@@ -161,15 +166,14 @@ printed in help, so no need to bother setting `desc`. you will also see how the 
 `ctx` comes to play.
 
 ```c
-enum rtype _nonopt(CLI_IGNORE_CTX, char *tok) {
+ret_e _nonopt(CLI_IGNORE_CTX, char *tok) {
     printf("hello, %s", tok);
 
     return RET_NORMAL;
 }
 
-struct opt nonopt = {
-    .type = OPTION_BARE,
-    .name = CLI_NONOPT,
+opt_s nonopt = {
+    .aliases = CLI_ALIASES(CLI_NONOPT),
     .body = _nonopt,
 };
 ```
@@ -184,7 +188,7 @@ CLI_ALLOW_NONOPT = true;
 ok, so now, we should compile together our cli struct with inputs we have created.
 
 ```c
-struct opt *opts[] = {&version_opt, &default_opt, &nonopt, NULL};
+opt_s *opts[] = {&version_opt, &default_opt, &nonopt, NULL};
 char *help_aliases[] = {"help", "--help", NULL};
 
 initcli(&cli, "program", "This program is an example on ezcli.",
@@ -205,6 +209,12 @@ you can also add options with `addopt` if you wish.
 
 ```c
 addopt(&cli, &version_opt);
+```
+
+or, remove them with `delopt`.
+
+```c
+delopt(&cli, &version_opt);
 ```
 
 now, when compiling and running this,
