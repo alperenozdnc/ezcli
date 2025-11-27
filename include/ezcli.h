@@ -4,6 +4,7 @@
 #include <ezcli/opt.h>
 
 #include <ezcli/external.h>
+#include <ezcli/ezcliver.h>
 
 #include <ezcli/addopt.h>
 #include <ezcli/delopt.h>
