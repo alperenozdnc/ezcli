@@ -5,9 +5,9 @@
 #include <ezcli/print.h>
 #include <ezcli/runcli.h>
 
-#include "internal/context.h"
-#include "internal/handle_nonopt.h"
-#include "internal/match.h"
+#include "../internal/context.h"
+#include "../internal/handle_nonopt.h"
+#include "../internal/match.h"
 
 #include <stdbool.h>
 #include <stdio.h>

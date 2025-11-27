@@ -2,9 +2,9 @@
 #include <ezcli/initcli.h>
 #include <ezcli/print.h>
 
-#include "internal/check_alloc.h"
-#include "internal/help.h"
-#include "internal/opts_size.h"
+#include "../internal/check_alloc.h"
+#include "../internal/help.h"
+#include "../internal/opts_size.h"
 
 #include <stdio.h>
 #include <stdlib.h>
