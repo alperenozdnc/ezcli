@@ -229,12 +229,14 @@ we get (i moved the binary to `/usr/bin/program`):
     This program is an example on ezcli.                                                  
                                                                                         
         help, --help -> prints this menu.                                               
-        --version -> prints out the version.                                              
+        -v, --version -> prints out the version.                                              
                                                                                           
-                                                                                        
     And this is the footer.                                                             
 
 % program --version                                           
+    my program is version, v1.0.0                                                       
+
+% program -v
     my program is version, v1.0.0                                                       
                                                                                     
 % program name1 name2 name3 name4                                                                   
