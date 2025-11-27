@@ -1,5 +1,6 @@
 #include <ezcli/addopt.h>
 
+#include "../internal/check_alloc.h"
 #include "../internal/opts_size.h"
 
 #include <stdio.h>
@@ -9,6 +10,8 @@
 void addopt(cli_s *cli, opt_s *opt_a) {
     size_t new_len = cli->opts_len + 1;
     opt_s **new_opts = malloc(OPTS_SIZE(new_len));
+
+    CLI_CHECK_ALLOC(new_opts);
 
     for (size_t i = 0; i < cli->opts_len; i++) {
         opt_s *opt = cli->opts[i];
@@ -20,6 +23,8 @@ void addopt(cli_s *cli, opt_s *opt_a) {
     new_opts[new_len] = NULL;
 
     cli->opts = realloc(cli->opts, OPTS_SIZE(new_len));
+    CLI_CHECK_ALLOC(cli->opts);
+
     memcpy(cli->opts, new_opts, OPTS_SIZE(new_len));
     free(new_opts);
 

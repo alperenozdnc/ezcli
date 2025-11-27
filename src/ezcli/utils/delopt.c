@@ -1,5 +1,6 @@
 #include <ezcli/delopt.h>
 
+#include "../internal/check_alloc.h"
 #include "../internal/match.h"
 #include "../internal/opts_size.h"
 
@@ -10,6 +11,7 @@
 void delopt(cli_s *cli, opt_s *opt_d) {
     size_t new_len = cli->opts_len - 1;
     opt_s **new_opts = malloc(OPTS_SIZE(new_len));
+    CLI_CHECK_ALLOC(new_opts);
 
     int j = 0;
 
@@ -26,6 +28,7 @@ void delopt(cli_s *cli, opt_s *opt_d) {
 
     int k = 0;
     cli->opts = realloc(cli->opts, OPTS_SIZE(new_len));
+    CLI_CHECK_ALLOC(cli->opts);
 
     while (new_opts[k]) {
         cli->opts[k] = new_opts[k];

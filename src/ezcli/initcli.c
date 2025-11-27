@@ -1,6 +1,8 @@
 #include <ezcli/cli.h>
 #include <ezcli/initcli.h>
+#include <ezcli/print.h>
 
+#include "internal/check_alloc.h"
 #include "internal/help.h"
 #include "internal/opts_size.h"
 
@@ -25,6 +27,8 @@ void initcli(cli_s *cli, char *cmd, char *desc, char *usage, char *footer,
     }
 
     cli->opts = malloc(OPTS_SIZE(cli->opts_len));
+
+    CLI_CHECK_ALLOC(cli->opts);
 
     for (size_t i = 0; i < cli->opts_len; i++) {
         cli->opts[i] = opts[i];
