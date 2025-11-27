@@ -39,29 +39,25 @@ ret_e __default(CLI_IGNORE_ARGS) {
 }
 
 opt_s eat = {
-    .type = OPTION_BARE,
-    .name = "eat",
+    .aliases = CLI_ALIASES("eat", "--eat"),
     .body = *_eat,
     .want_input = true,
     .desc = "every human needs something to consoom.",
 };
 
-opt_s sleep = {.type = OPTION_BARE,
-               .name = "sleep",
+opt_s sleep = {.aliases = CLI_ALIASES("sleep", "--sleep"),
                .body = *_sleep,
                .want_input = false,
                .desc = "zzzzzz. i'm always sleepy, man."};
 
-opt_s secret = {.type = OPTION_DOUBLE,
-                .name = "secret",
+opt_s secret = {.aliases = CLI_ALIASES("secret", "--secret"),
                 .ctx = "i use contexts!",
                 .desc = "hey, lemme tell you b secret.",
                 .body = *_secret,
                 .want_input = true};
 
 opt_s __secret = {
-    .type = OPTION_SINGLE,
-    .name = "S",
+    .aliases = CLI_ALIASES("-S", "--secrets"),
     .body = *_secret,
     .ctx = "i use contexts!",
     .want_input = true,
@@ -69,26 +65,23 @@ opt_s __secret = {
 };
 
 opt_s unwanted = {
-    .type = OPTION_BARE,
-    .name = "unwanted",
     .body = *_unwanted,
+    .aliases = CLI_ALIASES("-U", "--unwanted"),
     .want_input = true,
     .desc = "this is for when you feel unwanted.",
 };
 
 opt_s __unwanted = {
-    .type = OPTION_DOUBLE,
-    .name = "unwanted2",
+    .aliases = CLI_ALIASES("-UW", "-unwanteed"),
     .body = *_unwanted,
     .want_input = true,
     .desc = "this is for when you feel even more unwanted.",
 };
 
-opt_s nonopt = {.type = OPTION_BARE, .name = CLI_NONOPT, .body = *_nonopt};
+opt_s nonopt = {.aliases = CLI_ALIASES(CLI_NONOPT), .body = *_nonopt};
 
 opt_s _default = {
-    .type = OPTION_BARE,
-    .name = CLI_DEFAULT_OPT,
+    .aliases = CLI_ALIASES(CLI_DEFAULT_OPT),
     .body = *__default,
 };
 
