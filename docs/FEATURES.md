@@ -67,3 +67,17 @@ take percent sign (%) formats.
 ```c
 void cliprint(print_e type, char *prefix, char *fmt, ...);
 ```
+
+## accessing tokens with ease
+
+for accessing the tokens that come before and after the currently parsed token,
+you can use the `gettok_prev()` and `gettok_next()` functions.
+
+```c
+char *gettok_prev(cli_s *cli);
+
+char *gettok_next(cli_s *cli);
+```
+
+these require your cli instance to be passed on to the context of which option
+you will use them for.
