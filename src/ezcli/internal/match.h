@@ -13,7 +13,7 @@ bool ot_match(opt_s *opt, char *token);
 
 /*
  * stands for option_token_match_any.
- * checks if the given token and any option names match. returns the option
+ * checks if the given token and any option aliases match. returns the option
  * if any matches are found.
  */
 opt_s *ot_match_any(cli_s *cli, char *token);

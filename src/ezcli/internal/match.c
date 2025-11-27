@@ -1,7 +1,6 @@
 #include <ezcli/cli.h>
 #include <ezcli/opt.h>
 
-#include "expand.h"
 #include "match.h"
 
 #include <stdbool.h>
@@ -9,22 +8,26 @@
 #include <string.h>
 
 bool ot_match(opt_s *opt, char *token) {
-    char *exp_opt = expand(opt);
+    int i = 0;
 
-    bool ret = strcmp(token, exp_opt) == 0;
+    while (opt->aliases[i]) {
+        char *name = opt->aliases[i];
 
-    free(exp_opt);
+        if (strcmp(token, name) == 0)
+            return true;
 
-    return ret;
+        i++;
+    }
+
+    return false;
 }
 
 opt_s *ot_match_any(cli_s *cli, char *token) {
     for (size_t i = 0; i < cli->opts_len; i++) {
         opt_s *opt = cli->opts[i];
 
-        if (ot_match(opt, token)) {
+        if (ot_match(opt, token))
             return opt;
-        }
     }
 
     return NULL;
@@ -34,7 +37,7 @@ opt_s *match_nonopt(cli_s *cli) {
     for (size_t i = 0; i < cli->opts_len; i++) {
         opt_s *opt = cli->opts[i];
 
-        if (strcmp(opt->name, CLI_NONOPT) == 0) {
+        if (strcmp(opt->aliases[0], CLI_NONOPT) == 0) {
             return opt;
         }
     }

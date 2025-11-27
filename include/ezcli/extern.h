@@ -12,8 +12,8 @@ extern bool CLI_MODE_LAIDBACK;
  * setting for the allowing of non option-preceded arguments, (positional
  * options).
  * like `ls /home` where `/home` is the non option-preceded argument.
- * you should create an opt in `opts` that has name `CLI_NONOPT` and type
- * `OPTION_BARE` to handle these inputs.
+ * you should create an opt in `opts` that has alias `CLI_NONOPT` to handle
+ * these inputs.
  * */
 extern bool CLI_ALLOW_NONOPT;
 

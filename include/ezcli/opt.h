@@ -3,15 +3,6 @@
 #include <stdbool.h>
 
 /*
- * keeps track of the type of an option.
- *
- * `OPTION_BARE` -> `option`
- * `OPTION_SINGLE` -> `-option`
- * `OPTION_DOUBLE` -> `--option`
- */
-typedef enum { OPTION_BARE, OPTION_SINGLE, OPTION_DOUBLE } opt_e;
-
-/*
  * keeps track of the return type of an option.
  *
  * `RET_NORMAL` -> returns 0.
@@ -29,10 +20,14 @@ typedef enum { RET_NORMAL, RET_WARN, RET_FAIL } ret_e;
 #define CLI_IGNORE_TOK __attribute((unused)) char *_
 #define CLI_IGNORE_CTX __attribute((unused)) void *_
 
+#define CLI_ALIASES(...)                                                       \
+    (char *[]) {                                                               \
+        __VA_ARGS__, NULL                                                      \
+    }
+
 /*
  * keeps the information about an option.
- * `type`: type of option (see enum opt_e)
- * `name`: name of option
+ * `aliases`: names of option
  * `desc`: description of option. this is printed in help in format `opt ->
  * desc`.
  * `want_input`: true if option requires an input. if not filled,
@@ -43,8 +38,7 @@ typedef enum { RET_NORMAL, RET_WARN, RET_FAIL } ret_e;
  * the word that comes after an option.
  */
 typedef struct {
-    opt_e type;
-    char *name;
+    char **aliases;
     char *desc;
 
     bool want_input;

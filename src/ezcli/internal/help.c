@@ -2,9 +2,9 @@
 #include <ezcli/opt.h>
 #include <ezcli/print.h>
 
-#include "expand.h"
 #include "help.h"
 #include "match.h"
+#include "printaliases.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -18,33 +18,24 @@ void __print_header(cli_s *cli) {
     printf("%s\n\n", cli->desc);
 }
 
+void __print_option(char **aliases, char *desc) {
+    printf(PADDING_LEFT);
+    printaliases(aliases);
+    printf(" -> %s", desc);
+}
+
 void __print_options(cli_s *cli, opt_s **opts) {
-    int i = 0;
     char *blacklist[] = {CLI_NONOPT, CLI_DEFAULT_OPT, NULL};
 
-    while (cli->help_aliases[i]) {
-        if (i == 0)
-            printf(PADDING_LEFT);
-
-        printf(ANSI_BLUE "%s" ANSI_RESET, cli->help_aliases[i]);
-
-        if (cli->help_aliases[i + 1]) {
-            printf(", ");
-        } else {
-            printf(" -> prints this menu.\n");
-        }
-
-        i++;
-    }
+    __print_option(cli->help_aliases, "prints this menu.\n");
 
     for (size_t i = 0; i < cli->opts_len; i++) {
         opt_s *opt = opts[i];
 
-        if (match_str(blacklist, opt->name))
+        if (match_str(blacklist, opt->aliases[0]))
             continue;
 
-        printf(PADDING_LEFT ANSI_BLUE "%s" ANSI_RESET " -> %s", expand(opt),
-               opt->desc);
+        __print_option(opt->aliases, opt->desc);
 
         if (i != cli->opts_len - 1)
             printf("\n");

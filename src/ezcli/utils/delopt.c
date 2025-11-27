@@ -1,5 +1,6 @@
 #include <ezcli/delopt.h>
 
+#include "../internal/match.h"
 #include "../internal/opts_size.h"
 
 #include <stdio.h>
@@ -15,7 +16,7 @@ void delopt(cli_s *cli, opt_s *opt_d) {
     for (size_t i = 0; i < cli->opts_len; i++) {
         opt_s *opt = cli->opts[i];
 
-        if (strcmp(opt_d->name, opt->name) == 0)
+        if (ot_match(opt_d, opt->aliases[0]))
             continue;
 
         new_opts[j++] = opt;

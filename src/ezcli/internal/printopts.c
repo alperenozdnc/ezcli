@@ -1,14 +1,15 @@
 #include "printopts.h"
 #include "context.h"
+#include "printaliases.h"
 
 #include <stdio.h>
 
 void printopt(opt_s *opt) {
     printf("\n");
 
-    printf("%s <%p>: \n", opt->name, &opt->name);
+    printaliases(opt->aliases);
+    printf(" <%p>: \n", &opt);
 
-    printf("opt->type = %d\n", opt->type);
     printf("opt->desc = %s\n", opt->desc);
     printf("opt->want_input = %d\n", opt->want_input);
     printf("opt->ctx = %p\n", __CONTEXT(opt));

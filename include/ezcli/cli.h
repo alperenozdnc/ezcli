@@ -28,8 +28,8 @@
  *
  * `CLI_ALLOW_NONOPT`: setting for the allowing of non option-preceded
  * arguments, (positional options). like `ls /home` where `/home` is the non
- * option-preceded argument. you should create an opt in `opts` that has name
- * `CLI_NONOPT` and type `OPTION_BARE` to handle these inputs.
+ * option-preceded argument. you should create an opt in `opts` that has alias
+ * `CLI_NONOPT` to handle these inputs.
  * */
 typedef struct __cli_s {
     char *cmd;

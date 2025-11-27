@@ -80,7 +80,7 @@ void runcli(cli_s *cli, int argc, char *argv[]) {
             cliprint(CLI_ERROR, CLI_EMPTY_PREFIX,
                      "%s: '%s' cannot be passed to '%s' as it requires no "
                      "arguments.",
-                     cli->cmd, tok, opt_prev->name);
+                     cli->cmd, tok, argv[i - 1]);
 
             check_ret(cli, panic(), &any_warnings);
         }
@@ -96,7 +96,7 @@ void runcli(cli_s *cli, int argc, char *argv[]) {
         }
 
         if (argc == i + 1) {
-            DEBUG_ONLY(cliprint(CLI_HINT, "ezcli: ", "%s -> NULL", opt->name));
+            DEBUG_ONLY(cliprint(CLI_HINT, "ezcli: ", "%s -> NULL", tok));
 
             check_ret(cli, opt->body(__CONTEXT(opt), NULL), &any_warnings);
             any_option_seen = true;
@@ -115,8 +115,8 @@ void runcli(cli_s *cli, int argc, char *argv[]) {
 
         char *arg = opt->want_input ? tok_next : NULL;
 
-        DEBUG_ONLY(cliprint(CLI_HINT, "ezcli: ", "%s -> %s", opt->name,
-                            arg ? arg : "NULL"));
+        DEBUG_ONLY(
+            cliprint(CLI_HINT, "ezcli: ", "%s -> %s", tok, arg ? arg : "NULL"));
 
         check_ret(cli, opt->body(__CONTEXT(opt), arg), &any_warnings);
         any_option_seen = true;
