@@ -18,6 +18,8 @@
  * panic with a warning/error based on laidback value.
  */
 ret_e panic() {
+    DEBUG_ONLY(cliprint(CLI_WARN, "ezcli: ", "panicking"));
+
     if (CLI_MODE_LAIDBACK)
         return RET_WARN;
 
