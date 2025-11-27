@@ -1,4 +1,4 @@
-#include <ezcli/extern.h>
+#include <ezcli/external.h>
 
 #include <stdbool.h>
 

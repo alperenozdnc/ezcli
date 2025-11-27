@@ -3,7 +3,7 @@
 #include <ezcli/cli.h>
 #include <ezcli/opt.h>
 
-#include <ezcli/extern.h>
+#include <ezcli/external.h>
 
 #include <ezcli/addopt.h>
 #include <ezcli/delopt.h>

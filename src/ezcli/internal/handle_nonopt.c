@@ -1,5 +1,5 @@
 #include <ezcli/cli.h>
-#include <ezcli/extern.h>
+#include <ezcli/external.h>
 #include <ezcli/opt.h>
 #include <ezcli/print.h>
 
