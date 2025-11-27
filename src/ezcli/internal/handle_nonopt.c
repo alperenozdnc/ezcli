@@ -32,7 +32,7 @@ bool handle_nonopt(cli_s *cli, char *tok, bool is_unrecog,
 
     opt_s *nonopt = match_nonopt(cli);
 
-    nonopt->body(__CONTEXT(nonopt), tok);
+    nonopt->body(_CLI_CONTEXT(nonopt), tok);
 
     return true;
 }

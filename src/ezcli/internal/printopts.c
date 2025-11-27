@@ -12,7 +12,7 @@ void printopt(opt_s *opt) {
 
     printf("opt->desc = %s\n", opt->desc);
     printf("opt->want_input = %d\n", opt->want_input);
-    printf("opt->ctx = %p\n", __CONTEXT(opt));
+    printf("opt->ctx = %p\n", _CLI_CONTEXT(opt));
     printf("opt->body = %p\n", &opt->body);
 
     printf("\n");

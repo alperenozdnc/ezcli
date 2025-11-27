@@ -53,7 +53,7 @@ void runcli(cli_s *cli, int argc, char *argv[]) {
         opt_s *opt_default = ot_match_any(cli, CLI_DEFAULT_OPT);
 
         if (opt_default) {
-            opt_default->body(__CONTEXT(opt_default), NULL);
+            opt_default->body(_CLI_CONTEXT(opt_default), NULL);
         } else {
             cli->help(cli, cli->opts);
         }
@@ -100,7 +100,7 @@ void runcli(cli_s *cli, int argc, char *argv[]) {
         if (argc == i + 1) {
             DEBUG_ONLY(cliprint(CLI_HINT, "ezcli: ", "%s -> NULL", tok));
 
-            check_ret(cli, opt->body(__CONTEXT(opt), NULL), &any_warnings);
+            check_ret(cli, opt->body(_CLI_CONTEXT(opt), NULL), &any_warnings);
             any_option_seen = true;
 
             break;
@@ -120,7 +120,7 @@ void runcli(cli_s *cli, int argc, char *argv[]) {
         DEBUG_ONLY(
             cliprint(CLI_HINT, "ezcli: ", "%s -> %s", tok, arg ? arg : "NULL"));
 
-        check_ret(cli, opt->body(__CONTEXT(opt), arg), &any_warnings);
+        check_ret(cli, opt->body(_CLI_CONTEXT(opt), arg), &any_warnings);
         any_option_seen = true;
     }
 

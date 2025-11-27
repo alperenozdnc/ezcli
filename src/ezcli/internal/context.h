@@ -1,3 +1,3 @@
 #pragma once
 
-#define __CONTEXT(opt) opt->ctx ? opt->ctx : NULL
+#define _CLI_CONTEXT(opt) opt->ctx ? opt->ctx : NULL
