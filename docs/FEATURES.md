@@ -10,7 +10,7 @@ define your own parsing methods, inject context based on input, and even more.
 
 you can add new options with the `addopt` function
 (and obviously remove with `delopt`). this enables you to make programs that
-have user defined commands (and have those user-defined commands persist across sessions),
+have user-defined commands (and have those user-defined commands persist across sessions),
 or you can even make a wrapper around my library
 if you don't really like the philosophy behind it.
 
@@ -38,23 +38,18 @@ will handle printing out an error for you.
 ## default option
 
 if you don't define a default option, ezcli prints out an help menu by default.
-if you do though, any program that is ran with argc=0, argv={} immediately calls
-this default option behaviour. this can also take context, which would make
-totally weird ideas like a program that increments a certain number in a file
-by just being ran. let's say the program is named 'sum' and you do,
-`sum set num.txt`, and `sum` 5 times and you could see 5 in `num.txt`. this
-obviously isn't something that's viable, or usable looking from a ux perspective,
-but it just goes to show the flexibility and unopinionated-ness of ezcli.
+if you do though, any program that's run with no args immediately calls
+this default option behaviour. this can also take context.
 
 ## injectable runner
 
 the `runcli(int argc, char *argv[])` function doesn't care about the source of
 the arguments, so you can inject any arguments you want. this allows for creation
-of interactive cli's, and maybe even might make ezcli kind of a 'programming interface'.
+of interactive clis, and maybe might even make ezcli kind of a 'programming interface'.
 you could do recursion, calculations, and other weird things you don't expect a cli
 library to be able to do.
 
 ## debug mode
 
 setting `CLI_MODE_DEBUG` to true enables all prints ezcli creates about
-parsing. these are printed in blue color. and formatted as `opt -> input`.
+parsing. these are printed in blue, and formatted as `opt -> input`.

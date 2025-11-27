@@ -19,8 +19,9 @@ typedef struct __cli_s {
 ```
 
 `cli_s` consists of:
-- 1) information that concerns the user (cmd, desc, usage, footer)
-- 2) information that concerns ezcli (opts, opts_len, help_aliases, help)
+
+- 1. information that concerns the user (cmd, desc, usage, footer)
+- 2. information that concerns ezcli (opts, opts_len, help_aliases, help)
 
 you can go check out `include/ezcli/cli.h` for information on what each field
 represents.
@@ -32,8 +33,7 @@ this function will allocate memory for your options, define a default help comma
 and copy all other information.
 
 > [!CAUTION]
-note that `**opts` and `*help_aliases[]` MUST be null terminated.
-> 
+> note that `**opts` and `*help_aliases[]` MUST be null terminated.
 
 ```c
 void initcli(cli_s *cli, char *cmd, char *desc, char *usage, char *footer,
@@ -75,13 +75,14 @@ to punish you if you do the wrong thing.
 the aliases are defined using the `CLI_ALIASES` macro provided in `include/opt.h`.
 
 it expands to:
+
 ```c
 // CLI_ALIASES(a, b, c, d)
 (char *[]){a, b, c, d, NULL};
 ```
 
 this macro is just to save you time wasted creating variables / casting, you
-you don't really have to use it if you don't want.
+don't really have to use it if you don't want.
 
 the description is what's shown in the help command, and `want_input` obviously
 specifies if the option wants input or not.
@@ -97,25 +98,25 @@ the combination of shareable state and custom functionality allows you to make
 almost any kind of cli you want. interactive, non-interactive, game, utility,
 etc.
 
-there are two special cases for names you cant take: `"NONOPT"`, and `"DEFAULT"`,
+there are two special cases for names you can't take: `"NONOPT"`, and `"DEFAULT"`,
 these live under the macros names respectively, `CLI_NONOPT` and `CLI_DEFAULT_OPT`.
 
-any opt struct named these macros are now special options and will be used in
+any opt struct named these macros is now special options and will be used in
 contexts that require them.
 
 setting the name to `CLI_NONOPT` lets you define behaviour when the parsing
 comes across a non-option option. this lets you create programs that take
-arguments that can't be known before being ran. for example, in the command 
+arguments that can't be known before being run. for example, in the command
 `ls home/ etc/`, the `home/` and `etc/` are non-option options.
 
-if the name is set to `CLI_DEFAULT_OPT` lets you define behaviour when no
+setting the name to `CLI_DEFAULT_OPT` lets you define behaviour when no
 external input is given. if not defined, ezcli will print out the result of calling
 help. (note that you can set your own help behaviour by writing your own help fn
-and pointing it to `cli->help`. the help function is passed the cli struct and opts.
+and pointing it to `cli->help`). the help function is passed the cli struct and opts.
 
-now, with all of this info, lets create a simple cli that has version `v1.0.0`,
-prints "hello, world" when being ran with no input, and replaces the 'world'
-in hello world with the given nonopt if any is given.
+now, with all of this info, let's create a simple cli that has version `v1.0.0`,
+prints "hello, world" when being run with no input, and replaces the 'world'
+in "hello, world" with the given nonopt if any is given.
 to start, import ezcli and create an empty `cli_s` struct:
 
 ```c
@@ -124,7 +125,7 @@ to start, import ezcli and create an empty `cli_s` struct:
 cli_s cli;
 ```
 
-then, lets define our options:
+then, let's define our options:
 
 ```c
 ret_e _default_opt(CLI_IGNORE_ARGS) {
@@ -139,7 +140,7 @@ opt_s default_opt = {
 
 this is the default option. the `ret_e` enum has three values, `RET_NORMAL`
 just continues parsing, `RET_WARN` warns the user that they probably did
-something wrong, and `RET_FAIL` just flat out exits the program. i like to
+something wrong, and `RET_FAIL` just flat-out exits the program. i like to
 name like this for clarity, you may like to do it some other way, and that's
 totally okay.
 
@@ -159,11 +160,11 @@ opt_s version_opt = {
     .ctx = "my program is version",
     .body = _version_opt,
 };
-``` 
+```
 
 this is the version option, the default option and the nonopt aren't
 printed in help, so no need to bother setting `desc`. you will also see how the value in
-`ctx` comes to play.
+`ctx` comes into play.
 
 ```c
 ret_e _nonopt(CLI_IGNORE_CTX, char *tok) {
@@ -221,27 +222,27 @@ now, when compiling and running this,
 we get (i moved the binary to `/usr/bin/program`):
 
 ```
-% program                                                   
-    hello, world                                                                        
-                                                                                    
-% program --help                                            
-    [USAGE]: program [option]/[name]                                                    
-    This program is an example on ezcli.                                                  
-                                                                                        
-        help, --help -> prints this menu.                                               
-        -v, --version -> prints out the version.                                              
-                                                                                          
-    And this is the footer.                                                             
+% program
+    hello, world
 
-% program --version                                           
-    my program is version, v1.0.0                                                       
+% program --help
+    [USAGE]: program [option]/[name]
+    This program is an example on ezcli.
+
+        help, --help -> prints this menu.
+        -v, --version -> prints out the version.
+
+    And this is the footer.
+
+% program --version
+    my program is version, v1.0.0
 
 % program -v
-    my program is version, v1.0.0                                                       
-                                                                                    
-% program name1 name2 name3 name4                                                                   
-    hello, name1                                                                          
-    hello, name2                                                                        
-    hello, name3                                                                          
-    hello, name4                                                                        
+    my program is version, v1.0.0
+
+% program name1 name2 name3 name4
+    hello, name1
+    hello, name2
+    hello, name3
+    hello, name4
 ```
