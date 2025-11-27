@@ -53,3 +53,15 @@ library to be able to do.
 
 setting `CLI_MODE_DEBUG` to true enables all prints ezcli creates about
 parsing. these are printed in blue, and formatted as `opt -> input`.
+
+## printing utility with colored output
+
+not every warning, error, and hint can be printed by ezcli because it can't
+know the bounds of your program. that's why you can use the `cliprint` function
+provided in `include/ezcli.h` to print hints, warnings, and errors with colored
+outputs, and custom prefixes. it also works like printf meaning that it can
+take percent sign (%) formats.
+
+```c
+void cliprint(print_e type, char *prefix, char *fmt, ...);
+```
