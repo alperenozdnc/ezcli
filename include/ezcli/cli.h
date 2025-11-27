@@ -5,7 +5,7 @@
 
 #include <ezcli/opt.h>
 
-#define DEBUG_ONLY(fn)                                                         \
+#define CLI_DEBUG_ONLY(fn)                                                     \
     if (CLI_MODE_DEBUG)                                                        \
         fn;
 

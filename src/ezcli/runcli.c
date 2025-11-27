@@ -18,7 +18,7 @@
  * panic with a warning/error based on laidback value.
  */
 ret_e panic() {
-    DEBUG_ONLY(cliprint(CLI_WARN, "ezcli: ", "panicking"));
+    CLI_DEBUG_ONLY(cliprint(CLI_WARN, "ezcli: ", "panicking"));
 
     if (CLI_MODE_LAIDBACK)
         return RET_WARN;
@@ -98,7 +98,7 @@ void runcli(cli_s *cli, int argc, char *argv[]) {
         }
 
         if (argc == i + 1) {
-            DEBUG_ONLY(cliprint(CLI_HINT, "ezcli: ", "%s -> NULL", tok));
+            CLI_DEBUG_ONLY(cliprint(CLI_HINT, "ezcli: ", "%s -> NULL", tok));
 
             check_ret(cli, opt->body(_CLI_CONTEXT(opt), NULL), &any_warnings);
             any_option_seen = true;
@@ -117,7 +117,7 @@ void runcli(cli_s *cli, int argc, char *argv[]) {
 
         char *arg = opt->want_input ? tok_next : NULL;
 
-        DEBUG_ONLY(
+        CLI_DEBUG_ONLY(
             cliprint(CLI_HINT, "ezcli: ", "%s -> %s", tok, arg ? arg : "NULL"));
 
         check_ret(cli, opt->body(_CLI_CONTEXT(opt), arg), &any_warnings);
