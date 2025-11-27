@@ -53,6 +53,8 @@ library to be able to do.
 
 setting `CLI_MODE_DEBUG` to true enables all prints ezcli creates about
 parsing. these are printed in blue, and formatted as `opt -> input`.
+you can also add some debug-only functionality if you wrap your debug-only
+code with `CLI_DEBUG_ONLY()`.
 
 ## printing utility with colored output
 
