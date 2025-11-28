@@ -50,10 +50,9 @@ you could do recursion, calculations, and other weird things you don't expect a 
 library to be able to do.
 
 > [!CAUTION]
-yes, you can do recursion. but you MUST restore `cli->tok_idx`, `cli->argc`, and `cli->argv`
-before and after any nested `runcli()` call to prevent undefined behaviour
-(notably, in token peeking utilities).
-> 
+> yes, you can do recursion. but you MUST restore `cli->tok_idx`, `cli->argc`, and `cli->argv`
+> before and after any nested `runcli()` call to prevent undefined behaviour
+> (notably, in token peeking utilities).
 
 ## debug mode
 
@@ -77,13 +76,19 @@ void cliprint(print_e type, char *prefix, char *fmt, ...);
 ## accessing tokens with ease
 
 for accessing the tokens that come before and after the currently parsed token,
-you can use the `gettok_prev()` and `gettok_next()` functions.
+you can use the `gettok_prev()`, `gettok_next()`, and `gettok_offset()` functions.
 
 ```c
 char *gettok_prev(cli_s *cli);
 
 char *gettok_next(cli_s *cli);
+
+char *gettok_offset(cli_s *cli, int n);
 ```
+
+note that passing `CLI_TOK_FIRST` and `CLI_TOK_LAST` to `int n` in `gettok_offset()`
+will get you the absolute first or last token respectively. otherwise, it's always
+relative to the current token.
 
 these require your cli instance to be passed on to the context of which option
 you will use them for.
