@@ -1,5 +1,6 @@
+#include <ezcli/print.h>
+
 #include "assert.h"
-#include "ezcli/print.h"
 
 #include <stdlib.h>
 
