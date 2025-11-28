@@ -31,7 +31,7 @@ typedef enum { RET_NORMAL, RET_WARN, RET_FAIL } ret_e;
  * `desc`: description of option. this is printed in help in format `opt ->
  * desc`.
  * `want_input`: true if option requires an input. if not filled,
- * undefined parsing behaviour may occur.
+ * this is false.
  * `ctx`: state to be passed to the body when running. this allows for
  * functionality like chaining, state tracking, multiple argument options,
  * etc. `body`: functionality of option. this is the function that is feeded
