@@ -7,11 +7,12 @@
 #include "../internal/match.h"
 #include "../internal/opts_size.h"
 
+#include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-void delopt(cli_s *cli, opt_s *opt_d) {
+void __delopt(cli_s *cli, opt_s *opt_d) {
     if (!ot_match_any(cli, opt_d->aliases[0])) {
         CLI_DEBUG_ONLY(
             cliprint(CLI_WARN, "[ezcli] ",
@@ -52,4 +53,20 @@ void delopt(cli_s *cli, opt_s *opt_d) {
     cli->opts_len--;
 
     free(new_opts);
+}
+
+void _delopt(cli_s *cli, ...) {
+    va_list args;
+    va_start(args, cli);
+
+    while (true) {
+        opt_s *opt_d = va_arg(args, opt_s *);
+
+        if (!opt_d)
+            break;
+
+        __delopt(cli, opt_d);
+    }
+
+    va_end(args);
 }
