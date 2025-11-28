@@ -1,8 +1,8 @@
 #include <ezcli/addopt.h>
 
-#include "../internal/assert.h"
 #include "../internal/check_alloc.h"
 #include "../internal/opts_size.h"
+#include "../internal/validate.h"
 
 #include <stdarg.h>
 #include <stdbool.h>
@@ -11,11 +11,7 @@
 #include <string.h>
 
 void __addopt(cli_s *cli, opt_s *opt_a) {
-    cliassert(opt_a->aliases && opt_a->aliases[0],
-              "an option must have at least one alias");
-    cliassert(opt_a->body, "an option must have a body");
-    cliassert(opt_a->desc && strlen(opt_a->desc) > 0,
-              "an option must have a description");
+    validate_opt(opt_a);
 
     size_t new_len = cli->opts_len + 1;
     opt_s **new_opts = malloc(OPTS_SIZE(new_len));
