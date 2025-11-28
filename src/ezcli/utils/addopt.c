@@ -4,11 +4,13 @@
 #include "../internal/check_alloc.h"
 #include "../internal/opts_size.h"
 
+#include <stdarg.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-void addopt(cli_s *cli, opt_s *opt_a) {
+void __addopt(cli_s *cli, opt_s *opt_a) {
     cliassert(opt_a->aliases && opt_a->aliases[0],
               "an option must have at least one alias");
     cliassert(opt_a->body, "an option must have a body");
@@ -36,4 +38,20 @@ void addopt(cli_s *cli, opt_s *opt_a) {
     free(new_opts);
 
     cli->opts_len++;
+}
+
+void _addopt(cli_s *cli, ...) {
+    va_list args;
+    va_start(args, cli);
+
+    while (true) {
+        opt_s *opt_a = va_arg(args, opt_s *);
+
+        if (!opt_a)
+            break;
+
+        __addopt(cli, opt_a);
+    }
+
+    va_end(args);
 }
