@@ -50,7 +50,7 @@ void __print_footer(cli_s *cli) {
     printf("%s", cli->footer);
 }
 
-void clihelp(cli_s *cli, opt_s **opts) {
+void help(cli_s *cli, opt_s **opts) {
     __print_header(cli);
     __print_options(cli, opts);
     __print_footer(cli);

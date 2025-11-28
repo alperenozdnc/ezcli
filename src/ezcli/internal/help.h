@@ -9,4 +9,4 @@
  * description,
  * and information about options.
  */
-void clihelp(cli_s *cli, opt_s **opts);
+void help(cli_s *cli, opt_s **opts);

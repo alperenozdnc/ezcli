@@ -24,7 +24,7 @@ void __delopt(cli_s *cli, opt_s *opt_d) {
 
     size_t new_len = cli->opts_len - 1;
     opt_s **new_opts = malloc(OPTS_SIZE(new_len));
-    CLI_CHECK_ALLOC(new_opts);
+    CHECK_ALLOC(new_opts);
 
     int j = 0;
 
@@ -41,7 +41,7 @@ void __delopt(cli_s *cli, opt_s *opt_d) {
 
     int k = 0;
     cli->opts = realloc(cli->opts, OPTS_SIZE(new_len));
-    CLI_CHECK_ALLOC(cli->opts);
+    CHECK_ALLOC(cli->opts);
 
     while (new_opts[k]) {
         cli->opts[k] = new_opts[k];

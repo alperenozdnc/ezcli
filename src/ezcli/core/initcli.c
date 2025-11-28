@@ -30,7 +30,7 @@ void initcli(cli_s *cli, char *cmd, char *desc, char *usage, char *footer,
     cli->opts_len = 0;
     cli->tok_idx = 1;
 
-    cli->help = clihelp;
+    cli->help = help;
     cli->help_aliases = help_aliases;
 
     bool calc_len = true;
@@ -44,7 +44,7 @@ void initcli(cli_s *cli, char *cmd, char *desc, char *usage, char *footer,
 
     cli->opts = malloc(OPTS_SIZE(cli->opts_len));
 
-    CLI_CHECK_ALLOC(cli->opts);
+    CHECK_ALLOC(cli->opts);
 
     for (size_t i = 0; i < cli->opts_len; i++) {
         validate_opt(opts[i]);
