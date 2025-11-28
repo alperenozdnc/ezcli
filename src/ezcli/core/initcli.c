@@ -17,10 +17,10 @@ void initcli(cli_s *cli, char *cmd, char *desc, char *usage, char *footer,
              opt_s **opts, char *help_aliases[]) {
     CLI_DEBUG_ONLY(cliprint(CLI_HINT, "[ezcli] ", "validating cli"));
 
-    cliassert(strlen(cmd) > 0, "cli->cmd can't be empty");
-    cliassert(strlen(desc) > 0, "cli->desc can't be empty");
-    cliassert(strlen(usage) > 0, "cli->usage can't be empty");
-    cliassert(help_aliases[0], "cli->help_aliases can't be empty");
+    _assert(strlen(cmd) > 0, "cli->cmd can't be empty");
+    _assert(strlen(desc) > 0, "cli->desc can't be empty");
+    _assert(strlen(usage) > 0, "cli->usage can't be empty");
+    _assert(help_aliases[0], "cli->help_aliases can't be empty");
 
     cli->cmd = cmd;
     cli->desc = desc;

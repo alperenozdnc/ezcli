@@ -2,4 +2,4 @@
 
 #include <stdbool.h>
 
-void cliassert(bool expr, char *label);
+void _assert(bool expr, char *label);
