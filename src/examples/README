@@ -1,0 +1,16 @@
+disclaimer:
+
+i do realize the code of the examples here look
+unpolished, but these examples are more of a proof of concept than anything else.
+
+i probably could've refactored, i probably could've
+repeated myself a lot less but that doesn't matter.
+
+also, if you think that a truckload of ret_e and opt_s definitions don't look
+pretty, i happen to agree with you. if you correctly modularize your options
+individually, that is where it actually looks clean and simple.
+
+and if you do modularize, you wont have to do code scope schenanigans with
+passing the cli struct as a context. i.e having to include some options
+inside main and under initcli(). you'll just be able to pass any state you want
+as arguments to the functions that initialize your opt structs.
