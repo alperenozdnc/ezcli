@@ -29,7 +29,7 @@ examples: $(EXAMPLE_BIN)
 
 $(EXAMPLES_DIR)/%: $(SRC_DIR)/examples/%.c $(LIB_PATH)
 	@mkdir -p $(EXAMPLES_DIR)
-	$(CC) $(CFLAGS) $< -L$(LIB_DIR) -lezcli -o $@
+	$(CC) $(CFLAGS) -lm $< -L$(LIB_DIR) -lezcli -o $@
 
 PREFIX = /usr/local
 INCLUDE_DIR = $(PREFIX)/include
