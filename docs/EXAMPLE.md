@@ -215,7 +215,7 @@ addopt(&cli, &version_opt, ...);
 or, remove them with `delopt`.
 
 ```c
-delopt(&cli, &version_opt);
+delopt(&cli, &version_opt, ...);
 ```
 
 now, when compiling and running this,
