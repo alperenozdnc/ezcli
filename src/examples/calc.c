@@ -192,10 +192,7 @@ int main(int argc, char *argv[]) {
                  .body = pow_body,
                  .ctx = &ctx};
 
-    addopt(&cli, &add);
-    addopt(&cli, &subtract);
-    addopt(&cli, &multiply);
-    addopt(&cli, &pow);
+    addopt(&cli, &add, &subtract, &multiply, &pow);
 
     runcli(&cli, argc, argv);
 

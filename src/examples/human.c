@@ -100,8 +100,7 @@ int main(int argc, char *argv[]) {
             "license: <https://www.gnu.org/licenses/gpl-3.0.en.html>",
             opts, help_aliases);
 
-    addopt(&cli, &unwanted);
-    addopt(&cli, &__unwanted);
+    addopt(&cli, &unwanted, &__unwanted);
     delopt(&cli, &__secret);
 
     runcli(&cli, argc, argv);
