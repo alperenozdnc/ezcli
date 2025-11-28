@@ -7,6 +7,7 @@
 #include "../internal/check_alloc.h"
 #include "../internal/help.h"
 #include "../internal/opts_size.h"
+#include "../internal/validate.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -46,6 +47,8 @@ void initcli(cli_s *cli, char *cmd, char *desc, char *usage, char *footer,
     CLI_CHECK_ALLOC(cli->opts);
 
     for (size_t i = 0; i < cli->opts_len; i++) {
+        validate_opt(opts[i]);
+
         cli->opts[i] = opts[i];
     }
 
