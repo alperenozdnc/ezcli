@@ -2,6 +2,7 @@
 #include <ezcli/initcli.h>
 #include <ezcli/print.h>
 
+#include "../internal/assert.h"
 #include "../internal/check_alloc.h"
 #include "../internal/help.h"
 #include "../internal/opts_size.h"
@@ -12,10 +13,15 @@
 
 void initcli(cli_s *cli, char *cmd, char *desc, char *usage, char *footer,
              opt_s **opts, char *help_aliases[]) {
+    cliassert(strlen(cmd) > 0, "cli->cmd can't be empty");
+    cliassert(strlen(desc) > 0, "cli->desc can't be empty");
+    cliassert(strlen(usage) > 0, "cli->usage can't be empty");
+    cliassert(help_aliases[0], "cli->help_aliases can't be empty");
+
     cli->cmd = cmd;
     cli->desc = desc;
     cli->usage = usage;
-    cli->footer = footer ? footer : NULL;
+    cli->footer = strlen(footer) > 0 ? footer : NULL;
 
     cli->opts_len = 0;
     cli->tok_idx = 1;
@@ -23,12 +29,12 @@ void initcli(cli_s *cli, char *cmd, char *desc, char *usage, char *footer,
     cli->help = clihelp;
     cli->help_aliases = help_aliases;
 
-    bool count_indices = true;
+    bool calc_len = true;
 
     if (!opts[0])
-        count_indices = false;
+        calc_len = false;
 
-    while (count_indices && opts[cli->opts_len] != NULL) {
+    while (calc_len && opts[cli->opts_len] != NULL) {
         cli->opts_len++;
     }
 
