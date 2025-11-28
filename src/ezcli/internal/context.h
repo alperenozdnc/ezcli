@@ -1,3 +1,5 @@
 #pragma once
 
-#define _CLI_CONTEXT(opt) opt->ctx ? opt->ctx : NULL
+#include "validate.h"
+
+#define _CLI_CONTEXT(opt) CLI_VALIDATE_ELSE_NULLIFY(opt->ctx)
