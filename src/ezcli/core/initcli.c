@@ -23,7 +23,12 @@ void initcli(cli_s *cli, char *cmd, char *desc, char *usage, char *footer,
     cli->help = clihelp;
     cli->help_aliases = help_aliases;
 
-    while (opts[cli->opts_len] != NULL) {
+    bool count_indices = true;
+
+    if (!opts[0])
+        count_indices = false;
+
+    while (count_indices && opts[cli->opts_len] != NULL) {
         cli->opts_len++;
     }
 
