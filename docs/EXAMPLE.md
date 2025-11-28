@@ -206,10 +206,10 @@ runcli(&cli, argc, argv);
 freecli(&cli);
 ```
 
-you can also add options with `addopt` if you wish.
+you can also add options with `addopt` if you wish (accepts variable amount of options).
 
 ```c
-addopt(&cli, &version_opt);
+addopt(&cli, &version_opt, ...);
 ```
 
 or, remove them with `delopt`.
