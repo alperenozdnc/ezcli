@@ -10,6 +10,6 @@ void cliassert(bool expr, char *label) {
     if (expr)
         return;
 
-    cliprint(CLI_ERROR, "[assertion failed] ", "%s\n", label);
+    cliprint(CLI_ERROR, "[ezcli] assertion failed: ", "%s\n", label);
     exit(EXIT_FAILURE);
 }
