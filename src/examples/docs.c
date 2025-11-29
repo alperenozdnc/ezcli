@@ -58,14 +58,17 @@ opt_s doc_version = {
 
 int main(int argc, char *argv[]) {
     cli_s cli;
-    opt_s *opts[] = {&doc_version, NULL};
+    opt_s *opts[] = {NULL};
     char *help_aliases[] = {"help", "--help", "-h", NULL};
 
-    initcli(&cli, "docs", "this program is a cli documentation for ezcli.",
+    initcli(&cli, "docs",
+            "this program is a cli documentation for ezcli.\nyou should "
+            "probably start with 'docs entrypoint'.",
             "[concept]",
             "for source code, visit <https://github.com/alperenozdnc/ezcli>\n",
             opts, help_aliases);
 
+    opt_s doc_entry = create_doc_opt("entrypoint", "documentation root.");
     opt_s doc_initcli = create_doc_opt("initcli", "initcli() core function.");
     opt_s doc_runcli = create_doc_opt("runcli", "runcli() core function.");
     opt_s doc_freecli = create_doc_opt("freecli", "freecli() core function.");
@@ -79,9 +82,9 @@ int main(int argc, char *argv[]) {
     opt_s doc_cli_s = create_doc_opt("cli_s", "struct cli_s.");
     opt_s doc_opt_s = create_doc_opt("opt_s", "struct opt_s.");
 
-    addopt(&cli, &doc_initcli, &doc_runcli, &doc_freecli, &doc_external,
-           &doc_addopt, &doc_delopt, &doc_gettok, &doc_print, &doc_cli_s,
-           &doc_opt_s);
+    addopt(&cli, &doc_entry, &doc_initcli, &doc_runcli, &doc_freecli,
+           &doc_external, &doc_addopt, &doc_delopt, &doc_gettok, &doc_print,
+           &doc_cli_s, &doc_opt_s, &doc_version);
 
     runcli(&cli, argc, argv);
 
