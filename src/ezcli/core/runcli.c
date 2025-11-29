@@ -88,6 +88,8 @@ void runcli(cli_s *cli, int argc, char *argv[]) {
                      cli->cmd, tok, argv[i - 1]);
 
             check_ret(cli, panic(), &any_warnings);
+
+            continue;
         }
 
         if (is_tok_arg)
@@ -98,6 +100,8 @@ void runcli(cli_s *cli, int argc, char *argv[]) {
                      "%s: '%s' requires an argument.", cli->cmd, tok);
 
             check_ret(cli, panic(), &any_warnings);
+
+            break;
         }
 
         if (argc == i + 1) {
@@ -116,6 +120,8 @@ void runcli(cli_s *cli, int argc, char *argv[]) {
                      "%s: unallowed argument '%s'.", cli->cmd, tok_next);
 
             check_ret(cli, panic(), &any_warnings);
+
+            continue;
         }
 
         char *arg = opt->want_input ? tok_next : NULL;
