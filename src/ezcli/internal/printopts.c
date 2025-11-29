@@ -8,7 +8,7 @@ void printopt(opt_s *opt) {
     printf("\n");
 
     printaliases(opt->aliases);
-    printf(" <%p>: \n", &opt);
+    printf("<%p>: \n", &opt);
 
     printf("opt->desc = %s\n", opt->desc);
     printf("opt->want_input = %d\n", opt->want_input);
