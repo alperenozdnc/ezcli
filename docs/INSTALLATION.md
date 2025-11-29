@@ -12,8 +12,10 @@
 % make all
 ```
 
-this command creates the static library in `lib/` and an example
-executable in `examples/`.
+this command creates the static library in `lib/` and example
+executables in `examples/`. for easy testing of examples,
+run `source ./scripts/examples.sh` from project root. this creates aliases
+where `alias abc = ./examples/abc`.
 
 you can play around with examples to kind of get
 an idea on things you can create using ezcli.
