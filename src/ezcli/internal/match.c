@@ -37,9 +37,8 @@ opt_s *match_nonopt(cli_s *cli) {
     for (size_t i = 0; i < cli->opts_len; i++) {
         opt_s *opt = cli->opts[i];
 
-        if (strcmp(opt->aliases[0], CLI_NONOPT) == 0) {
+        if (strcmp(opt->aliases[0], CLI_NONOPT) == 0)
             return opt;
-        }
     }
 
     return NULL;
