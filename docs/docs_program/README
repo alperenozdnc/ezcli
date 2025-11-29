@@ -1,0 +1,4 @@
+don't read these raw. go to the root of your project,
+run "source ./scripts/examples.sh" and run "docs".
+
+yes, ezcli uses ezcli to document ezcli. weird idea, right?

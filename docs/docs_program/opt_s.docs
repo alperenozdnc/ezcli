@@ -1,0 +1,46 @@
+typedef struct {
+    char **aliases;
+    char *desc;
+
+    bool want_input;
+
+    void *ctx;
+    ret_e (*body)(void *ctx, char *tok);
+} opt_s;
+
+keeps information about an option. this is the
+building block of your program.
+
+
+'char **aliases':
+    a NULL-terminated string array keeping aliases for an option.
+    you can use CLI_ALIASES(alias1, alias2, ...) to avoid manual casting
+    and NULL-termination.
+
+    use CLI_NONOPT and CLI_DEFAULT_OPT inside CLI_ALIASES calls to create
+    nonopts and default opts. for those, 'desc' is not required.
+    note: nonopts and default opts should only have one alias. do not create multiple.
+
+'char *desc':
+    a probably-short string describing your option's functionality.
+
+'bool want_input':
+    false by default. specifies if your option requires input.
+    ignored in nonopts and default opts.
+
+'void *ctx':
+    this can be anything: program state, config, user data, etc.
+    cast it inside your option body to your expected type.
+
+'ret_e body()':
+    the actual functionality. takes context and next token (if want_input = true).
+    you can use CLI_IGNORE_CTX, CLI_IGNORE_TOK, and CLI_IGNORE_ARGS to tell the
+    compiler arguments won’t be used.
+
+'ret_e' values:
+    RET_NORMAL — continue program
+    RET_WARN   — warning
+    RET_FAIL   — error (terminates unless laidback mode is enabled)
+
+you'd be surprised what you can do with this building block with shared context
+idea. you could even let the USER define the commands. weird, right?

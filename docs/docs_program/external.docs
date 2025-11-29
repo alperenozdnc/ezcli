@@ -1,0 +1,17 @@
+extern bool CLI_MODE_LAIDBACK;
+extern bool CLI_ALLOW_NONOPT;
+extern bool CLI_MODE_DEBUG;
+
+
+CLI_MODE_LAIDBACK -> false by default.
+enables laidback mode, which downgrades all syntax errors to a warning.
+
+CLI_ALLOW_NONOPT -> false by default.
+enables allowing of non-option tokens.
+these are tokens that are not recognized as
+options and are not arguments to any option.
+for example, '/home' is the nonopt for 'ls /home'.
+
+CLI_MODE_DEBUG -> false by default.
+enables debug mode, which prints useful debugging info about what option
+is run with what input, when ezcli is validating, etc.

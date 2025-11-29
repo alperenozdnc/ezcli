@@ -1,0 +1,36 @@
+typedef struct __cli_s {
+    char *cmd;
+    char *desc;
+    char *usage;
+    char *footer;
+
+    int tok_idx;
+    int argc;
+    char **argv;
+
+    opt_s **opts;
+    size_t opts_len;
+
+    char **help_aliases;
+    void (*help)(struct __cli_s *cli, opt_s **opts);
+} cli_s;
+
+this is where all the information about your
+command line interface program is kept.
+see 'docs opt_s' for what to fill '**opts' with.
+
+
+'*cmd', '*desc', '*usage', and '*footer' are information that is printed
+during help. '*footer' is the bottommost message (like in 'cat --help').
+
+'**opts' should be filled with 'opt_s' structs and NULL-terminated.
+
+'help_aliases' should be filled with aliases for the help option.
+this also must be NULL-terminated.
+
+the 'help' function pointer points to the default help functionality
+that ezcli provides by default. you can replace this with your own function.
+it must take '*cli_s' and '**opt_s' as arguments.
+
+note: 'tok_idx', 'argc', 'argv', and 'opts_len' are fields that you should
+not manually set or change. modifying them may lead to undefined behaviour.

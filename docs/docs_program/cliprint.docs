@@ -1,0 +1,12 @@
+void cliprint(print_e type, char *prefix, char *fmt, ...);
+
+general colored printing utility that autoinserts newlines
+and also takes custom prefixes. it also does printf-like % formatting.
+
+
+'print_e type' has to be 'CLI_HINT', 'CLI_WARNING', or 'CLI_ERROR'.
+these types of prints are colored blue, yellow, and red respectively,
+and also prefixed with 'HINT: ', 'WARN: ', and 'ERROR: '.
+
+setting the prefix to NULL will show these prefixes.
+setting it to CLI_EMPTY_PREFIX will show none.

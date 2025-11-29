@@ -1,0 +1,17 @@
+void initcli(cli_s *cli, char *cmd, char *desc, char *usage, char *footer,
+             opt_s **opts, char *help_aliases[]);
+
+initializes a general command line interface struct.
+see 'docs cli_s' for explanation of arguments.
+
+
+ezcli only owns memory of '*cli'. the command name,
+description, usage, opts, etc. are things YOU should
+make sure live until the end of the program.
+
+make sure you run freecli() after usage.
+
+note: '**opts' can also be populated with addopt(),
+but if you choose to give options to initcli(), make sure
+you null-terminate them. '*help_aliases[]' should also
+be null-terminated.

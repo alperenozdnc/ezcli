@@ -1,0 +1,10 @@
+void addopt(cli_s *cli, ...opts);
+
+allocates a variable amount of `opt_s` structs to the 'cli->opts'
+dynamic array in a 'cli_s' struct.
+see 'docs cli_s' and 'docs opt_s' for more details.
+
+
+note: addopt() is a macro that inserts a sentinel NULL after your
+variable amount of options. the actual functionality lives in
+'src/ezcli/utils/addopt.c'.

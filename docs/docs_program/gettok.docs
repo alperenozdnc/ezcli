@@ -1,0 +1,21 @@
+char *gettok_prev(cli_s *cli);
+char *gettok_next(cli_s *cli);
+char *gettok_offset(cli_s *cli, int n);
+
+this is a set of token-peeking utilities to
+access specific argv indices.
+
+
+see 'docs cli_s' for what fields to fill it with.
+
+gettok_prev() -> gets the previously parsed token.
+                 if idx = 1, returns NULL.
+
+gettok_next() -> gets the next parsed token.
+                 if idx = end, returns NULL.
+
+gettok_offset() -> offsets 'n' from the current token's position.
+                   returns NULL if the offset is too small or too large.
+
+note: use 'CLI_TOK_FIRST' as 'n' for the first token in 'argv' and
+'CLI_TOK_LAST' as 'n' for the final token.
