@@ -37,11 +37,11 @@ void __addopt(cli_s *cli, opt_s *opt_a) {
 }
 
 void _addopt(cli_s *cli, ...) {
-    va_list args;
-    va_start(args, cli);
+    va_list opts;
+    va_start(opts, cli);
 
     while (true) {
-        opt_s *opt_a = va_arg(args, opt_s *);
+        opt_s *opt_a = va_arg(opts, opt_s *);
 
         if (!opt_a)
             break;
@@ -49,5 +49,5 @@ void _addopt(cli_s *cli, ...) {
         __addopt(cli, opt_a);
     }
 
-    va_end(args);
+    va_end(opts);
 }

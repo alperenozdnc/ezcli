@@ -56,11 +56,11 @@ void __delopt(cli_s *cli, opt_s *opt_d) {
 }
 
 void _delopt(cli_s *cli, ...) {
-    va_list args;
-    va_start(args, cli);
+    va_list opts;
+    va_start(opts, cli);
 
     while (true) {
-        opt_s *opt_d = va_arg(args, opt_s *);
+        opt_s *opt_d = va_arg(opts, opt_s *);
 
         if (!opt_d)
             break;
@@ -68,5 +68,5 @@ void _delopt(cli_s *cli, ...) {
         __delopt(cli, opt_d);
     }
 
-    va_end(args);
+    va_end(opts);
 }
