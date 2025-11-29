@@ -10,7 +10,6 @@
 #include "../internal/match.h"
 
 #include <stdbool.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -50,8 +49,6 @@ void runcli(cli_s *cli, int argc, char *argv[]) {
     bool any_option_seen = false;
     bool any_warnings = false;
 
-    // not a return point because the default case also needs the printf("\n")
-    // on the bottom. the for loop is omitted anyways.
     if (argc == 1) {
         opt_s *opt_default = ot_match_any(cli, CLI_DEFAULT_OPT);
 
@@ -60,6 +57,8 @@ void runcli(cli_s *cli, int argc, char *argv[]) {
         } else {
             cli->help(cli, cli->opts);
         }
+
+        return;
     }
 
     // 0-th index is the command name itself
@@ -142,6 +141,4 @@ void runcli(cli_s *cli, int argc, char *argv[]) {
                      cli->cmd);
         }
     }
-
-    printf("\n");
 }
