@@ -129,7 +129,7 @@ then, let's define our options:
 
 ```c
 ret_e _default_opt(CLI_IGNORE_ARGS) {
-    printf("hello, world");
+    printf("hello, world\n");
 
     return RET_NORMAL;
 }
@@ -148,7 +148,7 @@ totally okay.
 ret_e _version_opt(void *ctx, CLI_IGNORE_TOK) {
     char *prefix = (char *)ctx;
 
-    printf("%s, v1.0.0", prefix);
+    printf("%s, v1.0.0\n", prefix);
 
     return RET_NORMAL;
 }
@@ -168,7 +168,7 @@ printed in help, so no need to bother setting `desc`. you will also see how the 
 
 ```c
 ret_e _nonopt(CLI_IGNORE_CTX, char *tok) {
-    printf("hello, %s", tok);
+    printf("hello, %s\n", tok);
 
     return RET_NORMAL;
 }
