@@ -1,5 +1,11 @@
 # features
 
+## this library documents itself
+
+yes, you read that right. there is an example program in `examples/docs.c` that
+uses ezcli to generate documentation about ezcli. you should `source ./scripts/examples.sh`
+from the project root, build with `make all` and run `docs help` to get started.
+
 ## options are context-aware behaviour containers
 
 not only can you define what an option does, but you can optionally pass
@@ -72,6 +78,26 @@ take percent sign (%) formats.
 ```c
 void cliprint(print_e type, char *prefix, char *fmt, ...);
 ```
+
+## accessing tokens with ease
+
+for accessing the tokens that come before and after the currently parsed token,
+you can use the `gettok_prev()`, `gettok_next()`, and `gettok_offset()` functions.
+
+```c
+char *gettok_prev(cli_s *cli);
+
+char *gettok_next(cli_s *cli);
+
+char *gettok_offset(cli_s *cli, int n);
+```
+
+note that passing `CLI_TOK_FIRST` and `CLI_TOK_LAST` to `int n` in `gettok_offset()`
+will get you the absolute first or last token respectively. otherwise, it's always
+relative to the current token.
+
+these require your cli instance to be passed on to the context of which option
+you will use them for.
 
 ## accessing tokens with ease
 
