@@ -68,7 +68,13 @@ int main(int argc, char *argv[]) {
             "for source code, visit <https://github.com/alperenozdnc/ezcli>\n",
             opts, help_aliases);
 
-    opt_s doc_entry = create_doc_opt("entrypoint", "documentation root.");
+    opt_s doc_entry = {
+        .aliases = CLI_ALIASES("entrypoint", "root"),
+        .desc = "root of documentation.",
+        .body = doc_body,
+        .ctx = &cli,
+    };
+
     opt_s doc_initcli = create_doc_opt("initcli", "initcli() core function.");
     opt_s doc_runcli = create_doc_opt("runcli", "runcli() core function.");
     opt_s doc_freecli = create_doc_opt("freecli", "freecli() core function.");
