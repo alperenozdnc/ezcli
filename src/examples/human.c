@@ -15,7 +15,7 @@ ret_e _sleep(CLI_IGNORE_ARGS) {
 
 ret_e _secret(void *ctx, char *secret_str) {
     printf("human: %s...\n", secret_str);
-    printf("%s", (char *)ctx);
+    printf("%s\n", (char *)ctx);
 
     return RET_NORMAL;
 }
@@ -27,13 +27,13 @@ ret_e _unwanted(CLI_IGNORE_CTX, char *name) {
 }
 
 ret_e _nonopt(CLI_IGNORE_CTX, char *arg) {
-    printf("%s", arg);
+    printf("%s\n", arg);
 
     return RET_NORMAL;
 }
 
 ret_e __default(CLI_IGNORE_ARGS) {
-    printf("wassup dawg");
+    printf("wassup dawg\n");
 
     return RET_NORMAL;
 }
@@ -97,7 +97,7 @@ int main(int argc, char *argv[]) {
     initcli(&cli, "human", "This program mimicks human-like behaviours.",
             "[command] [args]",
             "For documentation: <https://github.com/alperenozdnc/ezcli>\nFor "
-            "license: <https://www.gnu.org/licenses/gpl-3.0.en.html>",
+            "license: <https://www.gnu.org/licenses/gpl-3.0.en.html>\n",
             opts, help_aliases);
 
     addopt(&cli, &unwanted, &__unwanted);

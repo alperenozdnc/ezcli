@@ -37,7 +37,7 @@ ret_e add_body(void *_ctx, char *stry) {
     }
 
     if (!gettok_offset(ctx->cli, 2)) {
-        printf("\nTotal sum is %d.", ctx->sum);
+        printf("\nTotal sum is %d.\n", ctx->sum);
     }
 
     return RET_NORMAL;
@@ -72,7 +72,7 @@ ret_e subtract_body(void *_ctx, char *stry) {
     }
 
     if (!gettok_offset(ctx->cli, 2)) {
-        printf("\nTotal sum is %d.", ctx->sum);
+        printf("\nTotal sum is %d.\n", ctx->sum);
     }
 
     return RET_NORMAL;
@@ -106,7 +106,7 @@ ret_e multiply_body(void *_ctx, char *stry) {
     }
 
     if (!gettok_offset(ctx->cli, 2)) {
-        printf("\nTotal sum is %d.", ctx->sum);
+        printf("\nTotal sum is %d.\n", ctx->sum);
     }
 
     return RET_NORMAL;
@@ -140,7 +140,7 @@ ret_e pow_body(void *_ctx, char *stry) {
     }
 
     if (!gettok_offset(ctx->cli, 2)) {
-        printf("\nTotal sum is %d.", ctx->sum);
+        printf("\nTotal sum is %d.\n", ctx->sum);
     }
 
     return RET_NORMAL;
