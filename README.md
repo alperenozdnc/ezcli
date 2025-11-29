@@ -12,7 +12,7 @@ using the cli library.
 
 read [`ezcli/docs/`](https://github.com/alperenozdnc/ezcli/tree/master/docs) for details.
 
-read [`features/documentation generation`](https://github.com/alperenozdnc/ezcli/blob/master/docs/FEATURES.md#this-library-documents-itself) section for thorough documentation.
+read [`features/documentation generation`](https://github.com/alperenozdnc/ezcli/blob/master/docs/FEATURES.md#this-library-documents-itself) for thorough documentation.
 
 ---
 
