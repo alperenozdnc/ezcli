@@ -6,7 +6,7 @@
 #include <ezcli/runcli.h>
 
 #include "../internal/check_ret.h"
-#include "../internal/context.h"
+#include "../internal/execopt.h"
 #include "../internal/handle_nonopt.h"
 #include "../internal/match.h"
 #include "../internal/panic.h"
@@ -25,7 +25,7 @@ void runcli(cli_s *cli, int argc, char *argv[]) {
         opt_s *opt_default = ot_match_any(cli, CLI_DEFAULT_OPT);
 
         if (opt_default) {
-            check_ret(opt_default->body(_CLI_CONTEXT(opt_default), NULL));
+            execopt(opt_default, NULL);
         } else {
             cli->help(cli, cli->opts);
         }
@@ -78,7 +78,8 @@ void runcli(cli_s *cli, int argc, char *argv[]) {
         if (argc == i + 1) {
             CLI_DEBUG_ONLY(cliprint(CLI_HINT, "ezcli: ", "%s -> NULL", tok));
 
-            check_ret(opt->body(_CLI_CONTEXT(opt), NULL));
+            execopt(opt, NULL);
+
             any_option_seen = true;
 
             break;
@@ -100,7 +101,8 @@ void runcli(cli_s *cli, int argc, char *argv[]) {
         CLI_DEBUG_ONLY(
             cliprint(CLI_HINT, "ezcli: ", "%s -> %s", tok, arg ? arg : "NULL"));
 
-        check_ret(opt->body(_CLI_CONTEXT(opt), arg));
+        execopt(opt, arg);
+
         any_option_seen = true;
     }
 
