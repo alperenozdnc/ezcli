@@ -1,5 +1,12 @@
 # changelog
 
+## [v0.5.1](https://github.com/alperenozdnc/ezcli/releases/tag/v0.5.1) - 2025-11-30
+
+### modify
+
+- removed an unintended `printf()` left in the common option handler that caused
+user-visible output.
+
 ---
 
 ## [v0.5.0](https://github.com/alperenozdnc/ezcli/releases/tag/v0.5.0) - 2025-11-30
