@@ -12,7 +12,11 @@ void read_docs(char *name) {
     FILE *doc_file = fopen(doc_file_path, "r");
 
     if (doc_file == NULL) {
-        fprintf(stderr, "the docs file '%s' doesn't exist.\n", name);
+        cliprint(CLI_ERROR, "docs: ",
+                 "no documentation found for '%s'.\nmake sure you're up to "
+                 "date with "
+                 "the git repository.\n",
+                 name);
 
         exit(EXIT_FAILURE);
     }
