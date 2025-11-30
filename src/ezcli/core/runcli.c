@@ -5,31 +5,14 @@
 #include <ezcli/print.h>
 #include <ezcli/runcli.h>
 
+#include "../internal/check_ret.h"
 #include "../internal/context.h"
 #include "../internal/handle_nonopt.h"
 #include "../internal/match.h"
 #include "../internal/panic.h"
 
 #include <stdbool.h>
-#include <stdlib.h>
 #include <string.h>
-
-/*
- * prints/exits appropriately for warnings/errors.
- */
-void check_ret(cli_s *cli, ret_e ret, bool *any_warnings) {
-    if (ret == RET_FAIL) {
-        cliprint(CLI_ERROR, CLI_EMPTY_PREFIX, "%s: exited with an error.",
-                 cli->cmd);
-
-        freecli(cli);
-
-        exit(EXIT_FAILURE);
-    }
-
-    if (ret == RET_WARN)
-        *any_warnings = true;
-}
 
 void runcli(cli_s *cli, int argc, char *argv[]) {
     cli->argc = argc;
@@ -42,8 +25,7 @@ void runcli(cli_s *cli, int argc, char *argv[]) {
         opt_s *opt_default = ot_match_any(cli, CLI_DEFAULT_OPT);
 
         if (opt_default) {
-            check_ret(cli, opt_default->body(_CLI_CONTEXT(opt_default), NULL),
-                      &any_warnings);
+            check_ret(opt_default->body(_CLI_CONTEXT(opt_default), NULL));
         } else {
             cli->help(cli, cli->opts);
         }
@@ -76,7 +58,7 @@ void runcli(cli_s *cli, int argc, char *argv[]) {
                      "arguments.",
                      cli->cmd, tok, argv[i - 1]);
 
-            check_ret(cli, panic(), &any_warnings);
+            check_ret(panic());
 
             continue;
         }
@@ -88,7 +70,7 @@ void runcli(cli_s *cli, int argc, char *argv[]) {
             cliprint(CLI_ERROR, CLI_EMPTY_PREFIX,
                      "%s: '%s' requires an argument.", cli->cmd, tok);
 
-            check_ret(cli, panic(), &any_warnings);
+            check_ret(panic());
 
             break;
         }
@@ -96,7 +78,7 @@ void runcli(cli_s *cli, int argc, char *argv[]) {
         if (argc == i + 1) {
             CLI_DEBUG_ONLY(cliprint(CLI_HINT, "ezcli: ", "%s -> NULL", tok));
 
-            check_ret(cli, opt->body(_CLI_CONTEXT(opt), NULL), &any_warnings);
+            check_ret(opt->body(_CLI_CONTEXT(opt), NULL));
             any_option_seen = true;
 
             break;
@@ -108,7 +90,7 @@ void runcli(cli_s *cli, int argc, char *argv[]) {
             cliprint(CLI_ERROR, CLI_EMPTY_PREFIX,
                      "%s: unallowed argument '%s'.", cli->cmd, tok_next);
 
-            check_ret(cli, panic(), &any_warnings);
+            check_ret(panic());
 
             continue;
         }
@@ -118,7 +100,7 @@ void runcli(cli_s *cli, int argc, char *argv[]) {
         CLI_DEBUG_ONLY(
             cliprint(CLI_HINT, "ezcli: ", "%s -> %s", tok, arg ? arg : "NULL"));
 
-        check_ret(cli, opt->body(_CLI_CONTEXT(opt), arg), &any_warnings);
+        check_ret(opt->body(_CLI_CONTEXT(opt), arg));
         any_option_seen = true;
     }
 
