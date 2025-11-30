@@ -81,7 +81,6 @@ int main(int argc, char *argv[]) {
 
     opt_s doc_structure =
         create_doc_opt("structure", "structuring projects using ezcli.");
-
     opt_s doc_initcli = create_doc_opt("initcli", "initcli() core function.");
     opt_s doc_runcli = create_doc_opt("runcli", "runcli() core function.");
     opt_s doc_freecli = create_doc_opt("freecli", "freecli() core function.");
