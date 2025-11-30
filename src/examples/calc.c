@@ -163,7 +163,7 @@ int main(int argc, char *argv[]) {
     initcli(
         &cli, "calc",
         "Mini calculator program to show off ezcli. (no order of operations)",
-        "x {operand} y", "Check src/examples/calculator.c for source code.",
+        "x {operand} y", "Check src/examples/calculator.c for source code.\n",
         opts, help_aliases);
 
     ctx_s ctx = {.cli = &cli, .sum = 0, .operation_mode = false};
