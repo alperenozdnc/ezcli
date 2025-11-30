@@ -26,7 +26,7 @@ ezcli/utilities:
     - docs gettok
 
 ezcli/general:
-		- docs structure
+    - docs structure
 
 start with ezcli/core/foundation and end with ezcli/general.
 if you want to follow a random order when reading documentation
