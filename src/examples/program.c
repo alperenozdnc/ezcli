@@ -37,9 +37,20 @@ opt_s nonopt = {
     .body = _nonopt,
 };
 
+ret_e _common_opt(CLI_IGNORE_ARGS) {
+    printf("hey, i always run.\n");
+
+    return RET_NORMAL;
+}
+
+opt_s common_opt = {
+    .aliases = CLI_ALIASES(CLI_COMMON_OPT),
+    .body = _common_opt,
+};
+
 int main(int argc, char *argv[]) {
     cli_s cli;
-    opt_s *opts[] = {&version_opt, &default_opt, &nonopt, NULL};
+    opt_s *opts[] = {&version_opt, &default_opt, &nonopt, &common_opt, NULL};
     char *help_aliases[] = {"help", "--help", NULL};
 
     CLI_ALLOW_NONOPT = true;
