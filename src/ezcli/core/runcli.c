@@ -53,7 +53,8 @@ void runcli(cli_s *cli, int argc, char *argv[]) {
         opt_s *opt_default = ot_match_any(cli, CLI_DEFAULT_OPT);
 
         if (opt_default) {
-            opt_default->body(_CLI_CONTEXT(opt_default), NULL);
+            check_ret(cli, opt_default->body(_CLI_CONTEXT(opt_default), NULL),
+                      &any_warnings);
         } else {
             cli->help(cli, cli->opts);
         }
