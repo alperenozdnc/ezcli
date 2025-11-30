@@ -8,22 +8,11 @@
 #include "../internal/context.h"
 #include "../internal/handle_nonopt.h"
 #include "../internal/match.h"
+#include "../internal/panic.h"
 
 #include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
-
-/*
- * panic with a warning/error based on laidback value.
- */
-ret_e panic() {
-    CLI_DEBUG_ONLY(cliprint(CLI_WARN, "ezcli: ", "panicking"));
-
-    if (CLI_MODE_LAIDBACK)
-        return RET_WARN;
-
-    return RET_FAIL;
-}
 
 /*
  * prints/exits appropriately for warnings/errors.
