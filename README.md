@@ -1,5 +1,7 @@
 ## ezcli 
 
+![v0.5.1](https://img.shields.io/badge/ezcli-v0.5.1-blue)
+
 ezcli is a cli library that doesn't have much content
 but has a lot of flexibility.
 
