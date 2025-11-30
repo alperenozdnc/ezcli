@@ -79,6 +79,9 @@ int main(int argc, char *argv[]) {
         .ctx = &cli,
     };
 
+    opt_s doc_structure =
+        create_doc_opt("structure", "structuring projects using ezcli.");
+
     opt_s doc_initcli = create_doc_opt("initcli", "initcli() core function.");
     opt_s doc_runcli = create_doc_opt("runcli", "runcli() core function.");
     opt_s doc_freecli = create_doc_opt("freecli", "freecli() core function.");
@@ -92,9 +95,9 @@ int main(int argc, char *argv[]) {
     opt_s doc_cli_s = create_doc_opt("cli_s", "struct cli_s.");
     opt_s doc_opt_s = create_doc_opt("opt_s", "struct opt_s.");
 
-    addopt(&cli, &doc_entry, &doc_initcli, &doc_runcli, &doc_freecli,
-           &doc_external, &doc_addopt, &doc_delopt, &doc_gettok, &doc_print,
-           &doc_cli_s, &doc_opt_s, &doc_version);
+    addopt(&cli, &doc_entry, &doc_structure, &doc_initcli, &doc_runcli,
+           &doc_freecli, &doc_external, &doc_addopt, &doc_delopt, &doc_gettok,
+           &doc_print, &doc_cli_s, &doc_opt_s, &doc_version);
 
     runcli(&cli, argc, argv);
 
