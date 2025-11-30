@@ -25,7 +25,7 @@ void __print_option(char **aliases, char *desc) {
 }
 
 void __print_options(cli_s *cli, opt_s **opts) {
-    char *blacklist[] = {CLI_NONOPT, CLI_DEFAULT_OPT, NULL};
+    char *blacklist[] = {CLI_NONOPT, CLI_DEFAULT_OPT, CLI_COMMON_OPT, NULL};
 
     __print_option(cli->help_aliases, "prints this menu.\n");
 
