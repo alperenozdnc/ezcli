@@ -25,6 +25,9 @@ ezcli/utilities:
     - docs delopt
     - docs gettok
 
-start with ezcli/core/foundation and end with ezcli/utilities.
+ezcli/general:
+		- docs structure
+
+start with ezcli/core/foundation and end with ezcli/general.
 if you want to follow a random order when reading documentation
 and are a first time user, make sure you read 'see: xxx for more details' sections carefully.
