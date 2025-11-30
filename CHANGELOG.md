@@ -1,5 +1,42 @@
 # changelog
 
+---
+
+## [v0.5.0](https://github.com/alperenozdnc/ezcli/releases/tag/v0.5.0) - 2025-11-27
+
+### add
+
+- `gettok_*()` token peeking utilities.
+    - `gettok_prev()` for the previous token.
+    - `gettok_next()` for the next token.
+    - `gettok_offset()` for getting tokens relatively.
+- an example calculator-ish program.
+- a header included in the public header of ezcli that reports its version.
+- all options passed to `initcli()` or `addopt()` are now validated for required fields.
+- `initcli()` validates the `cli_s` struct for required fields.
+- `program` program seen in `docs/EXAMPLE.md` added to `src/examples/program.c`.
+- a script in `scripts/examples.sh` that automatically creates aliases for all
+example programs.
+- ezcli now documents itself using ezcli. code in `src/examples/docs.c`. content
+in `docs/docs_program/*.docs`.
+- support for 'common options' - these are options that are run before every
+successfully parsed option.
+
+### delete
+
+- no default newline is printed after every opt anymore.
+
+### modify
+
+- renamed `extern` -> `external` for clarity.
+- `examples/main.c` -> `examples/human.c` because there's more than one example now.
+- `addopt()` and `delopt()` now accepts a variable amount of options.
+- `delopt()` skips entirely if option doesn't exist in `cli->opts`.
+- all possible code execution paths in `runcli()` have been optimized to `return`/`continue`
+as early as possible for better performance.
+
+---
+
 ## [v0.3.0](https://github.com/alperenozdnc/ezcli/releases/tag/v0.3.0) - 2025-11-27
 
 ### add
