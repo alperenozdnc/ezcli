@@ -13,6 +13,7 @@ typedef enum { RET_NORMAL, RET_WARN, RET_FAIL } ret_e;
 
 #define CLI_NONOPT "NONOPT"
 #define CLI_DEFAULT_OPT "DEFAULT"
+#define CLI_COMMON_OPT "COMMONOPT"
 
 #define CLI_IGNORE_ARGS                                                        \
     __attribute((unused)) void *_, __attribute((unused)) char *__
