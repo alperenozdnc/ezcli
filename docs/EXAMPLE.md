@@ -98,8 +98,8 @@ the combination of shareable state and custom functionality allows you to make
 almost any kind of cli you want. interactive, non-interactive, game, utility,
 etc.
 
-there are two special cases for names you can't take: `"NONOPT"`, and `"DEFAULT"`,
-these live under the macros names respectively, `CLI_NONOPT` and `CLI_DEFAULT_OPT`.
+there are three special cases for names you can't take: `"NONOPT"`, `"DEFAULT"`, and `"COMMON_OPT"`.
+these live under the macros names respectively, `CLI_NONOPT`, `CLI_DEFAULT_OPT` and `CLI_COMMON_OPT`.
 
 any opt struct named these macros is now special options and will be used in
 contexts that require them.
@@ -113,6 +113,10 @@ setting the name to `CLI_DEFAULT_OPT` lets you define behaviour when no
 external input is given. if not defined, ezcli will print out the result of calling
 help. (note that you can set your own help behaviour by writing your own help fn
 and pointing it to `cli->help`). the help function is passed the cli struct and opts.
+
+setting the name to `CLI_COMMON_OPT` lets you create a common option that is
+run before any successfully parsed option. this can be useful for logging, debugging,
+reporting, special behaviour, etc.
 
 now, with all of this info, let's create a simple cli that has version `v1.0.0`,
 prints "hello, world" when being run with no input, and replaces the 'world'
@@ -188,10 +192,25 @@ implement this functionality.
 CLI_ALLOW_NONOPT = true;
 ```
 
+```c
+ret_e _common_opt(CLI_IGNORE_ARGS) {
+    printf("hey, i always run.\n");
+
+    return RET_NORMAL;
+}
+
+opt_s common_opt = {
+    .aliases = CLI_ALIASES(CLI_COMMON_OPT),
+    .body = _common_opt,
+};
+```
+
+this is the common option. we'll see this run before all options in our output.
+
 ok, so now, we should compile together our cli struct with inputs we have created.
 
 ```c
-opt_s *opts[] = {&version_opt, &default_opt, &nonopt, NULL};
+opt_s *opts[] = {&version_opt, &default_opt, &nonopt, &common_opt, NULL};
 char *help_aliases[] = {"help", "--help", NULL};
 
 initcli(&cli, "program", "This program is an example on ezcli.",
@@ -221,10 +240,11 @@ delopt(&cli, &version_opt, ...);
 ```
 
 now, when compiling and running this,
-we get (i moved the binary to `/usr/bin/program`):
+we get (i sourced `./scripts/examples.sh` from project root):
 
 ```
 % program
+    hey, i always run.
     hello, world
 
 % program --help
@@ -237,14 +257,20 @@ we get (i moved the binary to `/usr/bin/program`):
     And this is the footer.
 
 % program --version
+    hey, i always run.
     my program is version, v1.0.0
 
 % program -v
+    hey, i always run.
     my program is version, v1.0.0
 
 % program name1 name2 name3 name4
+    hey, i always run.
     hello, name1
+    hey, i always run.
     hello, name2
+    hey, i always run.
     hello, name3
+    hey, i always run.
     hello, name4
 ```

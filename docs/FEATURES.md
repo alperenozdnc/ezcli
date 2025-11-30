@@ -47,6 +47,12 @@ if you don't define a default option, ezcli prints out an help menu by default.
 if you do though, any program that's run with no args immediately calls
 this default option behaviour. this can also take context.
 
+## common option
+
+a common option is a behaviour that is only executed before every individual
+successfully parsed option. using common options, you can do easy logging,
+debugging, benchmarking, reporting, and all sorts of stuff.
+
 ## injectable runner
 
 the `runcli(int argc, char *argv[])` function doesn't care about the source of
