@@ -1,0 +1,140 @@
+this is information on how you should probably be structuring your project
+that uses ezcli as it progresses. obviously opinionated, but take a look at
+'src/examples/calc.c'. doesn't that code smell to you?
+
+it's supposed to be a proof of concept. but you probably agree that stacking
+a shit ton of ret_e and opt_s definitions look REALLY ugly. and options using
+'cli_s' as context forcibly being inside 'main()' and others not? ugh. gross.
+
+if i was going to create a project that needs to scale using ezcli,
+here's how i'd do it:
+
+
+app/
+├── src/
+│   ├── main.c
+│   ├── ctx/
+│   │   ├── tmp/
+│   │   │   ├── state1.h
+│   │   │   └── state2.h
+│   │   ├── stay/
+│   │   │   ├── state1.h
+│   │   │   └── state2.h
+│   │   └── live/
+│   │   │   ├── state1.h
+│   │   │   └── state2.h
+│   ├── cli/
+│   │   ├── ctx.c
+│   │   ├── opt1.c
+│   │   └── opt2.c
+│   └── core/
+│       ├── init.c
+│       ├── run.c
+│       ├── die.c
+│       ├── func1.c
+│       └── func2.c
+└── include/
+    └── app/
+        ├── cli/
+        │   ├── opt1.h
+        │   └── opt2.h
+        │   └── .
+        │   └── .
+        │   └── .
+        └── core/
+            ├── func1.h
+            └── func2.h
+            └── .
+            └── .
+            └── .
+
+
+'main.c':
+    is where the program's lifecycle happens.
+    it should be no more than 3 function calls
+    and a 'return 0;' statement.
+
+in 'ctx/':
+    contexts in 'ctx/tmp/' are states that are supposed to be temporary
+    and should have a specific lifetime.
+
+    contexts in 'ctx/live/' are states that are supposed to persist until
+    the end of the program. these can be heap allocated memory pieces that
+    are freed in 'die()'.
+
+    contexts in 'ctx/stay/' are states that are supposed to persist across
+    sessions. these are most likely configurations or some sort of
+    authentication key for having accounts for your program (which sounds crazy).
+
+    although, this tmp<live<stay implementation could be skipped if the 
+    program isn't large enough.
+
+    we have headers for our different types of context data types.
+    generally, these would be structs populated with fields for different purposes.
+
+    for example: keeping track of permissions, program modes, the sum
+    for a calculator, user generated content, encryption keys, etc.
+
+in 'cli/':
+    'ctx.c' initializes and exports all context.
+
+    'optx.c' files are just ONE body and ONE 'opt_s' definition. if a set
+    of options can be fundamentally grouped by their functionality, they can
+    be a subdirectory to 'cli/' itself.
+
+    these only have code for logic THEY specifically need, if an option does
+    something that a utility can do, that utility goes to 'core/'. for example:
+    printing blog data is responsibility of the option body but fetching something
+    from the internet may belong to 'core/' if and only if used more than once.
+
+in 'core/':
+    'funcx.c': we have business logic for our program,
+    utilities, general functions, etc.
+
+    'init.c', 'run.c', 'die.c': these just specify the stages of the lifecycle
+    of a program.
+
+        'init.c' should run 'initcli()', add the options, add the command name,
+        the help aliases, the footer, the program description, etc. it should
+        set debug/laidback/nonopt modes. most things here should probably be 'static'.
+
+        'run.c' should run 'runcli()', it should be a loop if the program is
+        supposed to be interactive, it should react to context changes, propagate
+        them to the 'core/' part of the program, etc.
+
+        'die.c' should run 'freecli()', free context if heap allocated,
+        save any permanent states, and make sure no memory leaks exist.
+
+in 'include/':
+   scripts in 'cli/' and 'core/ should directly correspond to these headers,
+   i would define the cli_s struct and ret_e body inside the header and not
+   the script to make sure these headers reads like the cover of an
+   option.
+
+
+ok, so this is why this seemed really clean to 'me', at least. this structure
+acknowledges that ezcli is just a tunnel to between a good program and the
+user, not something that wraps the program itself.
+
+ezcli has moving parts:
+    - cli information
+    - option information
+    - context information
+
+this project structure mentally unifies them but structurally isolates them.
+and this is what's necessary for a project to be scalable using ezcli. because
+just like functions, files should also almost always have a single responsiblity.
+
+since each part is correctly split into its responsibilities, a person reading
+a part of that project will never be confused about what they're reading.
+
+they will know for sure, that when they go to 'ctx/', they will see the blueprint
+for context information, that when they go to 'cli/', they will see those contexts
+initialized and they will see options being specific, but using 'core/' functionality
+as building blocks.
+
+init->live->die is also what 99.9999% of what every program does. which is what
+'main.c' should be doing.
+
+note: ezcli doesn't know your project structure. nor does it care. you are free
+do whatever you're comfortable doing.
