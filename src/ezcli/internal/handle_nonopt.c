@@ -4,7 +4,7 @@
 #include <ezcli/print.h>
 
 #include "assert.h"
-#include "context.h"
+#include "execopt.h"
 #include "handle_nonopt.h"
 #include "match.h"
 
@@ -31,12 +31,12 @@ bool handle_nonopt(cli_s *cli, char *tok, bool is_unrecog,
         exit(EXIT_FAILURE);
     }
 
-    opt_s *nonopt = match_nonopt(cli);
+    opt_s *nonopt = oa_match_first(cli, CLI_NONOPT);
 
     _assert(nonopt, "you must define a nonopt after"
                     "setting CLI_ALLOW_NONOPT to true");
 
-    nonopt->body(_CLI_CONTEXT(nonopt), tok);
+    execopt(nonopt, tok);
 
     return true;
 }
