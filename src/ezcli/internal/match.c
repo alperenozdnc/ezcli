@@ -33,11 +33,11 @@ opt_s *ot_match_any(cli_s *cli, char *token) {
     return NULL;
 }
 
-opt_s *match_nonopt(cli_s *cli) {
+opt_s *oa_match_first(cli_s *cli, char *alias) {
     for (size_t i = 0; i < cli->opts_len; i++) {
         opt_s *opt = cli->opts[i];
 
-        if (strcmp(opt->aliases[0], CLI_NONOPT) == 0)
+        if (strcmp(opt->aliases[0], alias) == 0)
             return opt;
     }
 

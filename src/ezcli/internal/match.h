@@ -19,11 +19,13 @@ bool ot_match(opt_s *opt, char *token);
 opt_s *ot_match_any(cli_s *cli, char *token);
 
 /*
- * stands for option_match_non_option.
- * finds a 'non-option' (default) argument if it exists and returns `NULL` if it
- * doesn't
+ * stands for option_alias_match_first.
+ * checks if the given alias and one of any option's first alias and only
+ * first alias match. returns the option if any does, returns `NULL` if it
+ * doesn't. this is saves the cost of looping through every alias for special
+ * options.
  */
-opt_s *match_nonopt(cli_s *cli);
+opt_s *oa_match_first(cli_s *cli, char *alias);
 
 /*
  * checks if a string exists at least once inside of an array.
