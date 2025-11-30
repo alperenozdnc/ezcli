@@ -2,7 +2,7 @@
 
 ---
 
-## [v0.5.0](https://github.com/alperenozdnc/ezcli/releases/tag/v0.5.0) - 2025-11-27
+## [v0.5.0](https://github.com/alperenozdnc/ezcli/releases/tag/v0.5.0) - 2025-11-30
 
 ### add
 
