@@ -3,6 +3,8 @@
 #include <ezcli/opt.h>
 #include <ezcli/print.h>
 
+#include "panic.h"
+
 ret_e panic() {
     CLI_DEBUG_ONLY(cliprint(CLI_WARN, "ezcli: ", "panicking"));
 
