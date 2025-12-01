@@ -69,12 +69,12 @@ ret_e _section_categorizer(void *ctx, CLI_IGNORE_TOK) {
     if (cli->tok_idx > 1)
         printf("\n");
 
-    for (size_t i = 0; i < curr_tok_len * 3; i++)
+    for (int i = 0; i < curr_tok_len * 3; i++)
         putchar('-');
 
     printf("\n%*s\n", curr_tok_len * 2, curr_tok);
 
-    for (size_t i = 0; i < curr_tok_len * 3; i++)
+    for (int i = 0; i < curr_tok_len * 3; i++)
         putchar('-');
 
     printf("\n\n");
