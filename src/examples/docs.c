@@ -11,10 +11,14 @@
 
 void read_docs(char *name) {
     char *doc_file_dir = "./docs/docs_program/";
-    char *doc_file_path = malloc(strlen(doc_file_dir) + strlen(name) +
-                                 strlen(".docs") + sizeof('\0'));
 
-    sprintf(doc_file_path, "%s%s.docs", doc_file_dir, name);
+    size_t doc_file_path_size =
+        strlen(doc_file_dir) + strlen(name) + strlen(".docs") + sizeof('\0');
+
+    char *doc_file_path = malloc(doc_file_path_size);
+
+    snprintf(doc_file_path, doc_file_path_size, "%s%s.docs", doc_file_dir,
+             name);
 
     FILE *doc_file = fopen(doc_file_path, "r");
 
