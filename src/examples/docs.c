@@ -3,11 +3,18 @@
 #include <stdlib.h>
 #include <string.h>
 
-void read_docs(char *name) {
-    char doc_file_path[100] = "./docs/docs_program/";
+#define DOC_OPT(alias, descr)                                                  \
+    (opt_s) {                                                                  \
+        .aliases = CLI_ALIASES(alias), .desc = descr, .body = doc_body,        \
+        .ctx = &cli,                                                           \
+    }
 
-    strcat(doc_file_path, name);
-    strcat(doc_file_path, ".docs");
+void read_docs(char *name) {
+    char *doc_file_dir = "./docs/docs_program/";
+    char *doc_file_path =
+        malloc(strlen(doc_file_dir) + strlen(name) + strlen(".docs"));
+
+    sprintf(doc_file_path, "%s%s.docs", doc_file_dir, name);
 
     FILE *doc_file = fopen(doc_file_path, "r");
 
@@ -21,18 +28,21 @@ void read_docs(char *name) {
         exit(EXIT_FAILURE);
     }
 
-    char buffer[1024];
+    while (true) {
+        char c = fgetc(doc_file);
 
-    while (fgets(buffer, sizeof(buffer), doc_file)) {
-        printf("%s", buffer);
+        if (c == EOF)
+            break;
+
+        putchar(c);
     }
 
     fclose(doc_file);
+    free(doc_file_path);
 }
 
 ret_e doc_body(void *ctx, CLI_IGNORE_TOK) {
     cli_s *cli = ctx;
-
     char *curr_tok = gettok_offset(cli, 0);
 
     read_docs(curr_tok);
@@ -42,56 +52,38 @@ ret_e doc_body(void *ctx, CLI_IGNORE_TOK) {
 
 ret_e _doc_version(CLI_IGNORE_ARGS) {
     printf("ezcli current version -> v%s\n", CLI_STRING_V);
-
     printf("YOU can definitely help that go up.\n");
 
     return RET_NORMAL;
-}
-
-opt_s doc_version = {
-    .aliases = CLI_ALIASES("version", "-v", "--version"),
-    .desc = "version of ezcli.",
-    .body = _doc_version,
-};
-
-#define create_doc_opt(alias, descr)                                           \
-    (opt_s) {                                                                  \
-        .aliases = CLI_ALIASES(alias), .desc = descr, .body = doc_body,        \
-        .ctx = &cli,                                                           \
-    }
-
-void print_title_edge(size_t size) {
-    for (size_t i = 0; i < size; i++)
-        printf("-");
 }
 
 ret_e _section_categorizer(void *ctx, CLI_IGNORE_TOK) {
     cli_s *cli = ctx;
 
     char *curr_tok = gettok_offset(cli, 0);
+    int curr_tok_len = strlen(curr_tok);
 
-    if (cli->argc > 2) {
-        if (cli->tok_idx > 1) {
-            printf("\n");
-        }
+    if (cli->argc < 2)
+        return RET_NORMAL;
 
-        print_title_edge(strlen(curr_tok) * 3);
-
+    if (cli->tok_idx > 1)
         printf("\n");
 
-        printf("%*s\n", (int)strlen(curr_tok) * 2, curr_tok);
+    for (size_t i = 0; i < curr_tok_len * 3; i++)
+        putchar('-');
 
-        print_title_edge(strlen(curr_tok) * 3);
+    printf("\n%*s\n", curr_tok_len * 2, curr_tok);
 
-        printf("\n\n");
-    }
+    for (size_t i = 0; i < curr_tok_len * 3; i++)
+        putchar('-');
+
+    printf("\n\n");
 
     return RET_NORMAL;
 }
 
 int main(int argc, char *argv[]) {
     cli_s cli;
-    opt_s *opts[] = {NULL};
     char *help_aliases[] = {"help", "--help", "-h", NULL};
 
     initcli(&cli, "docs",
@@ -99,7 +91,7 @@ int main(int argc, char *argv[]) {
             "probably start with 'docs entrypoint'.",
             "[concept]",
             "for source code, visit <https://github.com/alperenozdnc/ezcli>\n",
-            opts, help_aliases);
+            (opt_s *[]){NULL}, help_aliases);
 
     opt_s doc_entry = {
         .aliases = CLI_ALIASES("entrypoint", "root"),
@@ -108,24 +100,28 @@ int main(int argc, char *argv[]) {
         .ctx = &cli,
     };
 
+    opt_s doc_structure =
+        DOC_OPT("structure", "structuring projects using ezcli.");
+    opt_s doc_initcli = DOC_OPT("initcli", "initcli() core function.");
+    opt_s doc_runcli = DOC_OPT("runcli", "runcli() core function.");
+    opt_s doc_freecli = DOC_OPT("freecli", "freecli() core function.");
+    opt_s doc_external = DOC_OPT("external", "core externals/globals.");
+    opt_s doc_addopt = DOC_OPT("addopt", "addopt() utility function.");
+    opt_s doc_delopt = DOC_OPT("delopt", "delopt() utility function.");
+    opt_s doc_gettok = DOC_OPT("gettok", "gettok_*() utility functions.");
+    opt_s doc_print = DOC_OPT("cliprint", "cliprint() utility function.");
+    opt_s doc_cli_s = DOC_OPT("cli_s", "struct cli_s.");
+    opt_s doc_opt_s = DOC_OPT("opt_s", "struct opt_s.");
+
     opt_s section_categorizer = {.aliases = CLI_ALIASES(CLI_COMMON_OPT),
                                  .body = _section_categorizer,
                                  .ctx = &cli};
 
-    opt_s doc_structure =
-        create_doc_opt("structure", "structuring projects using ezcli.");
-    opt_s doc_initcli = create_doc_opt("initcli", "initcli() core function.");
-    opt_s doc_runcli = create_doc_opt("runcli", "runcli() core function.");
-    opt_s doc_freecli = create_doc_opt("freecli", "freecli() core function.");
-    opt_s doc_external = create_doc_opt("external", "core externals/globals.");
-    opt_s doc_addopt = create_doc_opt("addopt", "addopt() utility function.");
-    opt_s doc_delopt = create_doc_opt("delopt", "delopt() utility function.");
-    opt_s doc_gettok =
-        create_doc_opt("gettok", "gettok_*() utility functions.");
-    opt_s doc_print =
-        create_doc_opt("cliprint", "cliprint() utility function.");
-    opt_s doc_cli_s = create_doc_opt("cli_s", "struct cli_s.");
-    opt_s doc_opt_s = create_doc_opt("opt_s", "struct opt_s.");
+    opt_s doc_version = {
+        .aliases = CLI_ALIASES("version", "-v", "--version"),
+        .desc = "version of ezcli.",
+        .body = _doc_version,
+    };
 
     addopt(&cli, &doc_entry, &doc_structure, &doc_initcli, &doc_runcli,
            &doc_freecli, &doc_external, &doc_addopt, &doc_delopt, &doc_gettok,
