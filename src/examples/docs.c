@@ -65,7 +65,7 @@ void print_title_edge(size_t size) {
         printf("-");
 }
 
-ret_e _common(void *ctx, CLI_IGNORE_TOK) {
+ret_e _section_categorizer(void *ctx, CLI_IGNORE_TOK) {
     cli_s *cli = ctx;
 
     char *curr_tok = gettok_offset(cli, 0);
@@ -108,8 +108,9 @@ int main(int argc, char *argv[]) {
         .ctx = &cli,
     };
 
-    opt_s common = {
-        .aliases = CLI_ALIASES(CLI_COMMON_OPT), .body = _common, .ctx = &cli};
+    opt_s section_categorizer = {.aliases = CLI_ALIASES(CLI_COMMON_OPT),
+                                 .body = _section_categorizer,
+                                 .ctx = &cli};
 
     opt_s doc_structure =
         create_doc_opt("structure", "structuring projects using ezcli.");
@@ -128,7 +129,8 @@ int main(int argc, char *argv[]) {
 
     addopt(&cli, &doc_entry, &doc_structure, &doc_initcli, &doc_runcli,
            &doc_freecli, &doc_external, &doc_addopt, &doc_delopt, &doc_gettok,
-           &doc_print, &doc_cli_s, &doc_opt_s, &common, &doc_version);
+           &doc_print, &doc_cli_s, &doc_opt_s, &section_categorizer,
+           &doc_version);
 
     runcli(&cli, argc, argv);
 
