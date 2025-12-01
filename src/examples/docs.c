@@ -11,8 +11,8 @@
 
 void read_docs(char *name) {
     char *doc_file_dir = "./docs/docs_program/";
-    char *doc_file_path =
-        malloc(strlen(doc_file_dir) + strlen(name) + strlen(".docs"));
+    char *doc_file_path = malloc(strlen(doc_file_dir) + strlen(name) +
+                                 strlen(".docs") + sizeof('\0'));
 
     sprintf(doc_file_path, "%s%s.docs", doc_file_dir, name);
 
