@@ -60,6 +60,35 @@ opt_s doc_version = {
         .ctx = &cli,                                                           \
     }
 
+void print_title_edge(size_t size) {
+    for (size_t i = 0; i < size; i++)
+        printf("-");
+}
+
+ret_e _common(void *ctx, CLI_IGNORE_TOK) {
+    cli_s *cli = ctx;
+
+    char *curr_tok = gettok_offset(cli, 0);
+
+    if (cli->argc > 2) {
+        if (cli->tok_idx > 1) {
+            printf("\n");
+        }
+
+        print_title_edge(strlen(curr_tok) * 3);
+
+        printf("\n");
+
+        printf("%*s\n", (int)strlen(curr_tok) * 2, curr_tok);
+
+        print_title_edge(strlen(curr_tok) * 3);
+
+        printf("\n\n");
+    }
+
+    return RET_NORMAL;
+}
+
 int main(int argc, char *argv[]) {
     cli_s cli;
     opt_s *opts[] = {NULL};
@@ -79,6 +108,9 @@ int main(int argc, char *argv[]) {
         .ctx = &cli,
     };
 
+    opt_s common = {
+        .aliases = CLI_ALIASES(CLI_COMMON_OPT), .body = _common, .ctx = &cli};
+
     opt_s doc_structure =
         create_doc_opt("structure", "structuring projects using ezcli.");
     opt_s doc_initcli = create_doc_opt("initcli", "initcli() core function.");
@@ -96,7 +128,7 @@ int main(int argc, char *argv[]) {
 
     addopt(&cli, &doc_entry, &doc_structure, &doc_initcli, &doc_runcli,
            &doc_freecli, &doc_external, &doc_addopt, &doc_delopt, &doc_gettok,
-           &doc_print, &doc_cli_s, &doc_opt_s, &doc_version);
+           &doc_print, &doc_cli_s, &doc_opt_s, &common, &doc_version);
 
     runcli(&cli, argc, argv);
 
