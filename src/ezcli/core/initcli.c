@@ -47,7 +47,7 @@ void initcli(cli_s *cli, char *cmd, char *desc, char *usage, char *footer,
     CHECK_ALLOC(cli->opts);
 
     for (size_t i = 0; i < cli->opts_len; i++) {
-        validate_opt(opts[i]);
+        validate_opt(cli, opts[i]);
 
         opts[i]->allocated = false;
 

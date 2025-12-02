@@ -11,7 +11,7 @@
 #include <string.h>
 
 void __addopt(cli_s *cli, opt_s *opt_a) {
-    validate_opt(opt_a);
+    validate_opt(cli, opt_a);
 
     size_t new_len = cli->opts_len + 1;
     opt_s **new_opts = malloc(OPTS_SIZE(new_len));
