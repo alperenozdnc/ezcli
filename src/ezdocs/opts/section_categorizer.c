@@ -35,10 +35,9 @@ void _section_categorizer_add(cli_s *cli) {
     opt_s section_categorizer = {
         .aliases = aliases,
         .body = _section_categorizer,
+        .ctx = cli,
         .desc = "section header formatter",
     };
-
-    section_categorizer.ctx = cli;
 
     allocopt(cli, &section_categorizer);
 }
