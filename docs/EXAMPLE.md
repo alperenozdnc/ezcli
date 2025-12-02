@@ -227,10 +227,13 @@ runcli(&cli, argc, argv);
 freecli(&cli);
 ```
 
-you can also add options with `addopt` if you wish (accepts variable amount of options).
+you can also add options with `addopt` (or `allocopt` for heap-allocation)
+if you wish (accepts variable amount of options).
 
 ```c
 addopt(&cli, &version_opt, ...);
+
+allocopt(&cli, &and_this_one_doesnt_accept_multiple_opts_opt);
 ```
 
 or, remove them with `delopt`.

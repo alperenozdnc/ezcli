@@ -22,6 +22,7 @@ ezcli/core/functions:
 ezcli/utilities:
     - ezdocs cliprint
     - ezdocs addopt 
+    - ezdocs allocopt
     - ezdocs delopt
     - ezdocs gettok
 

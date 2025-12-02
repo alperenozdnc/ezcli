@@ -5,10 +5,10 @@ dynamic array in a 'cli_s' struct.
 see 'ezdocs cli_s' and 'ezdocs opt_s' for more details.
 
 
-note: ezcli does NOT take ownership of opts passed to it. by 'allocates', i mean
+note: addopt() does NOT take ownership of opts passed to it. by 'allocates', i mean
 it allocates heap space for POINTERS of your opts, not the stack memory they use.
 
-also, with addopt() (and consequently delopt()):
+also, with addopt() (and consequently allocopt()):
     - you can add commands based on config files,
 
     - set different 'modes' to your program where certain options

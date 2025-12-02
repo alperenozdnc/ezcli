@@ -3,6 +3,7 @@ typedef struct {
     char *desc;
 
     bool want_input;
+    bool allocated;
 
     void *ctx;
     ret_e (*body)(void *ctx, char *tok);
@@ -31,6 +32,11 @@ building block of your program.
 'bool want_input':
     false by default. specifies if your option requires input.
     ignored in nonopts and default opts.
+
+'bool allocated':
+    this is how ezcli checks if you heap-allocated your option using 'allocopt()'
+    or not. you don't need to fill this field yourself. make sure you 
+    see 'ezdocs allocopt' before planning to use 'allocopt()'.
 
 'void *ctx':
     this can be anything: program state, config, user data, etc.

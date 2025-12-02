@@ -1,10 +1,11 @@
 void freecli(cli_s *cli);
 
 
-frees the only ezcli-owned piece of memory which
-is 'cli_s' itself.
-see 'ezdocs cli_s' for explanation of what it is.
+frees all ezcli-owned piece of memory which
+are the 'cli_s' struct and options initialized using 'allocopt()'.
 
+see 'ezdocs cli_s' for explanation of what 'cli_s' is.
+see 'ezdocs allocopt' for explanation of what 'allocopt()' does.
 
 freecli() is also run when ezcli comes across
 a syntax error and has to exit.
