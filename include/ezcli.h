@@ -26,6 +26,7 @@
 
 // helpers/utilities
 #include <ezcli/addopt.h>
+#include <ezcli/allocopt.h>
 #include <ezcli/delopt.h>
 #include <ezcli/gettok.h>
 #include <ezcli/print.h>
