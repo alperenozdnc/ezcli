@@ -37,6 +37,7 @@ int main(int argc, char *argv[]) {
     opt_s doc_delopt = DOC_OPT("delopt", "delopt() utility function.");
     opt_s doc_gettok = DOC_OPT("gettok", "gettok_*() utility functions.");
     opt_s doc_print = DOC_OPT("cliprint", "cliprint() utility function.");
+    opt_s doc_special = DOC_OPT("specials", "special option behaviours.");
     opt_s doc_cli_s = DOC_OPT("cli_s", "struct cli_s.");
     opt_s doc_opt_s = DOC_OPT("opt_s", "struct opt_s.");
 
@@ -45,7 +46,7 @@ int main(int argc, char *argv[]) {
 
     addopt(&cli, &doc_entry, &doc_structure, &doc_initcli, &doc_runcli,
            &doc_freecli, &doc_external, &doc_addopt, &doc_allocopt, &doc_delopt,
-           &doc_gettok, &doc_print, &doc_cli_s, &doc_opt_s);
+           &doc_gettok, &doc_print, &doc_special, &doc_cli_s, &doc_opt_s);
 
     runcli(&cli, argc, argv);
 
