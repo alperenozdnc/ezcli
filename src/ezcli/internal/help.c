@@ -2,6 +2,7 @@
 #include <ezcli/opt.h>
 #include <ezcli/print.h>
 
+#include "blacklist.h"
 #include "help.h"
 #include "match.h"
 #include "printaliases.h"
@@ -25,14 +26,12 @@ void __print_option(char **aliases, char *desc) {
 }
 
 void __print_options(cli_s *cli, opt_s **opts) {
-    char *blacklist[] = {CLI_NONOPT, CLI_DEFAULT_OPT, CLI_COMMON_OPT, NULL};
-
     __print_option(cli->help_aliases, "prints this menu.\n");
 
     for (size_t i = 0; i < cli->opts_len; i++) {
         opt_s *opt = opts[i];
 
-        if (match_str(blacklist, opt->aliases[0]))
+        if (match_str(BLACKLIST, opt->aliases[0]))
             continue;
 
         __print_option(opt->aliases, opt->desc);
