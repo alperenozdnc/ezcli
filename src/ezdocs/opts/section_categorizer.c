@@ -10,7 +10,7 @@ ret_e _section_categorizer(void *ctx, CLI_IGNORE_TOK) {
     char *curr_tok = gettok_offset(cli, 0);
     int curr_tok_len = strlen(curr_tok);
 
-    if (cli->argc < 2)
+    if (cli->argc < 3)
         return RET_NORMAL;
 
     if (cli->tok_idx > 1)
