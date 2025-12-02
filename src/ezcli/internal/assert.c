@@ -1,16 +1,26 @@
+#include <ezcli/freecli.h>
 #include <ezcli/print.h>
 
 #include "assert.h"
 
+#include <stdbool.h>
 #include <stdlib.h>
 
-/*
- * prints `label` and exits with failure if `expr` is `false`.
- */
 void _assert(bool expr, char *label) {
     if (expr)
         return;
 
-    cliprint(CLI_ERROR, "[ezcli] assertion failed: ", "%s\n", label);
+    ASSERT_PRINT_ERR();
+
+    exit(EXIT_FAILURE);
+}
+
+void _assert_free(cli_s *cli, bool expr, char *label) {
+    if (expr)
+        return;
+
+    ASSERT_PRINT_ERR();
+
+    freecli(cli);
     exit(EXIT_FAILURE);
 }

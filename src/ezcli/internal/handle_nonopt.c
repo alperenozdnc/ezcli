@@ -33,8 +33,9 @@ bool handle_nonopt(cli_s *cli, char *tok, bool is_unrecog,
 
     opt_s *nonopt = oa_match_first(cli, CLI_NONOPT);
 
-    _assert(nonopt, "you must define a nonopt after"
-                    "setting CLI_ALLOW_NONOPT to true");
+    _assert_free(cli, nonopt,
+                 "you must define a nonopt after"
+                 "setting CLI_ALLOW_NONOPT to true");
 
     execopt(nonopt, tok);
 
