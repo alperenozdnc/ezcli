@@ -31,18 +31,22 @@ typedef enum { RET_NORMAL, RET_WARN, RET_FAIL } ret_e;
  * `aliases`: names of option
  * `desc`: description of option. this is printed in help in format `opt ->
  * desc`.
- * `want_input`: true if option requires an input. if not filled,
- * this is false.
- * `ctx`: state to be passed to the body when running. this allows for
- * functionality like chaining, state tracking, multiple argument options,
- * etc. `body`: functionality of option. this is the function that is feeded
- * the word that comes after an option.
+ * `allocated`: `true` if heap-allocated, and `false` if stack. no need to fill
+ * this out yourself.
+ * `want_input`: true if option requires an input. if not
+ * filled, this is false.
+ * `ctx`: state to be passed to the body when running.
+ * this allows for functionality like chaining, state tracking, multiple
+ * argument options, etc.
+ * `body`: functionality of option. this is the function
+ * that is feeded the word that comes after an option.
  */
 typedef struct {
     char **aliases;
     char *desc;
 
     bool want_input;
+    bool allocated;
 
     void *ctx;
     ret_e (*body)(void *ctx, char *tok);
