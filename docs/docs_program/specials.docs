@@ -10,6 +10,9 @@ to be able to be recognized in an 'opt_s' struct) - but these special 'options'
 are still passable as context-aware behaviour containers, so you can still
 loosely define them as options.
 
+these options are not printed in help, so they don't require a 'desc' field
+like all other options do.
+
 note: setting more than a single alias (the intended ones) to any of these
 special 'options' will cause behaviour you don't necessarily want.
 
