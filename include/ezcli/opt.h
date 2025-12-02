@@ -16,10 +16,10 @@ typedef enum { RET_NORMAL, RET_WARN, RET_FAIL } ret_e;
 #define CLI_COMMON_OPT "COMMONOPT"
 
 #define CLI_IGNORE_ARGS                                                        \
-    __attribute((unused)) void *_, __attribute((unused)) char *__
+    __attribute((unused)) void *ctx, __attribute((unused)) char *tok
 
-#define CLI_IGNORE_TOK __attribute((unused)) char *_
-#define CLI_IGNORE_CTX __attribute((unused)) void *_
+#define CLI_IGNORE_TOK __attribute((unused)) char *tok
+#define CLI_IGNORE_CTX __attribute((unused)) void *ctx
 
 #define CLI_ALIASES(...)                                                       \
     (char *[]) {                                                               \
