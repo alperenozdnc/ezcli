@@ -4,8 +4,8 @@
 #include <ezcli/opt.h>
 
 /*
- * handles both the common option, and the option body execution for a single
- * option.
+ * handles the common option, the post common option, and the option body
+ * execution for a single option.
  */
 void _execopt(cli_s *cli, opt_s *opt, char *tok);
 

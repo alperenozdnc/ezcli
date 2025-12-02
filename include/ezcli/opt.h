@@ -14,6 +14,7 @@ typedef enum { RET_NORMAL, RET_WARN, RET_FAIL } ret_e;
 #define CLI_NONOPT "NONOPT"
 #define CLI_DEFAULT_OPT "DEFAULT"
 #define CLI_COMMON_OPT "COMMONOPT"
+#define CLI_POST_COMMON_OPT "POST_COMMONOPT"
 
 #define CLI_IGNORE_ARGS                                                        \
     __attribute((unused)) void *ctx, __attribute((unused)) char *tok
