@@ -33,6 +33,7 @@ int main(int argc, char *argv[]) {
     opt_s doc_freecli = DOC_OPT("freecli", "freecli() core function.");
     opt_s doc_external = DOC_OPT("external", "core externals/globals.");
     opt_s doc_addopt = DOC_OPT("addopt", "addopt() utility function.");
+    opt_s doc_allocopt = DOC_OPT("allocopt", "allocopt() utility function.");
     opt_s doc_delopt = DOC_OPT("delopt", "delopt() utility function.");
     opt_s doc_gettok = DOC_OPT("gettok", "gettok_*() utility functions.");
     opt_s doc_print = DOC_OPT("cliprint", "cliprint() utility function.");
@@ -43,8 +44,8 @@ int main(int argc, char *argv[]) {
     _version_add(&cli);
 
     addopt(&cli, &doc_entry, &doc_structure, &doc_initcli, &doc_runcli,
-           &doc_freecli, &doc_external, &doc_addopt, &doc_delopt, &doc_gettok,
-           &doc_print, &doc_cli_s, &doc_opt_s);
+           &doc_freecli, &doc_external, &doc_addopt, &doc_allocopt, &doc_delopt,
+           &doc_gettok, &doc_print, &doc_cli_s, &doc_opt_s);
 
     runcli(&cli, argc, argv);
 
