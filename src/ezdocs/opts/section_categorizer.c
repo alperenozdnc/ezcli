@@ -1,6 +1,5 @@
 #include <ezcli.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
 #include "section_categorizer.h"
@@ -30,18 +29,16 @@ ret_e _section_categorizer(void *ctx, CLI_IGNORE_TOK) {
     return RET_NORMAL;
 }
 
-opt_s SECTION_CATEGORIZER_TEMPLATE = {
-    .aliases = (char *[]){CLI_COMMON_OPT, NULL},
-    .body = _section_categorizer,
-    .desc = "section header formatter",
-};
-
 void _section_categorizer_add(cli_s *cli) {
-    opt_s *opt = malloc(sizeof *opt);
+    static char *aliases[] = CLI_ALIASES(CLI_COMMON_OPT);
 
-    *opt = SECTION_CATEGORIZER_TEMPLATE;
+    opt_s section_categorizer = {
+        .aliases = aliases,
+        .body = _section_categorizer,
+        .desc = "section header formatter",
+    };
 
-    opt->ctx = cli;
+    section_categorizer.ctx = cli;
 
-    addopt(cli, opt);
+    allocopt(cli, &section_categorizer);
 }
