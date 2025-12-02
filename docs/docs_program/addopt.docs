@@ -2,7 +2,7 @@ void addopt(cli_s *cli, ...opts);
 
 allocates a variable amount of `opt_s` structs to the 'cli->opts'
 dynamic array in a 'cli_s' struct.
-see 'docs cli_s' and 'docs opt_s' for more details.
+see 'ezdocs cli_s' and 'ezdocs opt_s' for more details.
 
 
 note: ezcli does NOT take ownership of opts passed to it. by 'allocates', i mean

@@ -3,7 +3,7 @@ void runcli(cli_s *cli_p, int argc, char *argv[]);
 parses and runs input in accordance to struct 'cli_p'.
 
 
-see 'docs cli_s' and 'docs initcli' for an explanation on
+see 'ezdocs cli_s' and 'ezdocs initcli' for an explanation on
 what 'cli_p' should be populated with.
 
 runcli() expects 'argv' to start with the command name itself.

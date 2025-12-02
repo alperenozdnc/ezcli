@@ -23,7 +23,7 @@ building block of your program.
 
     note: nonopts and default opts should only have one alias. do not create multiple.
 
-    see 'docs external' for what a 'nonopt' is.
+    see 'ezdocs external' for what a 'nonopt' is.
 
 'char *desc':
     a probably-short string describing your option's functionality.

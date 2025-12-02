@@ -6,7 +6,7 @@ this is a set of token-peeking utilities to
 access specific argv indices.
 
 
-see 'docs cli_s' for what fields to fill it with.
+see 'ezdocs cli_s' for what fields to fill it with.
 
 gettok_prev() -> gets the previously parsed token.
                  if idx = 1, returns NULL.

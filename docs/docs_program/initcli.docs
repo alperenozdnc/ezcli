@@ -2,7 +2,7 @@ void initcli(cli_s *cli, char *cmd, char *desc, char *usage, char *footer,
              opt_s **opts, char *help_aliases[]);
 
 initializes a general command line interface struct.
-see 'docs cli_s' for explanation of arguments.
+see 'ezdocs cli_s' for explanation of arguments.
 
 
 ezcli only owns memory of '*cli'. the command name,

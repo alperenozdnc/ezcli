@@ -3,7 +3,7 @@ void freecli(cli_s *cli);
 
 frees the only ezcli-owned piece of memory which
 is 'cli_s' itself.
-see 'docs cli_s' for explanation of what it is.
+see 'ezdocs cli_s' for explanation of what it is.
 
 
 freecli() is also run when ezcli comes across

@@ -2,7 +2,7 @@ void delopt(cli_s *cli, ...opts);
 
 deallocates a variable amount of `opt_s` structs from the 'cli->opts'
 dynamic array in a 'cli_s' struct.
-see 'docs cli_s' and 'docs opt_s' for more details.
+see 'ezdocs cli_s' and 'ezdocs opt_s' for more details.
 
 
 note: delopt() is a macro that inserts a sentinel NULL after your

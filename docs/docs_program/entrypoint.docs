@@ -1,32 +1,32 @@
 hey! welcome to the ezcli documentation root. i hope you will like the ideas used
 behind the creation of this library as you read through the documentation.
 
-ezcli is a cli library that documents itself using itself. the 'docs help' command
+ezcli is a cli library that documents itself using itself. the 'ezdocs help' command
 is the default ezcli-generated help command. you can chain different topics with
-'docs topic1 topic2 topic3' if you want.
+'ezdocs topic1 topic2 topic3' if you want.
 
 this is the general, intended reading path for a first-time user.
 
 ezcli/core/foundation:
-    - docs cli_s
-    - docs opt_s
+    - ezdocs cli_s
+    - ezdocs opt_s
 
 ezcli/core/external:
-    - docs external
+    - ezdocs external
 
 ezcli/core/functions:
-    - docs initcli
-    - docs runcli
-    - docs freecli
+    - ezdocs initcli
+    - ezdocs runcli
+    - ezdocs freecli
 
 ezcli/utilities:
-    - docs cliprint
-    - docs addopt 
-    - docs delopt
-    - docs gettok
+    - ezdocs cliprint
+    - ezdocs addopt 
+    - ezdocs delopt
+    - ezdocs gettok
 
 ezcli/general:
-    - docs structure
+    - ezdocs structure
 
 start with ezcli/core/foundation and end with ezcli/general.
 if you want to follow a random order when reading documentation

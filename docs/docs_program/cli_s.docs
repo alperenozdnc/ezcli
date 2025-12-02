@@ -17,7 +17,7 @@ typedef struct __cli_s {
 
 this is where all the information about your
 command line interface program is kept.
-see 'docs opt_s' for what to fill '**opts' with.
+see 'ezdocs opt_s' for what to fill '**opts' with.
 
 
 '*cmd', '*desc', '*usage', and '*footer' are information that is printed
