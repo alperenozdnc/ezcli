@@ -31,8 +31,12 @@ void __delopt(cli_s *cli, opt_s *opt_d) {
     for (size_t i = 0; i < cli->opts_len; i++) {
         opt_s *opt = cli->opts[i];
 
-        if (ot_match(opt_d, opt->aliases[0]))
+        if (ot_match(opt_d, opt->aliases[0])) {
+            if (opt->allocated)
+                free(cli->opts[i]);
+
             continue;
+        }
 
         new_opts[j++] = opt;
     }
