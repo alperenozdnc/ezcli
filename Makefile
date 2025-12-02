@@ -80,4 +80,4 @@ uninstall-docs:
 	@rm -f $(INSTALL_BIN_DIR)/ezdocs
 
 clean:
-	rm -rf $(OBJ_DIR) $(LIB_DIR) $(EXAMPLES_DIR) $(EZDOCS_CONTENT_DIR)
+	rm -rf $(OBJ_DIR) $(LIB_DIR) $(EXAMPLES_DIR) $(EZDOCS_DIR) $(EZDOCS_CONTENT_DIR) 
