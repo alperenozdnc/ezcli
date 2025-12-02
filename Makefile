@@ -5,23 +5,43 @@ SRC_DIR = src
 OBJ_DIR = obj
 LIB_DIR = lib
 EXAMPLES_DIR = examples
+EZDOCS_DIR = ezdocs
+EZDOCS_CONTENT_DIR = ~/.local/ezdocs
+EZDOCS_CONTENT_DIR_LOCAL = docs/docs_program
 
 LIB_NAME = libezcli.a
 LIB_PATH = $(LIB_DIR)/$(LIB_NAME)
 
+EZDOCS_NAME = ezdocs
+EZDOCS_PATH = $(EZDOCS_DIR)/$(EZDOCS_NAME)
+
 LIB_SRC := $(shell find $(SRC_DIR)/ezcli -name '*.c')
 LIB_OBJ := $(LIB_SRC:$(SRC_DIR)/ezcli/%.c=$(OBJ_DIR)/ezcli/%.o)
+
+EZDOCS_SRC := $(shell find $(SRC_DIR)/ezdocs -name '*.c')
+EZDOCS_OBJ := $(EZDOCS_SRC:$(SRC_DIR)/ezdocs/%.c=$(OBJ_DIR)/ezdocs/%.o)
 
 EXAMPLE_SRC := $(shell find $(SRC_DIR)/examples -name '*.c')
 EXAMPLE_BIN := $(EXAMPLE_SRC:$(SRC_DIR)/examples/%.c=$(EXAMPLES_DIR)/%)
 
-all: $(LIB_PATH) examples
+all: $(LIB_PATH) examples $(EZDOCS_PATH) 
 
 $(LIB_PATH): $(LIB_OBJ)
 	@mkdir -p $(LIB_DIR)
 	ar rcs $@ $^
 
 $(OBJ_DIR)/ezcli/%.o: $(SRC_DIR)/ezcli/%.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(EZDOCS_PATH): $(EZDOCS_OBJ)
+	@rm -rf $(EZDOCS_CONTENT_DIR)
+	@mkdir $(EZDOCS_CONTENT_DIR)
+	@cp -r $(EZDOCS_CONTENT_DIR_LOCAL)/* $(EZDOCS_CONTENT_DIR)/
+	@mkdir -p $(EZDOCS_DIR)
+	$(CC) $(CFLAGS) $^ -L$(LIB_DIR) -lezcli -o $@
+
+$(OBJ_DIR)/ezdocs/%.o: $(SRC_DIR)/ezdocs/%.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
@@ -34,6 +54,7 @@ $(EXAMPLES_DIR)/%: $(SRC_DIR)/examples/%.c $(LIB_PATH)
 PREFIX = /usr/local
 INCLUDE_DIR = $(PREFIX)/include
 INSTALL_LIB_DIR = $(PREFIX)/lib
+INSTALL_BIN_DIR = $(PREFIX)/bin
 
 .PHONY: install uninstall clean
 
@@ -50,5 +71,13 @@ uninstall:
 	@rm -rf $(INCLUDE_DIR)/ezcli
 	@rm -f $(INSTALL_LIB_DIR)/$(LIB_NAME)
 
+install-docs: $(EZDOCS_PATH)
+	@echo "installing ezdocs to $(PREFIX)."
+	@cp $(EZDOCS_PATH) $(INSTALL_BIN_DIR)/
+
+uninstall-docs:
+	@echo "uninstalling ezdocs"
+	@rm -f $(INSTALL_BIN_DIR)/ezdocs
+
 clean:
-	rm -rf $(OBJ_DIR) $(LIB_DIR) $(EXAMPLES_DIR)
+	rm -rf $(OBJ_DIR) $(LIB_DIR) $(EXAMPLES_DIR) $(EZDOCS_CONTENT_DIR)
