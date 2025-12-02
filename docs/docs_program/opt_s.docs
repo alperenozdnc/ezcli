@@ -18,13 +18,12 @@ building block of your program.
     you can use CLI_ALIASES(alias1, alias2, ...) to avoid manual casting
     and NULL-termination.
 
-    use CLI_NONOPT, CLI_DEFAULT_OPT, and CLI_COMMON_OPT inside CLI_ALIASES calls to create
-    nonopts, default opts and common opts. for those, 'desc' is not required. a default opt
-    triggers when the program is ran with no args.
+    use CLI_NONOPT, CLI_DEFAULT_OPT, CLI_COMMON_OPT, and CLI_POST_COMMON_OPT
+    inside CLI_ALIASES calls to create nonopts, default opts, common opts,
+    and post-common opts. for these 'special' options, 'desc' is not required.
+    a default opt triggers when the program is ran with no args.
 
-    note: nonopts and default opts should only have one alias. do not create multiple.
-
-    see 'ezdocs external' for what a 'nonopt' is.
+    see 'ezdocs special' for what these 'special' options are.
 
 'char *desc':
     a probably-short string describing your option's functionality.

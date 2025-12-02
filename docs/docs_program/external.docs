@@ -7,10 +7,7 @@ CLI_MODE_LAIDBACK -> false by default.
 enables laidback mode, which downgrades all syntax errors to a warning.
 
 CLI_ALLOW_NONOPT -> false by default.
-enables allowing of non-option tokens.
-these are tokens that are not recognized as
-options and are not arguments to any option.
-for example, '/home' is the nonopt for 'ls /home'.
+see 'ezdocs specials' for what this is.
 
 CLI_MODE_DEBUG -> false by default.
 enables debug mode, which prints useful debugging info about what option

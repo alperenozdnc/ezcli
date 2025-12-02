@@ -98,8 +98,8 @@ the combination of shareable state and custom functionality allows you to make
 almost any kind of cli you want. interactive, non-interactive, game, utility,
 etc.
 
-there are three special cases for names you can't take: `"NONOPT"`, `"DEFAULT"`, and `"COMMON_OPT"`.
-these live under the macros names respectively, `CLI_NONOPT`, `CLI_DEFAULT_OPT` and `CLI_COMMON_OPT`.
+there are four special cases for names you can't take: `"NONOPT"`, `"DEFAULT"`, `"COMMON_OPT"`, `"POST_COMMONOPT"`.
+these live under the macros names respectively, `CLI_NONOPT`, `CLI_DEFAULT_OPT`, `CLI_COMMON_OPT`, and `CLI_POST_COMMON_OPT`.
 
 any opt struct named these macros is now special options and will be used in
 contexts that require them.
@@ -117,6 +117,9 @@ and pointing it to `cli->help`). the help function is passed the cli struct and 
 setting the name to `CLI_COMMON_OPT` lets you create a common option that is
 run before any successfully parsed option. this can be useful for logging, debugging,
 reporting, special behaviour, etc.
+
+setting the name to `CLI_POST_COMMON_OPT` lets you create a post-common option that is
+run after any successfully parsed option. this can be useful for the same stuff.
 
 now, with all of this info, let's create a simple cli that has version `v1.0.0`,
 prints "hello, world" when being run with no input, and replaces the 'world'
