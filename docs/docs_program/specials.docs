@@ -1,0 +1,53 @@
+there are exactly four special options in ezcli:
+    a) non-option option (nonopt)
+    b) default option
+    c) common option
+    d) post-common option
+
+these are actually 'phony' options - in a sense that they don't actually
+have an alias, (although requiring their corresponding special alias
+to be able to be recognized in an 'opt_s' struct) - but these special 'options'
+are still passable as context-aware behaviour containers, so you can still
+loosely define them as options.
+
+note: setting more than a single alias (the intended ones) to any of these
+special 'options' will cause behaviour you don't necessarily want.
+
+a) non-option option
+
+    this is the behaviour that is executed when a token is not recognized as
+    any normal option and isn't passed as argument to any option.
+
+    for example, '/home' is the nonopt for 'ls /home'.
+                 './src' is the nonopt for 'grep -r "ezcli" ./src'.
+
+    for usage, set extern boolean 'CLI_ALLOW_NONOPT' to 'true'. if this flag
+    is set to true and no nonopts are found, ezcli will throw an error.
+
+    then, you should create an 'opt_s' struct that has 'CLI_NONOPT'
+    as the only item in its 'aliases' field.
+
+b) default option
+
+    this is the behaviour that is executed when your program receives no input
+    (argc = 1, argv = {cmd_name, NULL}). if not defined, ezcli will print the
+    default help option which is automatically generated.
+
+    for usage, you should create an 'opt_s' struct that has 'CLI_DEFAULT_OPT'
+    as the only item in its 'aliases' field.
+
+c) common option
+
+    this is the behaviour that is executed before every successfully parsed option.
+    this is useful for formatting, debugging, pretty printing, logging, etc.
+
+    for usage, you should create an 'opt_s' struct that has 'CLI_COMMON_OPT'
+    as the only item in its 'aliases' field.
+
+c) post-common option
+
+    this is the behaviour that is executed after every successfully parsed option.
+    this is useful for formatting, debugging, pretty printing, logging, etc.
+
+    for usage, you should create an 'opt_s' struct that has 'CLI_POST_COMMON_OPT'
+    as the only item in its 'aliases' field.
