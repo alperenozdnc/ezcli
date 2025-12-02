@@ -10,7 +10,7 @@ this is the general, intended reading path for a first-time user.
 ezcli/core/foundation:
     - ezdocs cli_s
     - ezdocs opt_s
-    - ezdocs special
+    - ezdocs specials
 
 ezcli/core/external:
     - ezdocs external
