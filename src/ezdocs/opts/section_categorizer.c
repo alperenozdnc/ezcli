@@ -49,17 +49,14 @@ ret_e _print_section_footer(void *ctx, CLI_IGNORE_TOK) {
 }
 
 void _section_categorizer_add(cli_s *cli) {
-    static char *aliases_header[] = CLI_ALIASES(CLI_COMMON_OPT);
-    static char *aliases_footer[] = CLI_ALIASES(CLI_POST_COMMON_OPT);
-
     opt_s section_header = {
-        .aliases = aliases_header,
+        .aliases = CLI_ALIASES(CLI_COMMON_OPT),
         .body = _print_section_header,
         .ctx = cli,
     };
 
     opt_s section_footer = {
-        .aliases = aliases_footer,
+        .aliases = CLI_ALIASES(CLI_POST_COMMON_OPT),
         .body = _print_section_footer,
         .ctx = cli,
     };

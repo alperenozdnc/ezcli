@@ -13,8 +13,10 @@ char **get_entries(char *path) {
     struct dirent *dir_entry;
     DIR *dir = opendir(path);
 
-    size_t entries_len = 0;
-    char **entries = malloc(sizeof(char *) * (entries_len + 1));
+    size_t len = 0;
+
+    // +1 for entry and +1 for NULL pointer
+    char **entries = malloc(sizeof(char *));
 
     if (!dir) {
         cliprint(CLI_ERROR, CLI_EMPTY_PREFIX, "ezdocs: couldn't open %s.",
@@ -32,12 +34,14 @@ char **get_entries(char *path) {
         if (match_str(ignore, dir_entry->d_name))
             continue;
 
-        entries_len++;
-        entries = realloc(entries, sizeof(char *) * (entries_len + 1));
-        entries[entries_len - 1] = strdup(dir_entry->d_name);
+        entries[len] = strdup(dir_entry->d_name);
+
+        // +1 for entry and +1 for NULL pointer
+        len++;
+        entries = realloc(entries, sizeof(char *) * (len + 1));
     }
 
-    entries[entries_len - 1] = NULL;
+    entries[len] = NULL;
 
     closedir(dir);
 

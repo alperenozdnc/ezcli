@@ -49,29 +49,22 @@ char *get_entry_description(char *path) {
 void _entry_opts_add(char *entries_path, char **entries, cli_s *cli) {
     int i = 0;
 
-    static opt_s template_entry = {.body = doc_body};
-
-    template_entry.ctx = cli;
-
     while (entries[i]) {
         char *entry_path = join_str(entries_path, entries[i]);
-
-        char **aliases = malloc(sizeof(char *) * 2);
 
         char *name = strip(entries[i], ".docs");
         char *desc = get_entry_description(entry_path);
 
-        opt_s entry = template_entry;
-
-        aliases[0] = name;
-        aliases[1] = NULL;
-
-        entry.desc = desc;
-        entry.aliases = aliases;
+        opt_s entry = {.body = doc_body,
+                       .aliases = CLI_ALIASES(name),
+                       .desc = desc,
+                       .ctx = cli};
 
         allocopt(cli, &entry);
 
         free(entry_path);
+        free(name);
+        free(desc);
 
         i++;
     }
