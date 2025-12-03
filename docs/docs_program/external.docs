@@ -1,3 +1,6 @@
+core externals/globals.
+DESCRIPTION_END
+
 extern bool CLI_MODE_LAIDBACK;
 extern bool CLI_ALLOW_NONOPT;
 extern bool CLI_MODE_DEBUG;

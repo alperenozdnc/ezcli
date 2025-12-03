@@ -1,3 +1,6 @@
+structuring projects using ezcli.
+DESCRIPTION_END
+
 this is information on how you should probably be structuring your project
 that uses ezcli as it progresses. obviously opinionated, but take a look at
 'src/examples/calc.c'. doesn't that code smell to you?

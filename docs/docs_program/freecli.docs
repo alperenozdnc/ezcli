@@ -1,3 +1,6 @@
+freecli() core function.
+DESCRIPTION_END
+
 void freecli(cli_s *cli);
 
 

@@ -1,3 +1,6 @@
+initcli() core function.
+DESCRIPTION_END
+
 void initcli(cli_s *cli, char *cmd, char *desc, char *usage, char *footer,
              opt_s **opts, char *help_aliases[]);
 

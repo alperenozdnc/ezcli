@@ -1,3 +1,6 @@
+cliprint() utility function.
+DESCRIPTION_END
+
 void cliprint(print_e type, char *prefix, char *fmt, ...);
 
 general colored printing utility that autoinserts newlines

@@ -1,3 +1,6 @@
+allocopt() utility function.
+DESCRIPTION_END
+
 void allocopt(cli_s *cli, const opt_s *opt_stack);
 
 allocates a stack-allocated `opt_s` struct to the 'cli->opts'

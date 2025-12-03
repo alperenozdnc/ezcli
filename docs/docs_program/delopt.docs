@@ -1,3 +1,6 @@
+delopt() utility function.
+DESCRIPTION_END
+
 void delopt(cli_s *cli, ...opts);
 
 deallocates a variable amount of `opt_s` structs from the 'cli->opts'

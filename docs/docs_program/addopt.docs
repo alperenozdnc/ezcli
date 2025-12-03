@@ -1,3 +1,6 @@
+addopt() utility function.
+DESCRIPTION_END
+
 void addopt(cli_s *cli, ...opts);
 
 allocates a variable amount of `opt_s` structs to the 'cli->opts'

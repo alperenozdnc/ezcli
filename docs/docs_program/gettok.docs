@@ -1,3 +1,6 @@
+gettok_*() utility function.
+DESCRIPTION_END
+
 char *gettok_prev(cli_s *cli);
 char *gettok_next(cli_s *cli);
 char *gettok_offset(cli_s *cli, int n);

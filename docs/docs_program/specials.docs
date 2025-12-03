@@ -1,3 +1,6 @@
+special option behaviours.
+DESCRIPTION_END
+
 there are exactly four special options in ezcli:
     a) non-option option (nonopt)
     b) default option

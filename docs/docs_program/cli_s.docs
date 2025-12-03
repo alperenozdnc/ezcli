@@ -1,3 +1,6 @@
+struct cli_s.
+DESCRIPTION_END
+
 typedef struct __cli_s {
     char *cmd;
     char *desc;
