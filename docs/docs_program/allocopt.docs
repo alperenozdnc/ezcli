@@ -3,26 +3,11 @@ DESCRIPTION_END
 
 void allocopt(cli_s *cli, const opt_s *opt_stack);
 
-allocates a stack-allocated `opt_s` struct to the 'cli->opts'
-dynamic array in a 'cli_s' struct using heap allocation.
+allocates a stack-allocated 'opt_s' struct to the 'cli->opts'
+dynamic array in a 'cli_s' struct using heap allocation. ezcli
+owns all opts passed to 'allocopt()'. your only responsibility is to:
+
+1) make sure 'ctx' and 'body' lives through the lifetime of your program.
+2) make sure you run 'freecli()' in your cleanup/die/termination implementation.
 
 see 'ezdocs cli_s' and 'ezdocs opt_s' for more details.
-
-
-note: allocopt() does not take ownership of data INSIDE 'opt_stack'. it only
-allocates POINTERS to that stack memory using heap. so all data in 'opt_stack'
-MUST live the entire program.
-
-then, why does allocopt() exist??
-    - because you can't run addopt() in a for loop, or using a static opt_s
-      for multiple different options. with allocopt, you can create a non-static,
-      template option and mutate for every different option, run allocopt() and you'll be fine.
-
-
-also, with allocopt() (and consequently addopt()):
-    - you can add commands based on config files,
-
-    - set different 'modes' to your program where certain options
-      are not accessible,
-
-    - and much more weird stuff.
