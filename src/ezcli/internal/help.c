@@ -19,14 +19,17 @@ void __print_header(cli_s *cli) {
     printf("%s\n\n", cli->desc);
 }
 
-void __print_option(char **aliases, char *desc) {
+void __print_option(char **aliases, char *desc, bool newline) {
+    if (newline)
+        printf("\n");
+
     printf(PADDING_LEFT);
     printaliases(aliases);
     printf(" -> %s", desc);
 }
 
 void __print_options(cli_s *cli, opt_s **opts) {
-    __print_option(cli->help_aliases, "prints this menu.\n");
+    __print_option(cli->help_aliases, "prints this menu.", false);
 
     for (size_t i = 0; i < cli->opts_len; i++) {
         opt_s *opt = opts[i];
@@ -34,10 +37,7 @@ void __print_options(cli_s *cli, opt_s **opts) {
         if (match_str(BLACKLIST, opt->aliases[0]))
             continue;
 
-        __print_option(opt->aliases, opt->desc);
-
-        if (i != cli->opts_len - 1)
-            printf("\n");
+        __print_option(opt->aliases, opt->desc, true);
     }
 }
 
