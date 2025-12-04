@@ -1,4 +1,4 @@
-## ezcli v0.5.1
+## ezcli v0.7.0
 
 ezcli is a cli library that doesn't have much content
 but has a lot of flexibility.
@@ -19,6 +19,7 @@ read [`features/documentation generation`](https://github.com/alperenozdnc/ezcli
 ### contributing
 
 i accept any kind of feedback as a contribution. here are some ways though;
+
 - opening an issue talking about something in (or not in) ezcli you don't like.
 - forking ezcli and opening a pull request.
 - tossing a star.

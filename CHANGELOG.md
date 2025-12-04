@@ -1,11 +1,41 @@
 # changelog
 
+## [v0.7.0](https://github.com/alperenozdnc/ezcli/releases/tag/v0.7.0) - 2025-12-04
+
+### add
+
+- `allocopt()` utility function for heap-allocation of options.
+- a lot more debugging prints if you enable `CLI_MODE_DEBUG`.
+- `make install-docs` and `make uninstall-docs` for installing and uninstalling
+  `ezdocs` to shell binaries.
+- `opt_s` structs now have an `allocated` field that is used in `delopt()` and
+  `freeopt()` to check stack/heap.
+- support for 'post-common options' - these are options that are run after every
+  successfully parsed option.
+- `ezdocs` now inserts separators if multiple subjects are asked for.
+- `specials` page in `ezdocs` explaining all special options.
+
+### modify
+
+- `src/examples/docs.c` is now named `ezdocs` and has its own subdirectory in `src/`.
+- `ezdocs` now dynamically creates options at runtime reading from `.docs` files in `docs/docs_program/*.docs`.
+- all development will now continue under `-O3` and `faddress=sanitize` to minimize/
+  destroy all undefined behaviour.
+- some general, non-behaviour changing refactors might have modified code.
+
+### delete
+
+- some general, non-behaviour changing refactors might have deleted redundant
+  code.
+
+---
+
 ## [v0.5.1](https://github.com/alperenozdnc/ezcli/releases/tag/v0.5.1) - 2025-11-30
 
 ### modify
 
 - removed an unintended `printf()` left in the common option handler that caused
-user-visible output.
+  user-visible output.
 
 ---
 
@@ -14,20 +44,20 @@ user-visible output.
 ### add
 
 - `gettok_*()` token peeking utilities.
-    - `gettok_prev()` for the previous token.
-    - `gettok_next()` for the next token.
-    - `gettok_offset()` for getting tokens relatively.
+  - `gettok_prev()` for the previous token.
+  - `gettok_next()` for the next token.
+  - `gettok_offset()` for getting tokens relatively.
 - an example calculator-ish program.
 - a header included in the public header of ezcli that reports its version.
 - all options passed to `initcli()` or `addopt()` are now validated for required fields.
 - `initcli()` validates the `cli_s` struct for required fields.
 - `program` program seen in `docs/EXAMPLE.md` added to `src/examples/program.c`.
 - a script in `scripts/examples.sh` that automatically creates aliases for all
-example programs.
+  example programs.
 - ezcli now documents itself using ezcli. code in `src/examples/docs.c`. content
-in `docs/docs_program/*.docs`.
+  in `docs/docs_program/*.docs`.
 - support for 'common options' - these are options that are run before every
-successfully parsed option.
+  successfully parsed option.
 
 ### delete
 
@@ -40,7 +70,7 @@ successfully parsed option.
 - `addopt()` and `delopt()` now accepts a variable amount of options.
 - `delopt()` skips entirely if option doesn't exist in `cli->opts`.
 - all possible code execution paths in `runcli()` have been optimized to `return`/`continue`
-as early as possible for better performance.
+  as early as possible for better performance.
 
 ---
 

@@ -5,8 +5,8 @@
  * documentation.
  *
  * author - Alperen Özdinç <alperen@ozdinc.org>
- * date - 11 Nov 2025
- * version - v0.5.1
+ * date - 04 Aug 2025
+ * version - v0.7.0
  */
 
 #pragma once
