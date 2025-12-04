@@ -1,6 +1,8 @@
 #include <ezcli/cli.h>
+#include <ezcli/external.h>
 #include <ezcli/freecli.h>
 #include <ezcli/opt.h>
+#include <ezcli/print.h>
 
 #include "assert.h"
 #include "blacklist.h"
@@ -10,6 +12,9 @@
 #include <string.h>
 
 void validate_opt(cli_s *cli, opt_s *opt) {
+    CLI_DEBUG_ONLY(
+        cliprint(CLI_HINT, "[ezcli] ", "validating opt %s", opt->aliases[0]));
+
     _assert_free(cli, opt->aliases && opt->aliases[0],
                  "an option must have at least one alias");
 
