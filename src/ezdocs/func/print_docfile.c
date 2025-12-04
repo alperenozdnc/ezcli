@@ -1,23 +1,20 @@
 #include <ezcli.h>
 
 #include "../main.h"
+#include "../utils/join_str.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 void print_docfile(char *docname) {
-    const char *HOME = getenv("HOME");
+    char *HOME = getenv("HOME");
 
-    size_t size = strlen(HOME) + strlen(LOCAL_EZCLI_DIR) + strlen(docname) +
-                  strlen(DOCS_FILE_EXT) + sizeof('\0');
+    char *dirname = join_str(HOME, LOCAL_EZCLI_DIR);
+    char *filename = join_str(docname, DOCS_FILE_EXT);
+    char *path = join_str(dirname, filename);
 
-    char *doc_file_path = malloc(size);
-
-    snprintf(doc_file_path, size, "%s%s%s%s", HOME, LOCAL_EZCLI_DIR, docname,
-             DOCS_FILE_EXT);
-
-    FILE *doc_file = fopen(doc_file_path, "r");
+    FILE *doc_file = fopen(path, "r");
 
     if (doc_file == NULL) {
         cliprint(CLI_ERROR, "ezdocs: ",
@@ -69,5 +66,7 @@ void print_docfile(char *docname) {
     }
 
     fclose(doc_file);
-    free(doc_file_path);
+    free(dirname);
+    free(filename);
+    free(path);
 }
