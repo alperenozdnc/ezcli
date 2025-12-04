@@ -20,11 +20,11 @@ char *gettok_next(cli_s *cli) {
 }
 
 char *gettok_offset(cli_s *cli, int n) {
-    if (n == CLI_TOK_FIRST) {
+    if (n == CLI_TOK_FIRST)
         return cli->argv[ARGV_BEGIN];
-    } else if (n == CLI_TOK_LAST) {
+
+    if (n == CLI_TOK_LAST)
         return cli->argv[ARGV_END];
-    }
 
     int k = cli->tok_idx + n;
 
