@@ -40,7 +40,7 @@ void __delopt(cli_s *cli, opt_s *opt_d) {
         if (!opt->allocated)
             continue;
 
-        free_heap_opt(opt_d);
+        free_heap_opt(opt);
     }
 
     new_opts[j] = NULL;
