@@ -4,6 +4,7 @@
 #include <ezcli/print.h>
 
 #include "../internal/check_alloc.h"
+#include "../internal/free_heap_opt.h"
 #include "../internal/match.h"
 #include "../internal/opts_size.h"
 
@@ -31,14 +32,15 @@ void __delopt(cli_s *cli, opt_s *opt_d) {
     for (size_t i = 0; i < cli->opts_len; i++) {
         opt_s *opt = cli->opts[i];
 
-        if (ot_match(opt_d, opt->aliases[0])) {
-            if (opt->allocated)
-                free(cli->opts[i]);
-
+        if (!ot_match(opt_d, opt->aliases[0])) {
+            new_opts[j++] = opt;
             continue;
         }
 
-        new_opts[j++] = opt;
+        if (!opt->allocated)
+            continue;
+
+        free_heap_opt(opt_d);
     }
 
     new_opts[j] = NULL;
