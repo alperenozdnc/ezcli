@@ -51,12 +51,12 @@ opt_s common_opt = {
 int main(int argc, char *argv[]) {
     cli_s cli;
     opt_s *opts[] = {&version_opt, &default_opt, &nonopt, &common_opt, NULL};
-    char *help_aliases[] = {"help", "--help", NULL};
 
     CLI_ALLOW_NONOPT = true;
 
     initcli(&cli, "program", "This program is an example on ezcli.",
-            "[option]/[name]", "And this is the footer.\n", opts, help_aliases);
+            "[option]/[name]", "And this is the footer.\n", opts,
+            CLI_ALIASES("help", "--help"));
 
     runcli(&cli, argc, argv);
 

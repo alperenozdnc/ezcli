@@ -156,7 +156,6 @@ int main(int argc, char *argv[]) {
     cli_s cli;
 
     opt_s *opts[] = {&nonopt, NULL};
-    char *help_aliases[] = {"help", "--help", NULL};
 
     CLI_ALLOW_NONOPT = true;
 
@@ -164,7 +163,7 @@ int main(int argc, char *argv[]) {
         &cli, "calc",
         "Mini calculator program to show off ezcli. (no order of operations)",
         "x {operand} y", "Check src/examples/calculator.c for source code.\n",
-        opts, help_aliases);
+        opts, CLI_ALIASES("help", "--help"));
 
     ctx_s ctx = {.cli = &cli, .sum = 0, .operation_mode = false};
 

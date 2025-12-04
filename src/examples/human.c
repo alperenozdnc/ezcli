@@ -89,7 +89,6 @@ int main(int argc, char *argv[]) {
     cli_s cli;
     opt_s *opts[] = {&eat,    &sleep,    &secret, &__secret,
                      &nonopt, &_default, NULL};
-    char *help_aliases[] = {"help", "--help", NULL};
 
     CLI_ALLOW_NONOPT = true;
     CLI_MODE_DEBUG = true;
@@ -98,7 +97,7 @@ int main(int argc, char *argv[]) {
             "[command] [args]",
             "For documentation: <https://github.com/alperenozdnc/ezcli>\nFor "
             "license: <https://www.gnu.org/licenses/gpl-3.0.en.html>\n",
-            opts, help_aliases);
+            opts, CLI_ALIASES("help", "--help"));
 
     addopt(&cli, &unwanted, &__unwanted);
     delopt(&cli, &__secret);
