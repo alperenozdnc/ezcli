@@ -4,6 +4,11 @@
 
 #include "section_categorizer.h"
 
+/*
+ * ---------
+ *  subject
+ * ---------
+ */
 ret_e _print_section_header(void *ctx, CLI_IGNORE_TOK) {
     cli_s *cli = ctx;
 
@@ -29,6 +34,10 @@ ret_e _print_section_header(void *ctx, CLI_IGNORE_TOK) {
     return RET_NORMAL;
 }
 
+/*
+ * ---------
+ * (as long as header bars)
+ */
 ret_e _print_section_footer(void *ctx, CLI_IGNORE_TOK) {
     cli_s *cli = ctx;
 
