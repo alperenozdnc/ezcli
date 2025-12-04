@@ -4,12 +4,10 @@
 
 #include "func/cleanup.h"
 #include "func/get_entries.h"
-
-#include "utils/join_str.h"
-
 #include "opts/entries.h"
 #include "opts/section_categorizer.h"
 #include "opts/version.h"
+#include "utils/join_str.h"
 
 #include <stdlib.h>
 
