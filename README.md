@@ -32,11 +32,5 @@ please, no more than 3 indentations.
 
 ### license
 
-i think all software should be free and open-source, and even if there needs
-to be a paywall, the user should know the code that is running on their device.
-pirating exists alongside proprietary code and open-source is generally safer
-to use because of the sheer amount of workforce that open-source projects have,
-so why would anybody want to make proprietary software if it's not malicious or
-behind a paywall?
-
-for those reasons, i use [`GPLv3`](https://www.gnu.org/licenses/gpl-3.0.en.html) in all of my projects. see [`ezcli/LICENSE`](https://github.com/alperenozdnc/ezcli/blob/master/LICENSE) for details.
+project licensed under [`GPLv3`](https://www.gnu.org/licenses/gpl-3.0.en.html).
+see [`ezcli/LICENSE`](https://github.com/alperenozdnc/ezcli/blob/master/LICENSE) for details.
