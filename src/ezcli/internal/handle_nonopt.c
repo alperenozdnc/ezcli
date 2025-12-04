@@ -37,6 +37,8 @@ bool handle_nonopt(cli_s *cli, char *tok, bool is_unrecog,
                  "you must define a nonopt after"
                  "setting CLI_ALLOW_NONOPT to true");
 
+    CLI_DEBUG_ONLY(cliprint(CLI_HINT, "[ezcli] ", "executing nonopt"));
+
     execopt(nonopt, tok);
 
     return true;

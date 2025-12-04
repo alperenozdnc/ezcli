@@ -1,4 +1,5 @@
 #include <ezcli/cli.h>
+#include <ezcli/external.h>
 #include <ezcli/opt.h>
 #include <ezcli/print.h>
 
@@ -50,6 +51,8 @@ void __print_footer(cli_s *cli) {
 }
 
 void help(cli_s *cli, opt_s **opts) {
+    CLI_DEBUG_ONLY(cliprint(CLI_HINT, "[ezcli] ", "executing help"));
+
     __print_header(cli);
     __print_options(cli, opts);
     __print_footer(cli);

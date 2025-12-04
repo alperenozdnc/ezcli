@@ -22,6 +22,8 @@ void initcli(cli_s *cli, char *cmd, char *desc, char *usage, char *footer,
     _assert(strlen(usage) > 0, "cli->usage can't be empty");
     _assert(help_aliases[0], "cli->help_aliases can't be empty");
 
+    CLI_DEBUG_ONLY(cliprint(CLI_HINT, "[ezcli] ", "initializing cli"));
+
     cli->cmd = cmd;
     cli->desc = desc;
     cli->usage = usage;
