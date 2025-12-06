@@ -81,6 +81,12 @@ parsing. these are printed in blue, and formatted as `opt -> input`.
 you can also add some debug-only functionality if you wrap your debug-only
 code with `CLI_DEBUG_ONLY()`.
 
+## recommendations
+
+`CLI_MODE_RECOMMEND` (`true` by default) enables recommendations for if an unrecognized
+option is seen while parsing. this doesn't print anything if no strong-enough matches
+are found.
+
 ## printing utility with colored output
 
 not every warning, error, and hint can be printed by ezcli because it can't

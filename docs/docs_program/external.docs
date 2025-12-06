@@ -15,3 +15,7 @@ see 'ezdocs specials' for what this is.
 CLI_MODE_DEBUG -> false by default.
 enables debug mode, which prints useful debugging info about what option
 is run with what input, when ezcli is validating, etc.
+
+CLI_MODE_RECOMMEND -> true by default.
+enables recommend mode, which prints recommendations (if any is found to be
+accurate enough) for unrecognized inputs.
