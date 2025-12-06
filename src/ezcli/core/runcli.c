@@ -101,9 +101,6 @@ void runcli(cli_s *cli, int argc, char *argv[]) {
 
         char *arg = opt->want_input ? tok_next : NULL;
 
-        CLI_DEBUG_ONLY(
-            cliprint(CLI_HINT, "ezcli: ", "%s -> %s", tok, arg ? arg : "NULL"));
-
         execopt(opt, arg);
 
         any_option_seen = true;
