@@ -6,4 +6,4 @@
 alias calc="./examples/calc"
 alias human="./examples/human"
 alias program="./examples/program"
-alias recursor="./examples/recurse"
+alias recursor="./examples/recursor"
