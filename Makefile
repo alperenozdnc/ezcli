@@ -39,11 +39,11 @@ $(EZDOCS_PATH): $(EZDOCS_OBJ)
 	@mkdir $(EZDOCS_CONTENT_DIR)
 	@cp -r $(EZDOCS_CONTENT_DIR_LOCAL)/* $(EZDOCS_CONTENT_DIR)/
 	@mkdir -p $(EZDOCS_DIR)
-	$(CC) $(CFLAGS) $^ -L$(LIB_DIR) -lezcli -o $@
+	$(CC) $(CFLAGS) -Iinclude/ezdocs $^ -L$(LIB_DIR) -lezcli -o $@
 
 $(OBJ_DIR)/ezdocs/%.o: $(SRC_DIR)/ezdocs/%.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -Iinclude/ezdocs -c $< -o $@
 
 examples: $(EXAMPLE_BIN)
 
