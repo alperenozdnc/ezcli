@@ -24,5 +24,4 @@ times out of a hundred, you'll need yes or no input in your cli program.
     if 'false', an error is thrown that states that the input is unknown.
 
 note: 'askbinary()' does not let the user do any retries if unrecognized input
-is received. you can implement your own looping functionality if you desire
-it.
+is received. you can implement your own looping functionality if you desire it.
