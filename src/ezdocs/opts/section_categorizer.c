@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "section_categorizer.h"
+#include <ezdocs/section_categorizer.h>
 
 /*
  * ---------

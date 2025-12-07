@@ -1,4 +1,4 @@
-#include "get_entries.h"
+#include <ezdocs/get_entries.h>
 
 #include "internal/match.h"
 

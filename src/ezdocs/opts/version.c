@@ -1,8 +1,7 @@
-
 #include <ezcli.h>
 #include <stdio.h>
 
-#include "version.h"
+#include <ezdocs/version.h>
 
 ret_e _version(CLI_IGNORE_ARGS) {
     printf("ezcli current version -> v%s\n", CLI_STRING_V);

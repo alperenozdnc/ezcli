@@ -1,4 +1,4 @@
-#include "strip.h"
+#include <ezdocs/strip.h>
 
 #include <stdlib.h>
 #include <string.h>

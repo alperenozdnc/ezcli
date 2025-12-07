@@ -1,13 +1,13 @@
 #include <ezcli.h>
 
-#include "main.h"
+#include <ezdocs/main.h>
 
-#include "func/cleanup.h"
-#include "func/get_entries.h"
-#include "opts/entries.h"
-#include "opts/section_categorizer.h"
-#include "opts/version.h"
-#include "utils/join_str.h"
+#include <ezdocs/cleanup.h>
+#include <ezdocs/entries.h>
+#include <ezdocs/get_entries.h>
+#include <ezdocs/join_str.h>
+#include <ezdocs/section_categorizer.h>
+#include <ezdocs/version.h>
 
 #include <stdlib.h>
 

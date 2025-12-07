@@ -1,6 +1,6 @@
 #include <ezcli.h>
 
-#include "../func/print_docfile.h"
+#include <ezdocs/print_docfile.h>
 
 ret_e doc_body(void *ctx, CLI_IGNORE_TOK) {
     cli_s *cli = ctx;

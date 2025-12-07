@@ -1,9 +1,9 @@
 #include <ezcli/cli.h>
 
-#include "../utils/doc_body.h"
-#include "../utils/join_str.h"
-#include "../utils/strip.h"
-#include "entries.h"
+#include <ezdocs/doc_body.h>
+#include <ezdocs/entries.h>
+#include <ezdocs/join_str.h>
+#include <ezdocs/strip.h>
 
 #include <stdio.h>
 #include <stdlib.h>
