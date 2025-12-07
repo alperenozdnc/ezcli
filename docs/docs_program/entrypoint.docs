@@ -28,6 +28,7 @@ ezcli/utilities:
     - ezdocs addopt 
     - ezdocs allocopt
     - ezdocs delopt
+    - ezdocs askbinary
     - ezdocs gettok
 
 ezcli/general:
