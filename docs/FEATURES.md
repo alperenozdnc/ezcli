@@ -99,6 +99,20 @@ take percent sign (%) formats.
 void cliprint(print_e type, char *prefix, char *fmt, ...);
 ```
 
+## taking yes/no inputs
+
+99 times out of 100, you will need to take a `[y/n]?` type of input in your
+command line interface program. so, why write the dreaded `scanf/fgets` and
+`if input == 'y' do stuff` implementations for the one thousandth time? you
+can use the `askbinary()` utility provided in `include/ezcli.h` to automatically
+validate your inputs, parse them, and throw an error/continue based on your
+preference.
+
+```c
+bool askbinary(char *msg, char **yes_aliases, char **no_aliases,
+               bool is_no_inclusive);
+```
+
 ## accessing tokens with ease
 
 for accessing the tokens that come before and after the currently parsed token,

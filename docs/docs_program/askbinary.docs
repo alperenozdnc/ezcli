@@ -1,0 +1,28 @@
+askbinary() utility function.
+DESCRIPTION_END
+
+bool askbinary(char *msg, char **yes_aliases, char **no_aliases,
+               bool is_no_inclusive);
+
+lets you ask binary-answered questions. usually yes or no. because ninety nine
+times out of a hundred, you'll need yes or no input in your cli program.
+
+
+'*msg':
+    the string that gets printed while waiting for input.
+    'askbinary()' does not append a newline to this message.
+
+'**yes_aliases', '**no_aliases'
+    'NULL'-terminated string arrays. no checking is done on these,
+    if you put duplicated strings across both arrays, or just flat-out
+    input empty arrays, ezcli will continue as if nothing is wrong.
+    the only time validation is done is for the creation of 'cli_s' (see ezdocs
+    cli_s) and 'opt_s' (see ezdocs opt_s) structs.
+
+'is_no_inclusive':
+    if 'true', counts every non-yes input as no.
+    if 'false', an error is thrown that states that the input is unknown.
+
+note: 'askbinary()' does not let the user do any retries if unrecognized input
+is received. you can implement your own looping functionality if you desire
+it.
