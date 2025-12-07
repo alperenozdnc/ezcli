@@ -3,10 +3,10 @@
 #include <ezcli/external.h>
 #include <ezcli/print.h>
 
-#include "../internal/check_alloc.h"
-#include "../internal/free_heap_opt.h"
-#include "../internal/match.h"
-#include "../internal/opts_size.h"
+#include "internal/check_alloc.h"
+#include "internal/free_heap_opt.h"
+#include "internal/match.h"
+#include "internal/opts_size.h"
 
 #include <stdarg.h>
 #include <stdio.h>

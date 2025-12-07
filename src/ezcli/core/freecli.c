@@ -3,7 +3,7 @@
 #include <ezcli/freecli.h>
 #include <ezcli/print.h>
 
-#include "../internal/free_heap_opt.h"
+#include "internal/free_heap_opt.h"
 
 #include <stdlib.h>
 

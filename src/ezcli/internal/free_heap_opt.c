@@ -1,7 +1,7 @@
 #include <ezcli/cli.h>
 #include <ezcli/opt.h>
 
-#include "free_heap_opt.h"
+#include "internal/free_heap_opt.h"
 
 #include <stdlib.h>
 

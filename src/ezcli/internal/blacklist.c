@@ -1,6 +1,6 @@
 #include <ezcli/opt.h>
 
-#include "blacklist.h"
+#include "internal/blacklist.h"
 
 #include <stddef.h>
 

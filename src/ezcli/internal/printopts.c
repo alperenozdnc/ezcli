@@ -1,6 +1,6 @@
-#include "printopts.h"
-#include "context.h"
-#include "printaliases.h"
+#include "internal/printopts.h"
+#include "internal/context.h"
+#include "internal/printaliases.h"
 
 #include <stdio.h>
 

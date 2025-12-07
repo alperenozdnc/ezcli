@@ -4,10 +4,10 @@
 #include <ezcli/opt.h>
 #include <ezcli/print.h>
 
-#include "assert.h"
-#include "blacklist.h"
-#include "match.h"
-#include "validate.h"
+#include "internal/assert.h"
+#include "internal/blacklist.h"
+#include "internal/match.h"
+#include "internal/validate.h"
 
 #include <string.h>
 

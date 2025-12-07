@@ -3,9 +3,9 @@
 #include <ezcli/opt.h>
 #include <ezcli/print.h>
 
-#include "context.h"
-#include "handle_post_common_opt.h"
-#include "match.h"
+#include "internal/context.h"
+#include "internal/handle_post_common_opt.h"
+#include "internal/match.h"
 
 void handle_post_common_opt(cli_s *cli, char *tok) {
     opt_s *opt_post_common = oa_match_first(cli, CLI_POST_COMMON_OPT);

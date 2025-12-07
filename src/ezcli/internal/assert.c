@@ -1,7 +1,7 @@
 #include <ezcli/freecli.h>
 #include <ezcli/print.h>
 
-#include "assert.h"
+#include "internal/assert.h"
 
 #include <stdbool.h>
 #include <stdlib.h>

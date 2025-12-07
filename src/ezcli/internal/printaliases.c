@@ -1,6 +1,6 @@
 #include <ezcli/print.h>
 
-#include "printaliases.h"
+#include "internal/printaliases.h"
 
 #include <stdio.h>
 

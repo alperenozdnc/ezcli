@@ -1,7 +1,7 @@
 #include <ezcli/cli.h>
 #include <ezcli/opt.h>
 
-#include "match.h"
+#include "internal/match.h"
 
 #include <stdbool.h>
 #include <stdlib.h>

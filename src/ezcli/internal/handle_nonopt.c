@@ -3,11 +3,11 @@
 #include <ezcli/opt.h>
 #include <ezcli/print.h>
 
-#include "assert.h"
-#include "execopt.h"
-#include "handle_nonopt.h"
-#include "match.h"
-#include "recommend.h"
+#include "internal/assert.h"
+#include "internal/execopt.h"
+#include "internal/handle_nonopt.h"
+#include "internal/match.h"
+#include "internal/recommend.h"
 
 #include <stdbool.h>
 #include <stdlib.h>

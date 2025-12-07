@@ -1,8 +1,8 @@
 #include <ezcli/cli.h>
 
-#include "blacklist.h"
-#include "match.h"
-#include "recommend.h"
+#include "internal/blacklist.h"
+#include "internal/match.h"
+#include "internal/recommend.h"
 
 #include <limits.h>
 #include <stddef.h>

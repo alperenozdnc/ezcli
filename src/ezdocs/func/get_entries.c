@@ -1,6 +1,6 @@
 #include "get_entries.h"
 
-#include "../../ezcli/internal/match.h"
+#include "internal/match.h"
 
 #include <dirent.h>
 #include <ezcli.h>

@@ -3,10 +3,10 @@
 #include <ezcli/opt.h>
 #include <ezcli/print.h>
 
-#include "blacklist.h"
-#include "help.h"
-#include "match.h"
-#include "printaliases.h"
+#include "internal/blacklist.h"
+#include "internal/help.h"
+#include "internal/match.h"
+#include "internal/printaliases.h"
 
 #include <stdio.h>
 #include <string.h>

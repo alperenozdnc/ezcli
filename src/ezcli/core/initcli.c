@@ -3,11 +3,11 @@
 #include <ezcli/initcli.h>
 #include <ezcli/print.h>
 
-#include "../internal/assert.h"
-#include "../internal/check_alloc.h"
-#include "../internal/help.h"
-#include "../internal/opts_size.h"
-#include "../internal/validate.h"
+#include "internal/assert.h"
+#include "internal/check_alloc.h"
+#include "internal/help.h"
+#include "internal/opts_size.h"
+#include "internal/validate.h"
 
 #include <stdio.h>
 #include <stdlib.h>

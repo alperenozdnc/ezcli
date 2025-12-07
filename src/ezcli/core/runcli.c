@@ -5,11 +5,11 @@
 #include <ezcli/print.h>
 #include <ezcli/runcli.h>
 
-#include "../internal/check_ret.h"
-#include "../internal/execopt.h"
-#include "../internal/handle_nonopt.h"
-#include "../internal/match.h"
-#include "../internal/panic.h"
+#include "internal/check_ret.h"
+#include "internal/execopt.h"
+#include "internal/handle_nonopt.h"
+#include "internal/match.h"
+#include "internal/panic.h"
 
 #include <stdbool.h>
 #include <string.h>

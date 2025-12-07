@@ -1,7 +1,7 @@
 #include <ezcli/freecli.h>
 #include <ezcli/print.h>
 
-#include "check_ret.h"
+#include "internal/check_ret.h"
 
 #include <stdlib.h>
 

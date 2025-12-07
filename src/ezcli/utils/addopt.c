@@ -1,8 +1,8 @@
 #include <ezcli/addopt.h>
 
-#include "../internal/check_alloc.h"
-#include "../internal/opts_size.h"
-#include "../internal/validate.h"
+#include "internal/check_alloc.h"
+#include "internal/opts_size.h"
+#include "internal/validate.h"
 
 #include <stdarg.h>
 #include <stdbool.h>

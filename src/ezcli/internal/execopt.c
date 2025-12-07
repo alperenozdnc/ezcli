@@ -4,10 +4,10 @@
 #include <ezcli/opt.h>
 #include <ezcli/print.h>
 
-#include "context.h"
-#include "execopt.h"
-#include "handle_common_opt.h"
-#include "handle_post_common_opt.h"
+#include "internal/context.h"
+#include "internal/execopt.h"
+#include "internal/handle_common_opt.h"
+#include "internal/handle_post_common_opt.h"
 
 void _execopt(cli_s *cli, opt_s *opt, char *tok) {
     void *ctx = _CLI_CONTEXT(opt);
