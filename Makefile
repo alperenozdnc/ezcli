@@ -9,6 +9,9 @@ EZDOCS_DIR = ezdocs
 EZDOCS_CONTENT_DIR = ~/.local/ezdocs
 EZDOCS_CONTENT_DIR_LOCAL = docs/docs_program
 
+AUTOCOMP_TEMPLATES_DIR = ~/.local/ezcli
+AUTOCOMP_TEMPLATES_DIR_LOCAL = autocomp
+
 LIB_NAME = libezcli.a
 LIB_PATH = $(LIB_DIR)/$(LIB_NAME)
 
@@ -33,6 +36,9 @@ $(LIB_PATH): $(LIB_OBJ)
 $(OBJ_DIR)/ezcli/%.o: $(SRC_DIR)/ezcli/%.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
+	@rm -rf $(AUTOCOMP_TEMPLATES_DIR)
+	@mkdir $(AUTOCOMP_TEMPLATES_DIR)
+	@cp $(AUTOCOMP_TEMPLATES_DIR_LOCAL)/* $(AUTOCOMP_TEMPLATES_DIR)/
 
 $(EZDOCS_PATH): $(EZDOCS_OBJ)
 	@rm -rf $(EZDOCS_CONTENT_DIR)
@@ -80,4 +86,4 @@ uninstall-docs:
 	@rm -f $(INSTALL_BIN_DIR)/ezdocs
 
 clean:
-	rm -rf $(OBJ_DIR) $(LIB_DIR) $(EXAMPLES_DIR) $(EZDOCS_DIR) $(EZDOCS_CONTENT_DIR) 
+	rm -rf $(OBJ_DIR) $(LIB_DIR) $(EXAMPLES_DIR) $(EZDOCS_DIR) $(EZDOCS_CONTENT_DIR) $(AUTOCOMP_TEMPLATES_DIR)
