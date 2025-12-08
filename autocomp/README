@@ -1,0 +1,4 @@
+here are the reserved symbols ezcli does text replacement for:
+
+^ -> the program's command name
+> -> newline seperated option alias list
