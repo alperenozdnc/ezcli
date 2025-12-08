@@ -1,4 +1,4 @@
-## ezcli v0.7.0
+## ezcli v1.0.0
 
 ezcli is a cli library that doesn't have much content
 but has a lot of flexibility.
@@ -9,6 +9,8 @@ your own behaviour, your own parsing style, because
 a cli library shouldn't police the programmer. the
 programmer should police the user for correct input,
 using the cli library.
+
+read [the documentation website](https://ezcli.ozdinc.org).
 
 read [`ezcli/docs/`](https://github.com/alperenozdnc/ezcli/tree/master/docs) for details.
 

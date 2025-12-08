@@ -1,5 +1,23 @@
 # changelog
 
+## [v1.0.0](https://github.com/alperenozdnc/ezcli/releases/tag/v1.0.0) - 2025-12-08 - initial stable release
+
+from now on, all public headers in `include/ezcli` will not break without a major version bump.
+
+### add
+
+- autocompletion generator for `bash` and `zsh`.
+- `askbinary()` utility for yes/no questions.
+- recommendation 'engine' that suggests options to the end user by string-distance ranking (if wrong input was given).
+- pseudo-recursion support (saw 1.2 billion iterations on my computer with `src/examples/recursor.c`
+- a documentation website - https://ezcli.ozdinc.org
+
+### modify
+
+- no more relative includes (ezdocs and internal headers now line in `include/`
+- added a `make debug` build mode to the `Makefile` and now `make all` doesn't have asan.
+- cleaned up documentation, optimized code, improved naming.
+
 ## [v0.7.0](https://github.com/alperenozdnc/ezcli/releases/tag/v0.7.0) - 2025-12-04
 
 ### add
