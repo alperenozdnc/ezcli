@@ -1,6 +1,7 @@
 #include <ezcli.h>
 
-#include <ezdocs/join_str.h>
+#include <internal/join_str.h>
+
 #include <ezdocs/main.h>
 
 #include <stdio.h>

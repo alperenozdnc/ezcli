@@ -1,9 +1,10 @@
 #include <ezcli.h>
 
+#include <internal/join_str.h>
+
 #include <ezdocs/cleanup.h>
 #include <ezdocs/entries.h>
 #include <ezdocs/get_entries.h>
-#include <ezdocs/join_str.h>
 #include <ezdocs/main.h>
 #include <ezdocs/section_categorizer.h>
 #include <ezdocs/version.h>

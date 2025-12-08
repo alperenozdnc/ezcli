@@ -1,8 +1,9 @@
 #include <ezcli/cli.h>
 
+#include <internal/join_str.h>
+
 #include <ezdocs/doc_body.h>
 #include <ezdocs/entries.h>
-#include <ezdocs/join_str.h>
 #include <ezdocs/strip.h>
 
 #include <stdio.h>
