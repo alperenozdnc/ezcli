@@ -1,5 +1,12 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -Iinclude -Iinclude/internal -fsanitize=address -g -O3
+CFLAGS_DEBUG = -Wall -Wextra -Iinclude -Iinclude/internal -fsanitize=address -g -O0
+CFLAGS = -Wall -Wextra -Werror -Iinclude -Iinclude/internal -O3
+
+BUILD ?= release
+
+ifeq ($(BUILD),debug)
+    CFLAGS := $(CFLAGS_DEBUG)
+endif
 
 SRC_DIR = src
 OBJ_DIR = obj
@@ -62,7 +69,7 @@ INCLUDE_DIR = $(PREFIX)/include
 INSTALL_LIB_DIR = $(PREFIX)/lib
 INSTALL_BIN_DIR = $(PREFIX)/bin
 
-.PHONY: install uninstall clean
+.PHONY: install uninstall clean debug
 
 install: $(LIB_PATH)
 	@echo "installing ezcli to $(PREFIX)."
@@ -87,3 +94,6 @@ uninstall-docs:
 
 clean:
 	rm -rf $(OBJ_DIR) $(LIB_DIR) $(EXAMPLES_DIR) $(EZDOCS_DIR) $(EZDOCS_CONTENT_DIR) $(AUTOCOMP_TEMPLATES_DIR)
+
+debug:
+	$(MAKE) BUILD=debug
