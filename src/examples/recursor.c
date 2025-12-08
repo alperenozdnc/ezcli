@@ -22,8 +22,14 @@ ret_e recurse_body(void *ctx, char *tok) {
     cli_s *cli = ctx;
     char *self = gettok_offset(cli, 0);
 
-    char *argv[] = {cli->cmd, self, tok, NULL};
-    int argc = 3;
+    static char *argv[4] = {};
+
+    argv[0] = cli->cmd;
+    argv[1] = self;
+    argv[2] = tok;
+    argv[3] = NULL;
+
+    static int argc = 3;
 
     int amount = atoi(tok);
 
