@@ -12,4 +12,12 @@
 
 #define EZCLI_DIR "/.local/ezcli/"
 
+/*
+ * generates autocompletions based on `cli->opts` and `cli->cmd` and puts them
+ * in the current working directory.
+ *
+ * `filename` should have no extensions.
+ * `bool bash` generates completions for bash if `true`.
+ * `bool zsh` generates completions for zsh if `true`.
+ */
 void genautocomp(cli_s *cli, char *filename, bool bash, bool zsh);
