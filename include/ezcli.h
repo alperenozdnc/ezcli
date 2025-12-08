@@ -5,7 +5,7 @@
  * documentation.
  *
  * author - Alperen Özdinç <alperen@ozdinc.org>
- * date - 04 Aug 2025
+ * date - 04 Dec 2025
  * version - v0.7.0
  */
 
