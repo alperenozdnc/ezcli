@@ -1,4 +1,4 @@
-#include <ezdocs/join_str.h>
+#include <internal/join_str.h>
 
 #include <stdio.h>
 #include <stdlib.h>
