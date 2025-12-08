@@ -1,0 +1,15 @@
+autocompletion generation.
+DESCRIPTION_END
+
+void genautocomp(cli_s *cli, char *filename, bool bash, bool zsh);
+
+generates autocompletions for both bash and zsh based on information filled in 
+'cli->cmd' and 'cli->opts'. this function outputs files in the current working
+directory as 'filename.bash' and 'filename.zsh'.
+
+
+'genautocomp()' generates from templates living in the directory 'autocomp/'.
+these templates are then copied to `~/.local/ezcli` during installation.
+
+these generated autocompletion scripts should either be manually sourced or
+put in a directory where your shell sources it for autoinitialization.
