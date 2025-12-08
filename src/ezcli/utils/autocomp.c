@@ -12,7 +12,15 @@
 #include <stdlib.h>
 #include <string.h>
 
-void _genautocomp(cli_s *cli, char *ref_filename, char *filename) {
+/*
+ * replaces special tokens in an autocompletion script template with
+ * `cli->cmd` and `cli->opts`, and creates an output file with the desired
+ * name.
+ *
+ * `^` -> `cli->cmd`
+ * `>` -> newline-separated `cli->opts`.
+ */
+void replacer(cli_s *cli, char *ref_filename, char *filename) {
     FILE *reference = fopen(ref_filename, "r");
     FILE *new = fopen(filename, "w");
 
@@ -78,34 +86,33 @@ void _genautocomp(cli_s *cli, char *ref_filename, char *filename) {
     fclose(new);
 }
 
+/*
+ * injects the output and template paths to the replacer by injecting the
+ * required arguments specified by input.
+ */
+void replacer_paths_injector(cli_s *cli, char *template_dir, char *filename,
+                             char *extension) {
+    char *file_path = join_str(filename, extension);
+    char *template_filename = join_str("template", extension);
+    char *template_path = join_str(template_dir, template_filename);
+
+    replacer(cli, template_path, file_path);
+
+    free(file_path);
+    free(template_filename);
+    free(template_path);
+}
+
 void genautocomp(cli_s *cli, char *filename, bool bash, bool zsh) {
     char *home = getenv("HOME");
 
     char *template_dir = join_str(home, EZCLI_DIR);
 
-    if (zsh) {
-        char *zsh_filename = join_str(filename, ".zsh");
-        char *template_filename = join_str("template", ".zsh");
-        char *template_path = join_str(template_dir, template_filename);
+    if (zsh)
+        replacer_paths_injector(cli, template_dir, filename, ".zsh");
 
-        _genautocomp(cli, template_path, zsh_filename);
-
-        free(zsh_filename);
-        free(template_filename);
-        free(template_path);
-    }
-
-    if (bash) {
-        char *bash_filename = join_str(filename, ".bash");
-        char *template_filename = join_str("template", ".bash");
-        char *template_path = join_str(template_dir, template_filename);
-
-        _genautocomp(cli, template_path, bash_filename);
-
-        free(bash_filename);
-        free(template_filename);
-        free(template_path);
-    }
+    if (bash)
+        replacer_paths_injector(cli, template_dir, filename, ".bash");
 
     free(template_dir);
 }
