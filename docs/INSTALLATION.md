@@ -9,7 +9,7 @@
 ## (2) now, it's time to build.
 
 ```bash
-% make all
+% make
 ```
 
 this command creates the static library in `lib/` and example
@@ -20,10 +20,10 @@ where `alias abc = ./examples/abc`.
 you can play around with examples to kind of get
 an idea on things you can create using ezcli.
 
-## (3) and finally, the reason you're reading this section. 
+## (3) and finally, the reason you're reading this section.
 
 ```bash
-% sudo make install
+% make install
 ```
 
 this command puts the static library file `libezcli.a` in
@@ -42,7 +42,7 @@ make clean
 removes all files the linker creates while compilation.
 
 ```bash
-% sudo make uninstall
+% make uninstall
 ```
 
 you can also do this if you decide you don't like it.
