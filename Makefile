@@ -13,8 +13,12 @@ OBJ_DIR = obj
 LIB_DIR = lib
 EXAMPLES_DIR = examples
 EZDOCS_DIR = ezdocs
+
 EZDOCS_CONTENT_DIR = ~/.local/ezdocs
 EZDOCS_CONTENT_DIR_LOCAL = docs/docs_program
+
+EZDOCS_COMPLETIONS_BASH = ~/.local/share/bash-completion/completions/ezdocs
+EZDOCS_COMPLETIONS_ZSH = ~/.local/share/zsh/site-functions/_ezdocs
 
 AUTOCOMP_TEMPLATES_DIR = ~/.local/ezcli
 AUTOCOMP_TEMPLATES_DIR_LOCAL = autocomp
@@ -72,28 +76,43 @@ INSTALL_BIN_DIR = $(PREFIX)/bin
 .PHONY: install uninstall clean debug
 
 install: $(LIB_PATH)
-	@echo "installing ezcli to $(PREFIX)."
-	@mkdir -p $(INCLUDE_DIR)/ezcli
-	@cp include/ezcli.h $(INCLUDE_DIR)/
-	@cp include/ezcli/*.h $(INCLUDE_DIR)/ezcli/
-	@cp $(LIB_PATH) $(INSTALL_LIB_DIR)/
+	@echo "ezcli: copying headers to $(INCLUDE_DIR)/."
+	@sudo mkdir -p $(INCLUDE_DIR)/ezcli
+	@sudo cp include/ezcli.h $(INCLUDE_DIR)/
+	@sudo cp include/ezcli/*.h $(INCLUDE_DIR)/ezcli/
+	@echo "ezcli: copying dynamic lib file to $(INSTALL_LIB_DIR)/."
+	@sudo cp $(LIB_PATH) $(INSTALL_LIB_DIR)/
+	@echo "ezcli: hello."
+	@echo "ezcli: i'd suggest you to run 'make install-docs' and run 'ezdocs' before usage."
 
 uninstall:
-	@echo "uninstalling ezcli."
-	@rm -f $(INCLUDE_DIR)/ezcli.h
-	@rm -rf $(INCLUDE_DIR)/ezcli
-	@rm -f $(INSTALL_LIB_DIR)/$(LIB_NAME)
+	@echo "ezcli: farewell."
+	@echo
+
+	@sudo rm -f $(INCLUDE_DIR)/ezcli.h
+	@sudo rm -rf $(INCLUDE_DIR)/ezcli
+	@sudo rm -f $(INSTALL_LIB_DIR)/$(LIB_NAME)
 
 install-docs: $(EZDOCS_PATH)
-	@echo "installing ezdocs to $(PREFIX)."
-	@cp $(EZDOCS_PATH) $(INSTALL_BIN_DIR)/
+	@echo "ezcli: installing ezdocs to $(PREFIX)."
+	@sudo cp $(EZDOCS_PATH) $(INSTALL_BIN_DIR)/
+	@sudo -E $(EZDOCS_PATH) autocompletions
 
 uninstall-docs:
-	@echo "uninstalling ezdocs"
-	@rm -f $(INSTALL_BIN_DIR)/ezdocs
+	@echo "ezcli: uninstalling ezdocs."
+	@sudo rm -f $(INSTALL_BIN_DIR)/ezdocs
+	@echo "ezcli: uninstalling ezdocs autocompletions."
+	@sudo rm -f $(EZDOCS_COMPLETIONS_BASH)
+	@sudo rm -f $(EZDOCS_COMPLETIONS_ZSH)
 
 clean:
-	rm -rf $(OBJ_DIR) $(LIB_DIR) $(EXAMPLES_DIR) $(EZDOCS_DIR) $(EZDOCS_CONTENT_DIR) $(AUTOCOMP_TEMPLATES_DIR)
+	@echo "ezcli: removing all makefile-created dependencies."
+
+	@rm -rf $(OBJ_DIR) $(LIB_DIR) $(EXAMPLES_DIR) $(EZDOCS_DIR) \
+		   $(EZDOCS_CONTENT_DIR) $(AUTOCOMP_TEMPLATES_DIR) \
+		   $(EZDOCS_COMPLETIONS_BASH) $(EZDOCS_COMPLETIONS_ZSH)
 
 debug:
+	@echo "ezcli: building for debugging."
 	$(MAKE) BUILD=debug
+	@echo "ezcli: done."
