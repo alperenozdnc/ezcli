@@ -31,3 +31,8 @@ opt_s *oa_match_first(cli_s *cli, char *alias);
  * checks if a string exists at least once inside of an array.
  */
 bool match_str(char **arr, char *str);
+
+/*
+ * checks if a string `*str` contains an inner string `*inner`.
+ */
+bool match_str_contains(char *str, char *inner);
