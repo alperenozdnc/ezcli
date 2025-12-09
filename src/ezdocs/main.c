@@ -21,13 +21,12 @@ int main(int argc, char *argv[]) {
             "for source code, visit <https://github.com/alperenozdnc/ezcli>\n",
             (opt_s *[]){NULL}, CLI_ALIASES("help", "--help", "-h"));
 
-    _section_categorizer_add(&cli);
-    _version_add(&cli);
-
     char *HOME = getenv("HOME");
     char *entries_path = join_str(HOME, LOCAL_EZCLI_DIR);
     char **entries = get_entries(entries_path);
 
+    _section_categorizer_add(&cli);
+    _version_add(&cli);
     _entry_opts_add(entries_path, entries, &cli);
 
     runcli(&cli, argc, argv);
