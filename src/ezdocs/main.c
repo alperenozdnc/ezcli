@@ -2,6 +2,7 @@
 
 #include <internal/join_str.h>
 
+#include <ezdocs/autocompletions.h>
 #include <ezdocs/cleanup.h>
 #include <ezdocs/entries.h>
 #include <ezdocs/get_entries.h>
@@ -28,6 +29,7 @@ int main(int argc, char *argv[]) {
     _section_categorizer_add(&cli);
     _version_add(&cli);
     _entry_opts_add(entries_path, entries, &cli);
+    _autocompletions_add(&cli);
 
     runcli(&cli, argc, argv);
 
