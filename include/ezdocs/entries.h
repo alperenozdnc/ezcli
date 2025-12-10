@@ -3,6 +3,6 @@
 #include <ezcli.h>
 
 /*
- * adds all entries dynamically in `docs/docs_program`.
+ * adds all entries dynamically in `ezdocs/content`.
  */
 void _entry_opts_add(char *entries_path, char **entries, cli_s *cli);
