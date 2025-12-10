@@ -3,7 +3,7 @@
 ## this library documents itself
 
 yes, you read that right. there a program called `ezdocs` that uses ezcli to
-generate documentation about ezcli. build ezcli and ezdocs with `make`, install
+generate documentation about ezcli. build ezcli and ezdocs with `make all`, install
 ezdocs as a binary with `make install-docs` and run `ezdocs help` to get started.
 
 ## options are context-aware behaviour containers
