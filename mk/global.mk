@@ -59,7 +59,7 @@ AUTOCOMP_TEMPLATES_DIR       = ~/.local/ezcli
 AUTOCOMP_TEMPLATES_DIR_LOCAL = autocomp
 
 EZDOCS_CONTENT_DIR       = ~/.local/ezdocs
-EZDOCS_CONTENT_DIR_LOCAL = docs/docs_program
+EZDOCS_CONTENT_DIR_LOCAL = ezdocs/content
 EZDOCS_COMPLETIONS_BASH  = ~/.local/share/bash-completion/completions/ezdocs
 EZDOCS_COMPLETIONS_ZSH   = ~/.local/share/zsh/site-functions/_ezdocs
 
