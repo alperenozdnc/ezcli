@@ -1,6 +1,6 @@
 #include <ezcli.h>
 
-#include <internal/join_str.h>
+#include "internal/join_str.h"
 
 #include <ezdocs/autocompletions.h>
 #include <ezdocs/cleanup.h>
