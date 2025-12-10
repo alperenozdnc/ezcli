@@ -1,4 +1,4 @@
 don't read these raw. go to the root of your project,
-run "make", "make install-docs" and run "ezdocs".
+run "make all", "make install-docs" and run "ezdocs".
 
 yes, ezcli uses ezcli to document ezcli. weird idea, right?

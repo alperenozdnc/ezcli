@@ -246,7 +246,7 @@ delopt(&cli, &version_opt, ...);
 ```
 
 now, when compiling and running this,
-we get (i sourced `./scripts/examples.sh` from project root):
+we get (i sourced `./tools/loadexamples.sh` from project root):
 
 ```
 % program
