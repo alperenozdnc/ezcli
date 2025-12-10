@@ -187,7 +187,7 @@ clean:
 #------------------------------------------------------
 
 debug:
-	$(call banner,"debug build (asan)")
+	$(call banner,"build/debug")
 	@$(MAKE) BUILD=debug
 	$(call ok,"debug done")
-
+	@echo
