@@ -10,8 +10,7 @@ include mk/install.mk
 # build root
 #------------------------------------------------------
 
-all: $(LIB_PATH) examples $(EZDOCS_PATH)
-
+all: $(LIB_PATH) $(EZDOCS_PATH) examples 
 
 #------------------------------------------------------
 # clean
@@ -30,6 +29,6 @@ clean:
 
 debug:
 	$(call banner,"build/debug")
-	@$(MAKE) BUILD=debug
+	@$(MAKE) all BUILD=debug
 	$(call ok,"debug done")
 	@echo
