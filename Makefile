@@ -10,7 +10,7 @@ include mk/install.mk
 # build root
 #------------------------------------------------------
 
-all: $(LIB_PATH) $(EZDOCS_PATH) examples 
+all: $(LIB_PATH) $(EZDOCS_BIN) examples
 
 #------------------------------------------------------
 # clean
@@ -18,7 +18,7 @@ all: $(LIB_PATH) $(EZDOCS_PATH) examples
 
 clean:
 	$(call banner,"cleaning")
-	@rm -rf $(OBJ_DIR) $(LIB_DIR) $(EXAMPLES_DIR) $(EZDOCS_DIR) \
+	@rm -rf $(OBJ_DIR) $(LIB_DIR) $(BUILD_DIR) \
 		   $(EZDOCS_CONTENT_DIR) $(AUTOCOMP_TEMPLATES_DIR) \
 		   $(EZDOCS_COMPLETIONS_BASH) $(EZDOCS_COMPLETIONS_ZSH)
 	$(call ok,"clean")
@@ -32,3 +32,4 @@ debug:
 	@$(MAKE) all BUILD=debug
 	$(call ok,"debug done")
 	@echo
+

@@ -33,11 +33,12 @@ endef
 #------------------------------------------------------
 
 CC = gcc
-CFLAGS_DEBUG = -Wall -Wextra -Iinclude -Iinclude/internal -fsanitize=address -g -O0
-CFLAGS =      -Wall -Wextra -Werror -Iinclude -Iinclude/internal -O3
+
+# include all public + internal + ezdocs headers
+CFLAGS_DEBUG = -Wall -Wextra -Iinclude -Iinclude/internal -Iinclude/ezdocs -fsanitize=address -g -O0
+CFLAGS       = -Wall -Wextra -Werror -Iinclude -Iinclude/internal -Iinclude/ezdocs -O3
 
 BUILD ?= release
-
 ifeq ($(BUILD),debug)
     CFLAGS := $(CFLAGS_DEBUG)
 endif
@@ -46,34 +47,40 @@ endif
 # directories / paths
 #------------------------------------------------------
 
-SRC_DIR = src
-OBJ_DIR = obj
+OBJ_DIR   = obj
+BUILD_DIR = build
 
 EZCLI_WORLD       = /usr/local
 INCLUDE_DIR       = $(EZCLI_WORLD)/include
 INSTALL_LIB_DIR   = $(EZCLI_WORLD)/lib
 INSTALL_BIN_DIR   = $(EZCLI_WORLD)/bin
 
-EXAMPLES_DIR      = examples
-EXAMPLE_SRC       := $(shell find $(SRC_DIR)/examples -name '*.c')
-EXAMPLE_BIN       := $(EXAMPLE_SRC:$(SRC_DIR)/examples/%.c=$(EXAMPLES_DIR)/%)
-
+# autocompletion templates (for ezcli)
 AUTOCOMP_TEMPLATES_DIR       = ~/.local/ezcli
 AUTOCOMP_TEMPLATES_DIR_LOCAL = autocomp
 
-LIB_DIR  = lib
-LIB_NAME = libezcli.a
-LIB_PATH = $(LIB_DIR)/$(LIB_NAME)
-
-LIB_SRC := $(shell find $(SRC_DIR)/ezcli -name '*.c')
-LIB_OBJ := $(LIB_SRC:$(SRC_DIR)/ezcli/%.c=$(OBJ_DIR)/ezcli/%.o)
-
-EZDOCS_NAME          = ezdocs
-EZDOCS_DIR           = ezdocs
-EZDOCS_PATH          = $(EZDOCS_DIR)/$(EZDOCS_NAME)
-EZDOCS_SRC           := $(shell find $(SRC_DIR)/ezdocs -name '*.c')
-EZDOCS_OBJ           := $(EZDOCS_SRC:$(SRC_DIR)/ezdocs/%.c=$(OBJ_DIR)/ezdocs/%.o)
-EZDOCS_CONTENT_DIR   = ~/.local/ezdocs
+# ezdocs content + completions
+EZDOCS_CONTENT_DIR       = ~/.local/ezdocs
 EZDOCS_CONTENT_DIR_LOCAL = docs/docs_program
-EZDOCS_COMPLETIONS_BASH = ~/.local/share/bash-completion/completions/ezdocs
-EZDOCS_COMPLETIONS_ZSH  = ~/.local/share/zsh/site-functions/_ezdocs
+EZDOCS_COMPLETIONS_BASH  = ~/.local/share/bash-completion/completions/ezdocs
+EZDOCS_COMPLETIONS_ZSH   = ~/.local/share/zsh/site-functions/_ezdocs
+
+#------------------------------------------------------
+# generic object rule (mirrors source tree under obj/)
+#------------------------------------------------------
+
+# ezcli object files
+$(OBJ_DIR)/ezcli/%.o: ezcli/%.c
+	@mkdir -p $(dir $@)
+	$(call step,$(BLUE)[cc]$(RESET) $< → $@)
+	@$(CC) $(CFLAGS) -c $< -o $@
+	# autocomp regeneration
+	@rm -rf $(AUTOCOMP_TEMPLATES_DIR)
+	@mkdir -p $(AUTOCOMP_TEMPLATES_DIR)
+	@cp $(AUTOCOMP_TEMPLATES_DIR_LOCAL)/* $(AUTOCOMP_TEMPLATES_DIR)/
+
+# ezdocs object files
+$(OBJ_DIR)/ezdocs/%.o: ezdocs/%.c
+	@mkdir -p $(dir $@)
+	$(call step,$(BLUE)[cc ezdocs]$(RESET) $< → $@)
+	@$(CC) $(CFLAGS) -c $< -o $@
