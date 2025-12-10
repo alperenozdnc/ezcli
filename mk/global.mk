@@ -55,21 +55,14 @@ INCLUDE_DIR       = $(EZCLI_WORLD)/include
 INSTALL_LIB_DIR   = $(EZCLI_WORLD)/lib
 INSTALL_BIN_DIR   = $(EZCLI_WORLD)/bin
 
-# autocompletion templates (for ezcli)
 AUTOCOMP_TEMPLATES_DIR       = ~/.local/ezcli
 AUTOCOMP_TEMPLATES_DIR_LOCAL = autocomp
 
-# ezdocs content + completions
 EZDOCS_CONTENT_DIR       = ~/.local/ezdocs
 EZDOCS_CONTENT_DIR_LOCAL = docs/docs_program
 EZDOCS_COMPLETIONS_BASH  = ~/.local/share/bash-completion/completions/ezdocs
 EZDOCS_COMPLETIONS_ZSH   = ~/.local/share/zsh/site-functions/_ezdocs
 
-#------------------------------------------------------
-# generic object rule (mirrors source tree under obj/)
-#------------------------------------------------------
-
-# ezcli object files
 $(OBJ_DIR)/ezcli/%.o: ezcli/%.c
 	@mkdir -p $(dir $@)
 	$(call step,$(BLUE)[cc]$(RESET) $< → $@)
@@ -79,7 +72,6 @@ $(OBJ_DIR)/ezcli/%.o: ezcli/%.c
 	@mkdir -p $(AUTOCOMP_TEMPLATES_DIR)
 	@cp $(AUTOCOMP_TEMPLATES_DIR_LOCAL)/* $(AUTOCOMP_TEMPLATES_DIR)/
 
-# ezdocs object files
 $(OBJ_DIR)/ezdocs/%.o: ezdocs/%.c
 	@mkdir -p $(dir $@)
 	$(call step,$(BLUE)[cc ezdocs]$(RESET) $< → $@)
