@@ -67,7 +67,6 @@ $(OBJ_DIR)/ezcli/%.o: ezcli/%.c
 	@mkdir -p $(dir $@)
 	$(call step,$(BLUE)[cc]$(RESET) $< → $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
-	# autocomp regeneration
 	@rm -rf $(AUTOCOMP_TEMPLATES_DIR)
 	@mkdir -p $(AUTOCOMP_TEMPLATES_DIR)
 	@cp $(AUTOCOMP_TEMPLATES_DIR_LOCAL)/* $(AUTOCOMP_TEMPLATES_DIR)/
