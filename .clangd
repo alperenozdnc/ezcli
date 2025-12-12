@@ -1,0 +1,18 @@
+CompileFlags:
+  Add:
+    - -Wall
+    - -Wextra
+    - -Werror
+---
+If:
+  PathMatch: ezcli/platform/embedded\.c
+CompileFlags:
+  Add:
+    - -DCLI_EMBEDDED
+
+---
+If:
+  PathMatch: ezcli/platform/linux\.c
+CompileFlags:
+  Remove:
+    - -DCLI_EMBEDDED
