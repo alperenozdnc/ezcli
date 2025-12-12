@@ -1,5 +1,3 @@
-#include <ezcli/embedded.h>
-
 #include <ezcli.h>
 
 // you obviously can't use internal headers on a normal project
@@ -15,7 +13,8 @@
 #define FUNCTIONS_SIZE(n) sizeof(func_s *) * (n + 1)
 #define BUF_SIZE(n) sizeof(char) * (n + 1)
 
-char *KEYWORDS[] = {"func", "end", "print", "exec", "def", "+", "=", NULL};
+char *KEYWORDS[] = {"func",      "end",       "print", "exec", "def",
+                    "increment", "decrement", "=",     NULL};
 
 typedef struct {
     int argc;
@@ -525,11 +524,6 @@ int main(int argc, char *argv[]) {
     minilang lang = {};
     interpreter_state_s state = init_interpreter_state();
 
-    initcli(&cli, "minilang",
-            "a very minimal 'programming language' written in ezcli",
-            "[operation] [value]", "code present in src/examples/minilang.c\n",
-            (opt_s *[]){NULL}, CLI_ALIASES("help", "--help"));
-
     lang.cli = &cli;
     lang.state = &state;
 
@@ -591,13 +585,17 @@ int main(int argc, char *argv[]) {
                                .body = _keyword_decrement,
                                .ctx = &state};
 
-    addopt(&cli, &init, &placeholder_default, &keyword_func, &keyword_end,
-           &keyword_exec, &keyword_print, &keyword_def, &keyword_equals,
-           &keyword_increment, &keyword_decrement);
+    initcli(&cli, "minilang",
+            "a very minimal 'programming language' written in ezcli",
+            "[operation] [value]", "code present in src/examples/minilang.c\n",
+            (opt_s *[]){&init, &placeholder_default, &keyword_func,
+                        &keyword_end, &keyword_exec, &keyword_print,
+                        &keyword_def, &keyword_equals, &keyword_increment,
+                        &keyword_decrement, NULL},
+            CLI_ALIASES("help", "--help"));
 
     runcli(&cli, argc, argv);
 
-    freecli(&cli);
     free_interpreter_state(&state);
 
     return 0;
