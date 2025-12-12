@@ -1,6 +1,8 @@
+#include <ezcli/embedded.h>
+
 #include <ezcli.h>
 
-#include <internal/match.h>
+#include "internal/match.h"
 
 #include <stdio.h>
 #include <stdlib.h>
