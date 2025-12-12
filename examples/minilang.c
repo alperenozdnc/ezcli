@@ -1,4 +1,3 @@
-#include "ezcli/print.h"
 #include <ezcli.h>
 
 #include <internal/match.h>
