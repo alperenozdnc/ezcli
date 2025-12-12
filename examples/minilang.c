@@ -2,6 +2,8 @@
 
 #include <ezcli.h>
 
+// you obviously can't use internal headers on a normal project
+// but since this is an example, i absolutely can and i will
 #include "internal/match.h"
 
 #include <stdio.h>
