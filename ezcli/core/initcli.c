@@ -20,7 +20,9 @@ void initcli(cli_s *cli, char *cmd, char *desc, char *usage, char *footer,
     _assert(c_strlen(usage) > 0, "cli->usage can't be empty");
 
 #ifndef CLI_EMBEDDED
+
     _assert(help_aliases[0], "cli->help_aliases can't be empty");
+
 #endif // CLI_EMBEDDED
 
     CLI_DEBUG_ONLY(cliprint(CLI_HINT, "[ezcli] ", "initializing cli"));
@@ -36,11 +38,16 @@ void initcli(cli_s *cli, char *cmd, char *desc, char *usage, char *footer,
     cli->help = help;
 
 #ifndef CLI_EMBEDDED
+
     cli->help_aliases = help_aliases;
+
 #else
-    static char **DISABLE_HELP = {"_____", NULL};
+
+    (void)help_aliases;
+    static char *DISABLE_HELP[] = {"_____", NULL};
 
     cli->help_aliases = DISABLE_HELP;
+
 #endif // CLI_EMBEDDED
 
     bool calc_len = true;
@@ -53,10 +60,10 @@ void initcli(cli_s *cli, char *cmd, char *desc, char *usage, char *footer,
     }
 
 #ifdef CLI_EMBEDDED
+
     cli->opts = opts;
 
-    return;
-#endif /* ifdef CLI_EMBEDDED */
+#else
 
     cli->opts = c_malloc(OPTS_SIZE(cli->opts_len));
 
@@ -71,4 +78,6 @@ void initcli(cli_s *cli, char *cmd, char *desc, char *usage, char *footer,
     }
 
     cli->opts[cli->opts_len] = NULL;
+
+#endif // CLI_EMBEDDED
 }
