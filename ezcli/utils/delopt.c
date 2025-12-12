@@ -1,6 +1,9 @@
+#include <ezcli/platform.h>
+
 #include <ezcli/cli.h>
 #include <ezcli/delopt.h>
 #include <ezcli/external.h>
+#include <ezcli/platform.h>
 #include <ezcli/print.h>
 
 #include "internal/check_alloc.h"
@@ -9,9 +12,6 @@
 #include "internal/opts_size.h"
 
 #include <stdarg.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
 void __delopt(cli_s *cli, opt_s *opt_d) {
     if (!ot_match_any(cli, opt_d->aliases[0])) {
@@ -24,7 +24,7 @@ void __delopt(cli_s *cli, opt_s *opt_d) {
     }
 
     size_t new_len = cli->opts_len - 1;
-    opt_s **new_opts = malloc(OPTS_SIZE(new_len));
+    opt_s **new_opts = c_malloc(OPTS_SIZE(new_len));
     CHECK_ALLOC(new_opts);
 
     int j = 0;
@@ -46,7 +46,7 @@ void __delopt(cli_s *cli, opt_s *opt_d) {
     new_opts[j] = NULL;
 
     int k = 0;
-    cli->opts = realloc(cli->opts, OPTS_SIZE(new_len));
+    cli->opts = c_realloc(cli->opts, OPTS_SIZE(new_len));
     CHECK_ALLOC(cli->opts);
 
     while (new_opts[k]) {
@@ -58,7 +58,7 @@ void __delopt(cli_s *cli, opt_s *opt_d) {
     cli->opts[k] = NULL;
     cli->opts_len--;
 
-    free(new_opts);
+    c_free(new_opts);
 }
 
 void _delopt(cli_s *cli, ...) {

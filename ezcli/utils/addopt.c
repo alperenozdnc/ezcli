@@ -1,3 +1,5 @@
+#include <ezcli/platform.h>
+
 #include <ezcli/addopt.h>
 
 #include "internal/check_alloc.h"
@@ -7,14 +9,13 @@
 #include <stdarg.h>
 #include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
 void __addopt(cli_s *cli, opt_s *opt_a) {
     validate_opt(cli, opt_a);
 
     size_t new_len = cli->opts_len + 1;
-    opt_s **new_opts = malloc(OPTS_SIZE(new_len));
+    opt_s **new_opts = c_malloc(OPTS_SIZE(new_len));
 
     CHECK_ALLOC(new_opts);
 
@@ -27,11 +28,11 @@ void __addopt(cli_s *cli, opt_s *opt_a) {
     new_opts[new_len - 1] = opt_a;
     new_opts[new_len] = NULL;
 
-    cli->opts = realloc(cli->opts, OPTS_SIZE(new_len));
+    cli->opts = c_realloc(cli->opts, OPTS_SIZE(new_len));
     CHECK_ALLOC(cli->opts);
 
     memcpy(cli->opts, new_opts, OPTS_SIZE(new_len));
-    free(new_opts);
+    c_free(new_opts);
 
     cli->opts_len++;
 }

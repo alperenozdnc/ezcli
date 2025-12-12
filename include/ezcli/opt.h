@@ -2,6 +2,20 @@
 
 #include <stdbool.h>
 
+#define CLI_NONOPT "NONOPT"
+#define CLI_DEFAULT_OPT "DEFAULT"
+#define CLI_COMMON_OPT "COMMONOPT"
+#define CLI_POST_COMMON_OPT "POST_COMMONOPT"
+
+#define CLI_IGNORE_TOK __attribute((unused)) char *tok
+#define CLI_IGNORE_CTX __attribute((unused)) void *ctx
+#define CLI_IGNORE_ARGS CLI_IGNORE_CTX, CLI_IGNORE_TOK
+
+#define CLI_ALIASES(...)                                                       \
+    (char *[]) {                                                               \
+        __VA_ARGS__, NULL                                                      \
+    }
+
 /*
  * keeps track of the return type of an option.
  *
@@ -10,22 +24,6 @@
  * `RET_FAIL` -> returns -1, prints as an error, exits.
  */
 typedef enum { RET_NORMAL, RET_WARN, RET_FAIL } ret_e;
-
-#define CLI_NONOPT "NONOPT"
-#define CLI_DEFAULT_OPT "DEFAULT"
-#define CLI_COMMON_OPT "COMMONOPT"
-#define CLI_POST_COMMON_OPT "POST_COMMONOPT"
-
-#define CLI_IGNORE_ARGS                                                        \
-    __attribute((unused)) void *ctx, __attribute((unused)) char *tok
-
-#define CLI_IGNORE_TOK __attribute((unused)) char *tok
-#define CLI_IGNORE_CTX __attribute((unused)) void *ctx
-
-#define CLI_ALIASES(...)                                                       \
-    (char *[]) {                                                               \
-        __VA_ARGS__, NULL                                                      \
-    }
 
 /*
  * keeps the information about an option.

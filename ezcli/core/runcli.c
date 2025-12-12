@@ -1,6 +1,5 @@
 #include <ezcli/cli.h>
 #include <ezcli/external.h>
-#include <ezcli/freecli.h>
 #include <ezcli/opt.h>
 #include <ezcli/print.h>
 #include <ezcli/runcli.h>
@@ -12,7 +11,6 @@
 #include "internal/panic.h"
 
 #include <stdbool.h>
-#include <string.h>
 
 void runcli(cli_s *cli, int argc, char *argv[]) {
     cli->argc = argc;
@@ -30,7 +28,9 @@ void runcli(cli_s *cli, int argc, char *argv[]) {
 
             execopt(opt_default, NULL);
         } else {
+#ifndef CLI_EMBEDDED
             cli->help(cli, cli->opts);
+#endif // CLI_EMBEDDED
         }
 
         return;
@@ -46,11 +46,13 @@ void runcli(cli_s *cli, int argc, char *argv[]) {
         bool is_prev_tok_arg = !opt_prev;
         bool is_unrecog = is_tok_arg && is_prev_tok_arg;
 
+#ifndef CLI_EMBEDDED
         if (i == 1 && match_str(cli->help_aliases, tok)) {
             cli->help(cli, cli->opts);
 
             break;
         }
+#endif // CLI_EMBEDDED
 
         if (handle_nonopt(cli, tok, is_unrecog, any_option_seen))
             continue;

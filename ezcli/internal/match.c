@@ -1,11 +1,10 @@
 #include <ezcli/cli.h>
 #include <ezcli/opt.h>
+#include <ezcli/platform.h>
 
 #include "internal/match.h"
 
 #include <stdbool.h>
-#include <stdlib.h>
-#include <string.h>
 
 bool ot_match(opt_s *opt, char *token) {
     int i = 0;
@@ -13,7 +12,7 @@ bool ot_match(opt_s *opt, char *token) {
     while (opt->aliases[i]) {
         char *name = opt->aliases[i];
 
-        if (strcmp(token, name) == 0)
+        if (c_strcmp(token, name) == 0)
             return true;
 
         i++;
@@ -37,7 +36,7 @@ opt_s *oa_match_first(cli_s *cli, char *alias) {
     for (size_t i = 0; i < cli->opts_len; i++) {
         opt_s *opt = cli->opts[i];
 
-        if (strcmp(opt->aliases[0], alias) == 0)
+        if (c_strcmp(opt->aliases[0], alias) == 0)
             return opt;
     }
 
@@ -48,7 +47,7 @@ bool match_str(char **arr, char *str) {
     int i = 0;
 
     while (arr[i]) {
-        if (strcmp(arr[i], str) == 0)
+        if (c_strcmp(arr[i], str) == 0)
             return true;
 
         i++;
@@ -60,8 +59,8 @@ bool match_str(char **arr, char *str) {
 bool match_str_contains(char *str, char *inner) {
     bool str_contains_inner = false;
 
-    size_t len_str = strlen(str);
-    size_t len_inner = strlen(inner);
+    size_t len_str = c_strlen(str);
+    size_t len_inner = c_strlen(inner);
 
     size_t idx_inner = 0;
 
