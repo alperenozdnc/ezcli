@@ -33,6 +33,7 @@ ezcli/utilities:
 
 ezcli/general:
     - ezdocs structure
+    - ezdocs embedded
 
 start with ezcli/core/foundation and end with ezcli/general.
 if you want to follow a random order when reading documentation
