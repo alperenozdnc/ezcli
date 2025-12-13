@@ -4,6 +4,7 @@
 #include <stdarg.h>
 
 const char *PREFIXES[] = {"HINT: ", "WARN: ", "ERROR: "};
+
 void cliprint(print_e type, char *prefix, char *fmt, ...) {
     const char *_prefix = prefix ? prefix : PREFIXES[type];
 
