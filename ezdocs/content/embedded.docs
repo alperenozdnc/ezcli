@@ -27,7 +27,7 @@ here are things that aren't included in embedded:
    - 'addopt()' (see 'ezdocs addopt')
    - 'allocopt()' (see 'ezdocs allocopt')
    - 'askbinary()' (see 'ezdocs askbinary')
-   - 'autocomp()' (see 'ezdocs autocomp')
+   - 'genautocomp()' (see 'ezdocs autocomp')
    - 'delopt()' (see 'ezdocs delopt')
 
 in summary, anything that alters the 'cli_s' struct in runtime 
