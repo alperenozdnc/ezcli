@@ -1,3 +1,16 @@
+/*
+  note that this 'example' is probably too convoluted and single-file
+  for me to ensure you've read it.
+
+  this is more of a proof of concept that ezcli is only opinionated about
+  its own implementation and implementation-agnostic any other place.
+
+  the point is, you can make a mini interpreter that implements pseudo-
+  recursion, functions, and variables, using a CLI LIBRARY!
+
+  yeah, you shouldn't use ezcli for projects like this, but isn't it cool?
+*/
+
 #include <ezcli.h>
 
 // you obviously can't use internal headers on a normal project
