@@ -62,3 +62,7 @@ int c_puts(const char *str) {
 int c_strcmp(const char *a, const char *b) {
     return strcmp(a, b);
 }
+
+int c_abs(int n) {
+    return abs(n);
+}

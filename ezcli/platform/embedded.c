@@ -4,6 +4,7 @@
 
 #include <ezcli/platform.h>
 
+#include <limits.h>
 #include <stddef.h>
 
 size_t c_strlen(const char *str) {
@@ -23,4 +24,14 @@ int c_strcmp(const char *a, const char *b) {
     }
 
     return *a - *b;
+}
+
+int c_abs(int n) {
+    if (n == INT_MIN)
+        return INT_MAX;
+
+    if (n < 0)
+        return -n;
+
+    return n;
 }
