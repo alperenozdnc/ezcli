@@ -1,7 +1,7 @@
 /*
  * ezcli - a minimal but flexible command line interface library for C.
  *
- * compile with 'make all' and run 'build/ezdocs/ezdocs' for self-generated
+ * compile with 'make all' and run 'build/bin/ezdocs' for self-generated
  * documentation. or, go to https://ezcli.ozdinc.org/.
  *
  * author - Alperen Özdinç <alperen@ozdinc.org>
