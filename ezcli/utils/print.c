@@ -9,6 +9,7 @@ void cliprint(print_e type, char *prefix, char *fmt, ...) {
     const char *_prefix = prefix ? prefix : PREFIXES[type];
 
 #ifndef CLI_EMBEDDED
+
     const char *COLORS[] = {ANSI_BLUE, ANSI_YELLOW, ANSI_RED};
 
     c_printf("%s%s", COLORS[type], _prefix);
@@ -21,8 +22,11 @@ void cliprint(print_e type, char *prefix, char *fmt, ...) {
     va_end(args);
 
     c_printf("%s\n", ANSI_RESET);
+
 #else
+
     c_puts(_prefix);
     c_puts(fmt);
+
 #endif // CLI_EMBEDDED
 }

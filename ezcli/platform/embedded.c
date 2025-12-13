@@ -1,6 +1,8 @@
 #ifndef CLI_EMBEDDED
+
 #error "ezcli: embedded platform can't be compiled in linux mode"
-#endif
+
+#endif // CLI_EMBEDDED
 
 #include <ezcli/platform.h>
 

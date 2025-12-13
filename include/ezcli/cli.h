@@ -6,12 +6,16 @@
 #include <ezcli/opt.h>
 
 #ifndef CLI_EMBEDDED
+
 #define CLI_DEBUG_ONLY(fn)                                                     \
     if (CLI_MODE_DEBUG)                                                        \
         fn;
+
 #else
+
 #define CLI_DEBUG_ONLY(fn)
-#endif
+
+#endif // CLI_EMBEDDED
 
 /*
  * keeps the information about the general command line interface.

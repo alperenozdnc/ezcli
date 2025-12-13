@@ -13,7 +13,9 @@ void _check_ret(cli_s *cli, ret_e ret, bool *any_warnings) {
                  cli->cmd);
 
 #ifndef CLI_EMBEDDED
+
         freecli(cli);
+
 #endif // CLI_EMBEDDED
 
         c_exit(1);
