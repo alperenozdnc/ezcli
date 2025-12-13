@@ -1,4 +1,5 @@
 #include <ezcli/cli.h>
+#include <ezcli/platform.h>
 
 #include "internal/blacklist.h"
 #include "internal/match.h"
@@ -6,8 +7,6 @@
 
 #include <limits.h>
 #include <stddef.h>
-#include <stdlib.h>
-#include <string.h>
 
 /*
  * counts and returns the amount of steps (addition/modification/deletion)
@@ -15,12 +14,12 @@
  */
 int count_steps(char *ref, char *str) {
     int steps = 0;
-    int ref_len = strlen(ref);
-    int str_len = strlen(str);
+    int ref_len = c_strlen(ref);
+    int str_len = c_strlen(str);
 
     bool one_char_matches = false;
 
-    steps += abs(ref_len - str_len);
+    steps += c_abs(ref_len - str_len);
 
     for (int i = 0; i < ref_len; i++) {
         char ref_c = ref[i];
