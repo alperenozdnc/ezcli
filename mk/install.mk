@@ -4,6 +4,8 @@ EZCLI_INCLUDE_DIR= $(INCLUDE_DIR)/ezcli
 EZCLI_UMBRELLA_HEADER= $(INCLUDE_DIR)/ezcli.h
 EZCLI_COMPLETIONS_CMD = autocompletions
 
+.PHONY: clean install uninstall install-docs uninstall-docs
+
 install:
 	sudo mkdir -p $(USR_INCLUDE_DIR)/$(EZCLI_DIR)
 	sudo cp $(EZCLI_UMBRELLA_HEADER) $(USR_INCLUDE_DIR)/

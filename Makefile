@@ -22,6 +22,8 @@ include mk/install.mk
 
 #============== generalization ==============
 
+.PHONY: all debug embedded debug-embedded
+
 ifeq ($(EMBEDDED),0)
 
 all: $(EZCLI_LIB_PATH) $(EZDOCS_BIN) $(EXAMPLE_BIN)
@@ -40,5 +42,3 @@ embedded:
 
 debug-embedded:
 	$(MAKE) BUILD=debug EMBEDDED=1
-
-.PHONY: all debug embedded debug-embedded clean install uninstall install-docs uninstall-docs
