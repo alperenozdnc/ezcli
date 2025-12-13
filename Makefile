@@ -23,9 +23,13 @@ include mk/install.mk
 #============== generalization ==============
 
 ifeq ($(EMBEDDED),0)
+
 all: $(EZCLI_LIB_PATH) $(EZDOCS_BIN) $(EXAMPLE_BIN)
+
 else
+
 all: $(EZCLI_LIB_PATH) $(EXAMPLE_BIN)
+
 endif
 
 debug:
