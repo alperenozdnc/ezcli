@@ -1,10 +1,23 @@
+# initialization
 include mk/base.mk
+
+# setting up debug/embedded modes
 include mk/debug.mk
 include mk/embedded.mk
+
+# setting up autocompletions
 include mk/autocomp.mk
+
+# compilation and archiving of ezcli
 include mk/libezcli.mk
+
+# compilation of ezdocs 
 include mk/ezdocs.mk
+
+# compilation of examples 
 include mk/examples.mk
+
+# install/uninstall for ezcli, ezdocs and 'clean' option for build artifacts
 include mk/install.mk
 
 #============== generalization ==============
