@@ -1,0 +1,45 @@
+a guide for using ezcli in embedded environments.
+DESCRIPTION_END
+
+there exists an embedded build/version of ezcli that you can compile with
+'make embedded' in the source root. this version doesn't include ezdocs, autocompletion
+support, or examples.
+
+
+the embedded version of ezcli:
+    - doesn't use <stdlib.h>, so no 'malloc()', 'free()', 'exit()', ... is used.
+    - doesn't use <string.h>, so no 'strlen()', 'strcmp()', 'strdup()', ... is used.
+    - doesn't use <stdio.h>, so no 'printf()', 'fopen()', 'puts()', ... is used.
+
+to use embedded ezcli, you should be in an environment where <stdbool.h>,
+<stddef.h>, <stdarg.h>, and <limits.h> exists (and i'm pretty sure 99% of people have these
+even embedded), and you should define 'c_puts' and 'c_exit'.
+
+instead of only including <ezcli.h> like the desktop version implementation
+of ezcli, you should also include <ezcli/platform.h> to be able to define these
+'c_*()' functions.
+
+the embedded version does absolutely no heap-allocation so you don't need to
+write 'freecli()' to end your program.
+
+here are things that aren't included in embedded:
+   - 'freecli()' (see 'ezdocs freecli')
+   - 'addopt()' (see 'ezdocs addopt')
+   - 'allocopt()' (see 'ezdocs allocopt')
+   - 'askbinary()' (see 'ezdocs askbinary')
+   - 'autocomp()' (see 'ezdocs autocomp')
+   - 'delopt()' (see 'ezdocs delopt')
+
+in summary, anything that alters the 'cli_s' struct in runtime 
+or does heap allocation is not included.
+
+and yes, 'askbinary()' doesn't fit into these two categories, but i believe
+its too high-level and has too many variants in the functions it uses to be 
+included in the embedded build.
+
+this desktop -> embedded switch just converts ezcli from a runtime modifying
+library to a library that's almost procedural in the sense that it almost reads
+like a recipe that tells you how to make a command line interface.
+
+define options, usage, description, behaviours, context, and that's it. no runtime
+mutation, no memory side effects. you define your cli, you own it, the program dies.
