@@ -2,9 +2,32 @@
 
 ## this library documents itself
 
-yes, you read that right. there a program called `ezdocs` that uses ezcli to
+yes, you read that right. there is a program called `ezdocs` that uses ezcli to
 generate documentation about ezcli. build ezcli and ezdocs with `make all`, install
 ezdocs as a binary with `make install-docs` and run `ezdocs help` to get started.
+
+## there are two supported building modes
+
+there is the normal desktop ezcli that:
+
+- is dynamic,
+- can mutate itself,
+- provides core functions for the init-run-die lifecycle.
+
+and then, there is the embedded build that:
+
+- is static
+- is almost procedural
+- can't mutate itself and doesn't own any data passed to it,
+- does not provide the core function for the 'dying' step in a traditional
+  program's lifecycle; because no heap allocation is performed in the first
+  place.
+
+you can start learning more about the embedded mode, its usage, its constraints,
+and its requirements by running `ezdocs embedded`. or, you can just go to
+![the documentation website](https://ezcli.ozdinc.org/embedded/).
+
+for building, just run `make embedded`.
 
 ## options are context-aware behaviour containers
 
@@ -20,7 +43,7 @@ you can add new options with the `addopt` function
 ## dynamic option allocation
 
 you can allocate options to the heap with the `allocopt` function
-(and remove, again, with `delopt`).this enables you to make programs that
+(and remove, again, with `delopt`). this enables you to make programs that
 have user-defined commands (and have those user-defined commands persist across sessions),
 or you can even make a wrapper around my library
 if you don't really like the philosophy behind it.
@@ -48,7 +71,7 @@ will handle printing out an error for you.
 
 ## default option
 
-if you don't define a default option, ezcli prints out an help menu by default.
+if you don't define a default option, ezcli prints out a help menu by default.
 if you do though, any program that's run with no args immediately calls
 this default option behaviour. this can also take context.
 
