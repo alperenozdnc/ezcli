@@ -34,3 +34,10 @@ int c_strcmp(const char *a, const char *b);
 void *c_realloc(void *ptr, size_t n);
 void *c_malloc(size_t n);
 void c_free(void *ptr);
+
+/*
+ * function for finding the absolute value of an int.
+ * for embedded systems, this is defined using a minimal implementation that
+ * also handles the INT_MIN edge case. for pc, this maps out to libc abs().
+ */
+int c_abs(int n);
