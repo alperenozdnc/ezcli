@@ -1,5 +1,12 @@
 # changelog
 
+## [v1.2.7](https://github.com/alperenozdnc/ezcli/releases/tag/v1.2.7) - 2025-12-14
+
+### modify
+
+- the embedded build mode now doesn't include examples compilation because
+  examples are desktop-sided.
+
 ## [v1.2.6](https://github.com/alperenozdnc/ezcli/releases/tag/v1.2.6) - 2025-12-14
 
 ### add

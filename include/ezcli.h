@@ -6,7 +6,7 @@
  *
  * author - Alperen Özdinç <alperen@ozdinc.org>
  * date - 14 Dec 2025
- * version - v1.2.6
+ * version - v1.2.7
  */
 
 #pragma once
