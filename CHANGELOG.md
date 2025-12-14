@@ -1,5 +1,22 @@
 # changelog
 
+## [v1.2.6](https://github.com/alperenozdnc/ezcli/releases/tag/v1.2.6) - 2025-12-14
+
+### add
+
+- minimal interpreter example built in ezcli (why not?). supports functions, variables,
+  pseudo-recursion, and incrementing/decrementing. source code available
+  `src/examples/minilang.c`.
+- ezdocs now generates its autocompletions.
+- commands like `make install`, `make install-docs` don't require sudo for initiation
+  now, they just ask for it while running.
+- ezcli now has an 'embedded mode' that uses no heap allocation and no platform-
+  specific libraries.
+- embedded mode can be build with `make embedded` or `make debug-embedded` for
+  development of the embedded mode.
+- all build/teardown processes have been verified to be bijective (as in
+  perfectly reversing themselves filesystem-wise).
+
 ## [v1.0.0](https://github.com/alperenozdnc/ezcli/releases/tag/v1.0.0) - 2025-12-08 - initial stable release
 
 from now on, all public headers in `include/ezcli` will not break without a major version bump.
