@@ -30,7 +30,7 @@ all: $(EZCLI_LIB_PATH) $(EZDOCS_BIN) $(EXAMPLE_BIN)
 
 else
 
-all: $(EZCLI_LIB_PATH) $(EXAMPLE_BIN)
+all: $(EZCLI_LIB_PATH)
 
 endif
 
