@@ -60,5 +60,6 @@
 #include <ezcli/askbinary.h>
 #include <ezcli/autocomp.h>
 #include <ezcli/delopt.h>
+#include <ezcli/window.h>
 
 #endif // CLI_EMBEDDED
