@@ -45,10 +45,12 @@ opt_s eat = {
     .desc = "every human needs something to consoom.",
 };
 
-opt_s sleep = {.aliases = CLI_ALIASES("sleep", "--sleep"),
-               .body = *_sleep,
-               .want_input = false,
-               .desc = "zzzzzz. i'm always sleepy, man."};
+// 'sleep' is taken by unistd so that's why this option breaks the
+// naming pattern.
+opt_s sleep_opt = {.aliases = CLI_ALIASES("sleep", "--sleep"),
+                   .body = *_sleep,
+                   .want_input = false,
+                   .desc = "zzzzzz. i'm always sleepy, man."};
 
 opt_s secret = {.aliases = CLI_ALIASES("secret", "--secret"),
                 .ctx = "i use contexts!",
@@ -87,8 +89,8 @@ opt_s _default = {
 
 int main(int argc, char *argv[]) {
     cli_s cli;
-    opt_s *opts[] = {&eat,    &sleep,    &secret, &__secret,
-                     &nonopt, &_default, NULL};
+    opt_s *opts[] = {&eat,    &sleep_opt, &secret, &__secret,
+                     &nonopt, &_default,  NULL};
 
     CLI_ALLOW_NONOPT = true;
     CLI_MODE_DEBUG = true;
