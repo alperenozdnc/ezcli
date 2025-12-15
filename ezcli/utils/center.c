@@ -53,7 +53,7 @@ void clicenter_horiz(window_s wininfo, char *str) {
         if (c == '\n' || i == len_str - 1) {
             buffer[buffer_idx] = '\0';
 
-            clicenter_horiz_line(wininfo, buffer, len_str);
+            clicenter_horiz_line(wininfo, buffer, buffer_idx);
 
             c_printf("\n");
 
