@@ -6,7 +6,7 @@
  * general rendering function signature.
  *
  * this is used to generalize `clicenter_vert` and `clicenter_both` by using
- * `c_printf` for the former, and `clicenter_horiz_line` for the latter
+ * `c_printf` for the former, and `clicenter_horiz` for the latter
  * (internal utility in this header's source file).
  */
 typedef void (*render_fn_t)(window_s, char *);
