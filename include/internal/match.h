@@ -36,3 +36,8 @@ bool match_str(char **arr, char *str);
  * checks if a string `*str` contains an inner string `*inner`.
  */
 bool match_str_contains(char *str, char *inner);
+
+/*
+ * counts and returns the amount of newlines contained in `str`.
+ */
+int match_str_newlines(char *str);

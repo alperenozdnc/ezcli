@@ -85,3 +85,18 @@ bool match_str_contains(char *str, char *inner) {
 
     return str_contains_inner;
 }
+
+int match_str_newlines(char *str) {
+    size_t len_str = c_strlen(str);
+
+    int n = 0;
+
+    for (size_t i = 0; i < len_str; i++) {
+        char c = str[i];
+
+        if (c == '\n')
+            n++;
+    }
+
+    return n;
+}
