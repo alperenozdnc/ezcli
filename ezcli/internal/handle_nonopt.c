@@ -1,6 +1,7 @@
 #include <ezcli/cli.h>
 #include <ezcli/external.h>
 #include <ezcli/opt.h>
+#include <ezcli/platform.h>
 #include <ezcli/print.h>
 
 #include "internal/assert.h"
@@ -10,7 +11,6 @@
 #include "internal/recommend.h"
 
 #include <stdbool.h>
-#include <stdlib.h>
 
 bool handle_nonopt(cli_s *cli, char *tok, bool is_unrecog,
                    bool any_option_seen) {
@@ -30,7 +30,7 @@ bool handle_nonopt(cli_s *cli, char *tok, bool is_unrecog,
                          recommended);
         }
 
-        exit(EXIT_FAILURE);
+        c_exit(EXIT_FAILURE);
     }
 
     if (any_option_seen) {
@@ -38,7 +38,7 @@ bool handle_nonopt(cli_s *cli, char *tok, bool is_unrecog,
                  "%s: can't chain non-option '%s' after any options.", cli->cmd,
                  tok);
 
-        exit(EXIT_FAILURE);
+        c_exit(EXIT_FAILURE);
     }
 
     opt_s *nonopt = oa_match_first(cli, CLI_NONOPT);
