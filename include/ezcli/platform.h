@@ -3,6 +3,9 @@
 #include <stdarg.h>
 #include <stddef.h>
 
+#define EXIT_SUCCESS 0
+#define EXIT_FAILURE 1
+
 /*
  * for basic output. for embedded systems, these may write to uart, swo, etc.
  * for pc, these map out to their libc counterparts.

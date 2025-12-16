@@ -1,3 +1,9 @@
+/*
+    DISCLAIMER: this is a linux-only header.
+*/
+
+#ifndef CLI_EMBEDDED
+
 #pragma once
 
 #include <sys/ioctl.h>
@@ -17,6 +23,7 @@
    a        l
    l
 
+   this is linux-only.
 */
 #define IOCTL_GET_WIN_SIZE TIOCGWINSZ
 
@@ -29,6 +36,8 @@ typedef unsigned short window_size_t;
  *
  * `x` and `y` are the column and row sizes respectively, assuming one character
  * or newline as the unit.
+ *
+ * this is linux-only.
  */
 typedef struct {
     window_size_t x;
@@ -40,5 +49,9 @@ typedef struct {
  * terminal window and returns it in a `window_s` struct.
  *
  * the info is `ioctl()` sourced, so the info is neither ezcli nor user owned.
+ *
+ * this is linux-only.
  */
 window_s cliwininfo();
+
+#endif // CLI_EMBEDDED

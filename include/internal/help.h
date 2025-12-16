@@ -1,3 +1,9 @@
+/*
+    DISCLAIMER: this is a linux-only header.
+*/
+
+#ifndef CLI_EMBEDDED
+
 #pragma once
 
 #include <ezcli/cli.h>
@@ -8,5 +14,9 @@
  * usage,
  * description,
  * and information about options.
+ *
+ * this is linux-only.
  */
 void help(cli_s *cli, opt_s **opts);
+
+#endif // CLI_EMBEDDED

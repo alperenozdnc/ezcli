@@ -1,3 +1,9 @@
+/*
+    DISCLAIMER: this is a linux-only header.
+*/
+
+#ifndef CLI_EMBEDDED
+
 #pragma once
 
 #include <ezcli/cli.h>
@@ -10,5 +16,9 @@
  * ezcli owns memory of all opts passed to `allocopt()`. your only
  * responsibility is to keep the `ctx` and `body` fields alive, and run
  * `freecli()` at the end of your program.
+ *
+ * this is linux-only.
  */
 void allocopt(cli_s *cli, const opt_s *stack_opt);
+
+#endif // CLI_EMBEDDED

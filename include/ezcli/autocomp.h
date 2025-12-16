@@ -1,3 +1,9 @@
+/*
+    DISCLAIMER: this is a linux-only header.
+*/
+
+#ifndef CLI_EMBEDDED
+
 #pragma once
 
 #include <ezcli/cli.h>
@@ -19,5 +25,9 @@
  * `filename` should have no extensions.
  * `bool bash` generates completions for bash if `true`.
  * `bool zsh` generates completions for zsh if `true`.
+ *
+ * this is linux-only.
  */
 void genautocomp(cli_s *cli, char *filename, bool bash, bool zsh);
+
+#endif // CLI_EMBEDDED

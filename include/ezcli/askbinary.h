@@ -1,3 +1,9 @@
+/*
+    DISCLAIMER: this is a linux-only header.
+*/
+
+#ifndef CLI_EMBEDDED
+
 #pragma once
 
 #include <ezcli/print.h>
@@ -14,6 +20,10 @@
  * note: this function is NOT interactive in the sense that it doesn't keep
  * running after a wrong input, you should use this in a loop if you desire
  * that functionality.
+ *
+ * this is linux-only.
  */
 bool askbinary(char *msg, char **yes_aliases, char **no_aliases,
                bool is_no_inclusive);
+
+#endif // CLI_EMBEDDED
