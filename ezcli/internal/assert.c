@@ -1,10 +1,10 @@
 #include <ezcli/freecli.h>
+#include <ezcli/platform.h>
 #include <ezcli/print.h>
 
 #include "internal/assert.h"
 
 #include <stdbool.h>
-#include <stdlib.h>
 
 void _assert(bool expr, char *label) {
     if (expr)
@@ -12,7 +12,7 @@ void _assert(bool expr, char *label) {
 
     ASSERT_PRINT_ERR();
 
-    exit(EXIT_FAILURE);
+    c_exit(EXIT_FAILURE);
 }
 
 void _assert_free(cli_s *cli, bool expr, char *label) {
@@ -22,5 +22,5 @@ void _assert_free(cli_s *cli, bool expr, char *label) {
     ASSERT_PRINT_ERR();
 
     freecli(cli);
-    exit(EXIT_FAILURE);
+    c_exit(EXIT_FAILURE);
 }
