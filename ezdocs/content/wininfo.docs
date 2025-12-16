@@ -1,0 +1,23 @@
+getting terminal info in ezcli.
+DESCRIPTION_END
+
+typedef struct {
+    window_size_t x;
+    window_size_t y;
+} window_s;
+
+window_s cliwininfo();
+
+this utility function gets the width and height of a terminal window (in terms
+of characters), and returns it in a 'window_s' struct.
+
+
+'window_size_t' is just a name for an 'unsigned short' because that's what
+'ioctl()' internally returns the dimension sizes as.
+
+'window_s.x' is the amount of columns.
+'window_s.y' is the amount of rows.
+
+this utility function can be used for all kinds of purposes but internally,
+any kind of text centering utility such as 'clicenter_vert' (see 'ezdocs clicenter')
+uses 'cliwininfo()'.

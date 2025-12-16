@@ -1,0 +1,37 @@
+single/mutli line string centering utilities.
+DESCRIPTION_END
+
+void clicenter_horiz(window_s wininfo, char *str);
+void clicenter_vert(window_s wininfo, char *str);
+void clicenter_both(window_s wininfo, char *str);
+
+these utility functions are used for centering single/multi line strings.
+they only support ascii characters at this point of time.
+
+
+at some point, you may need to center strings, may that be for readability,
+eye candy, or anything else, doesn't matter. centering a string is a solved
+problem and is deterministic in terms of the correct result. thus, these
+not-so-primitive-looking utilities had to be included in ezcli.
+
+- 'clicenter_horiz()' centers a single/multi line string horizontally.
+
+- 'clicenter_vert()' centers a single/multi line string vertically.
+
+- 'clicenter_both()' centers a single/multi line string both vertically and
+  horizontally.
+
+'clicenter_vert()' does handle excess newlines at the start or end of your string.
+and so does, 'clicenter_both()'. in 'clicenter_horiz()' your excess newlines
+must be assumed a design choice and are printed as-is.
+
+these utilities only support ascii characters and implicitly assume that 
+one visible character always equates to a single byte.
+
+the 'window_s' struct (see 'ezdocs wininfo') is just a struct that holds information about the bounds
+of the current terminal window. these utilities are currently only linux-supported.
+although, they don't do any heap allocation and don't return anything.
+
+in future revisions, the choice of the centering utilities being only desktop
+and not embedded might change, and in that case, keep in mind that you can always
+create an artificial 'window_s' struct.

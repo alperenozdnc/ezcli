@@ -30,6 +30,8 @@ ezcli/utilities:
     - ezdocs delopt
     - ezdocs askbinary
     - ezdocs gettok
+    - ezdocs wininfo
+    - ezdocs clicenter
 
 ezcli/general:
     - ezdocs structure
