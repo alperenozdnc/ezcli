@@ -1,5 +1,23 @@
 # changelog
 
+## [v1.5.0](https://github.com/alperenozdnc/ezcli/releases/tag/v1.5.0) - 2025-12-16
+
+### add
+
+- the `cliwininfo()` utility was added for getting information about the current
+  terminal window's width and height (desktop-only).
+- `clicenter_horiz()`, `clicenter_vert()`, and `clicenter_both` utilities for,
+  horizontally, vertically, or horizontally and vertically centering a single/multi line string.
+  this only supports ASCII and does not support unicode characters yet.
+- macro guards and comment notes were added for desktop-only headers and functions.
+
+### modify
+
+- the platform-agnostic `c_printf` implementation needed to use `vprintf()`
+  internally, so that was fixed.
+
+- some platform-agnostic headers used linux-specific libraries, so that was fixed.
+
 ## [v1.2.7](https://github.com/alperenozdnc/ezcli/releases/tag/v1.2.7) - 2025-12-14
 
 ### modify

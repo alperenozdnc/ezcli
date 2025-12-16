@@ -5,8 +5,8 @@
  * documentation. or, go to https://ezcli.ozdinc.org/.
  *
  * author - Alperen Özdinç <alperen@ozdinc.org>
- * date - 14 Dec 2025
- * version - v1.2.7
+ * date - 16 Dec 2025
+ * version - v1.5.0
  */
 
 #pragma once

@@ -1,4 +1,4 @@
-## ezcli v1.2.7
+## ezcli v1.5.0
 
 ezcli is a cli library that doesn't have much content
 but has a lot of flexibility.
