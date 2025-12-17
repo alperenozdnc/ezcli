@@ -1,10 +1,10 @@
-/*
-    DISCLAIMER: this is a linux-only header.
-*/
-
-#ifndef CLI_EMBEDDED
-
 #pragma once
+
+#ifdef CLI_EMBEDDED
+
+#error "ezcli: clicenter_*() is not available on embedded mode."
+
+#endif // CLI_EMBEDDED
 
 #include <ezcli/window.h>
 
@@ -54,5 +54,3 @@ void clicenter_vert(window_s wininfo, char *str);
  * this is linux-only.
  */
 void clicenter_both(window_s wininfo, char *str);
-
-#endif // CLI_EMBEDDED

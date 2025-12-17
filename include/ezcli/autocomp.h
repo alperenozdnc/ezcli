@@ -1,10 +1,10 @@
-/*
-    DISCLAIMER: this is a linux-only header.
-*/
-
-#ifndef CLI_EMBEDDED
-
 #pragma once
+
+#ifdef CLI_EMBEDDED
+
+#error "ezcli: autocomp() is not available on embedded mode."
+
+#endif // CLI_EMBEDDED
 
 #include <ezcli/cli.h>
 #include <stdbool.h>
@@ -29,5 +29,3 @@
  * this is linux-only.
  */
 void genautocomp(cli_s *cli, char *filename, bool bash, bool zsh);
-
-#endif // CLI_EMBEDDED

@@ -1,10 +1,10 @@
-/*
-    DISCLAIMER: this is a linux-only header.
-*/
-
-#ifndef CLI_EMBEDDED
-
 #pragma once
+
+#ifdef CLI_EMBEDDED
+
+#error "ezcli: allocopt() is not available on embedded mode."
+
+#endif // CLI_EMBEDDED
 
 #include <ezcli/cli.h>
 #include <ezcli/opt.h>
@@ -20,5 +20,3 @@
  * this is linux-only.
  */
 void allocopt(cli_s *cli, const opt_s *stack_opt);
-
-#endif // CLI_EMBEDDED

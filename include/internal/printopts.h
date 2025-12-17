@@ -1,10 +1,10 @@
-/*
-    DISCLAIMER: this is a linux-only header.
-*/
-
-#ifndef CLI_EMBEDDED
-
 #pragma once
+
+#ifdef CLI_EMBEDDED
+
+#error "ezcli: printopts() is not available on embedded mode."
+
+#endif // CLI_EMBEDDED
 
 #include <ezcli/cli.h>
 
@@ -14,5 +14,3 @@
  * this is linux-only.
  */
 void printopts(cli_s *cli);
-
-#endif // CLI_EMBEDDED

@@ -1,10 +1,10 @@
-/*
-    DISCLAIMER: this is a linux-only header.
-*/
-
-#ifndef CLI_EMBEDDED
-
 #pragma once
+
+#ifdef CLI_EMBEDDED
+
+#error "ezcli: join_str() is not available on embedded mode."
+
+#endif // CLI_EMBEDDED
 
 /*
  * joins two strings using `snprintf()` and allocates on heap.
@@ -13,5 +13,3 @@
  * this is linux-only.
  */
 char *join_str(char *str1, char *str2);
-
-#endif // CLI_EMBEDDED

@@ -1,10 +1,10 @@
-/*
-    DISCLAIMER: this is a linux-only header.
-*/
-
-#ifndef CLI_EMBEDDED
-
 #pragma once
+
+#ifdef CLI_EMBEDDED
+
+#error "ezcli: askbinary() is not available on embedded mode."
+
+#endif // CLI_EMBEDDED
 
 #include <ezcli/print.h>
 
@@ -25,5 +25,3 @@
  */
 bool askbinary(char *msg, char **yes_aliases, char **no_aliases,
                bool is_no_inclusive);
-
-#endif // CLI_EMBEDDED

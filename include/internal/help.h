@@ -1,10 +1,10 @@
-/*
-    DISCLAIMER: this is a linux-only header.
-*/
-
-#ifndef CLI_EMBEDDED
-
 #pragma once
+
+#ifdef CLI_EMBEDDED
+
+#error "ezcli: help() is not available on embedded mode."
+
+#endif // CLI_EMBEDDED
 
 #include <ezcli/cli.h>
 #include <ezcli/opt.h>
@@ -18,5 +18,3 @@
  * this is linux-only.
  */
 void help(cli_s *cli, opt_s **opts);
-
-#endif // CLI_EMBEDDED

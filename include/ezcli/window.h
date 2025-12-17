@@ -1,10 +1,10 @@
-/*
-    DISCLAIMER: this is a linux-only header.
-*/
-
-#ifndef CLI_EMBEDDED
-
 #pragma once
+
+#ifdef CLI_EMBEDDED
+
+#error "ezcli: ezcli/window.h is not available on embedded mode."
+
+#endif // CLI_EMBEDDED
 
 #include <sys/ioctl.h>
 #include <unistd.h>
@@ -53,5 +53,3 @@ typedef struct {
  * this is linux-only.
  */
 window_s cliwininfo();
-
-#endif // CLI_EMBEDDED
