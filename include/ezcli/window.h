@@ -1,11 +1,5 @@
 #pragma once
 
-#ifdef CLI_EMBEDDED
-
-#error "ezcli: ezcli/window.h is not available on embedded mode."
-
-#endif // CLI_EMBEDDED
-
 #include <sys/ioctl.h>
 #include <unistd.h>
 

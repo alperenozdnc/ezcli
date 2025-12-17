@@ -1,11 +1,5 @@
 #pragma once
 
-#ifdef CLI_EMBEDDED
-
-#error "ezcli: autocomp() is not available on embedded mode."
-
-#endif // CLI_EMBEDDED
-
 #include <ezcli/cli.h>
 #include <stdbool.h>
 

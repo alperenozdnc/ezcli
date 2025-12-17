@@ -1,11 +1,5 @@
 #pragma once
 
-#ifdef CLI_EMBEDDED
-
-#error "ezcli: clicenter_*() is not available on embedded mode."
-
-#endif // CLI_EMBEDDED
-
 #include <ezcli/window.h>
 
 /*

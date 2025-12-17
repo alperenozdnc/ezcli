@@ -12,8 +12,6 @@
  */
 void _assert(bool expr, char *label);
 
-#ifndef CLI_EMBEDDED
-
 /*
  * prints `label`, frees all allocated memory, and exits with failure
  * if `expr` is `false`.
@@ -21,5 +19,3 @@ void _assert(bool expr, char *label);
  * this is linux-only.
  */
 void _assert_free(cli_s *cli, bool expr, char *label);
-
-#endif // CLI_EMBEDDED
