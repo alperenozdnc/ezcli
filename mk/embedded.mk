@@ -1,13 +1,19 @@
 #============== embedded mode ==============
 
 PLATFORM_DIR = $(EZCLI_DIR)/platform
+
 EMBEDDED ?= 0
 
 ifeq ($(EMBEDDED),0)
-PLATFORM_SRC := $(PLATFORM_DIR)/linux.c
-PLATFORM_OBJ := $(OBJ_DIR)/$(EZCLI_DIR)/platform/linux.o
+
+PLATFORM = linux
+
 else
-PLATFORM_SRC=$(PLATFORM_DIR)/embedded.c
-PLATFORM_OBJ := $(OBJ_DIR)/$(EZCLI_DIR)/platform/embedded.o
+
+PLATFORM = embedded
+
 CFLAGS += -DCLI_EMBEDDED
+
 endif
+
+PLATFORM_SRC := $(shell find $(PLATFORM_DIR)/$(PLATFORM) -name '*.c')
