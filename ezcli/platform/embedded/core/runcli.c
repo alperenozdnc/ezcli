@@ -42,10 +42,8 @@ void runcli(cli_s *cli, int argc, char *argv[]) {
             continue;
 
         if (is_tok_arg && !is_prev_tok_arg && !opt_prev->want_input) {
-            cliprint(CLI_ERROR, CLI_EMPTY_PREFIX,
-                     "%s: '%s' cannot be passed to '%s' as it requires no "
-                     "arguments.",
-                     cli->cmd, tok, argv[i - 1]);
+            cliprint(CLI_ERROR, argv[i - 1],
+                     " requires no arguments, but an argument was given.");
 
             check_ret(panic());
 
@@ -56,8 +54,7 @@ void runcli(cli_s *cli, int argc, char *argv[]) {
             continue;
 
         if (argc == i + 1 && opt->want_input) {
-            cliprint(CLI_ERROR, CLI_EMPTY_PREFIX,
-                     "%s: '%s' requires an argument.", cli->cmd, tok);
+            cliprint(CLI_ERROR, tok, " requires an argument.");
 
             check_ret(panic());
 
@@ -75,8 +72,7 @@ void runcli(cli_s *cli, int argc, char *argv[]) {
         char *tok_next = argv[i + 1];
 
         if (ot_match_any(cli, tok_next) && opt->want_input) {
-            cliprint(CLI_ERROR, CLI_EMPTY_PREFIX,
-                     "%s: unallowed argument '%s'.", cli->cmd, tok_next);
+            cliprint(CLI_ERROR, tok_next, " is an not an allowed argument.");
 
             check_ret(panic());
 
@@ -92,11 +88,9 @@ void runcli(cli_s *cli, int argc, char *argv[]) {
 
     if (any_warnings) {
         if (CLI_MODE_LAIDBACK) {
-            cliprint(CLI_WARN, CLI_EMPTY_PREFIX,
-                     "%s: there are some warnings/errors.", cli->cmd);
+            cliprint(CLI_WARN, cli->cmd, ": there are some warnings/errors.");
         } else {
-            cliprint(CLI_WARN, CLI_EMPTY_PREFIX, "%s: there are some warnings.",
-                     cli->cmd);
+            cliprint(CLI_WARN, cli->cmd, ": there are some warnings.");
         }
     }
 }
