@@ -4,12 +4,12 @@ so, i have a really simple guideline to follow that i think makes versioning
 easier and more deterministic (although the problem of versioning is always
 subjective, of course). here's the checklist.
 
-let's assume we start from v0.0.0:
+let's assume we start from `v0.0.0`:
 
-- did your changes fix or patch something the users use? -> v0.0.1 (patch)
-- did your changes add new entries to the public api? -> v0.1.0 (minor)
+- did your changes fix or patch something the users use? -> `v0.0.1` (patch)
+- did your changes add new entries to the public api? -> `v0.1.0` (minor)
 - does your changes fundamentally change base assumptions or break currently
-  working code? -> v1.0.0 (major)
+  working code? -> `v1.0.0` (major)
 
 and that's it. i believe bumps should be rated on _effect_ of change, **not** the
 size of it. because you could be writing a 1000-line utility and that still wouldn't
