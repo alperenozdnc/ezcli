@@ -17,16 +17,14 @@ bool handle_nonopt(cli_s *cli, char *tok, bool is_unrecog,
         return false;
 
     if (!CLI_ALLOW_NONOPT) {
-        cliprint(CLI_ERROR, CLI_EMPTY_PREFIX, "%s: unrecognized option '%s'.",
-                 cli->cmd, tok);
+        cliprint(CLI_ERROR, tok, " is an unrecognized option.");
 
         c_exit(EXIT_FAILURE);
     }
 
     if (any_option_seen) {
-        cliprint(CLI_ERROR, CLI_EMPTY_PREFIX,
-                 "%s: can't chain non-option '%s' after any options.", cli->cmd,
-                 tok);
+        cliprint(CLI_ERROR, tok,
+                 " is a nonopt, and it can't be passed after any options.");
 
         c_exit(EXIT_FAILURE);
     }

@@ -8,8 +8,7 @@
  */
 void _check_ret(cli_s *cli, ret_e ret, bool *any_warnings) {
     if (ret == RET_FAIL) {
-        cliprint(CLI_ERROR, CLI_EMPTY_PREFIX, "%s: exited with an error.",
-                 cli->cmd);
+        cliprint(CLI_ERROR, cli->cmd, ": exited with an error.");
 
         c_exit(1);
     }
