@@ -12,11 +12,7 @@ void _check_ret(cli_s *cli, ret_e ret, bool *any_warnings) {
         cliprint(CLI_ERROR, CLI_EMPTY_PREFIX, "%s: exited with an error.",
                  cli->cmd);
 
-#ifndef CLI_EMBEDDED
-
         freecli(cli);
-
-#endif // CLI_EMBEDDED
 
         c_exit(1);
     }

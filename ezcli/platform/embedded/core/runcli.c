@@ -27,13 +27,6 @@ void runcli(cli_s *cli, int argc, char *argv[]) {
                 cliprint(CLI_HINT, "[ezcli] ", "executing default opt"));
 
             execopt(opt_default, NULL);
-        } else {
-
-#ifndef CLI_EMBEDDED
-
-            cli->help(cli, cli->opts);
-
-#endif // CLI_EMBEDDED
         }
 
         return;
@@ -48,16 +41,6 @@ void runcli(cli_s *cli, int argc, char *argv[]) {
         bool is_tok_arg = !opt;
         bool is_prev_tok_arg = !opt_prev;
         bool is_unrecog = is_tok_arg && is_prev_tok_arg;
-
-#ifndef CLI_EMBEDDED
-
-        if (i == 1 && match_str(cli->help_aliases, tok)) {
-            cli->help(cli, cli->opts);
-
-            break;
-        }
-
-#endif // CLI_EMBEDDED
 
         if (handle_nonopt(cli, tok, is_unrecog, any_option_seen))
             continue;
