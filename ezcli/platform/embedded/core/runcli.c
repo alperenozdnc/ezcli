@@ -23,9 +23,6 @@ void runcli(cli_s *cli, int argc, char *argv[]) {
         opt_s *opt_default = ot_match_any(cli, CLI_DEFAULT_OPT);
 
         if (opt_default) {
-            CLI_DEBUG_ONLY(
-                cliprint(CLI_HINT, "[ezcli] ", "executing default opt"));
-
             execopt(opt_default, NULL);
         }
 
@@ -69,8 +66,6 @@ void runcli(cli_s *cli, int argc, char *argv[]) {
         }
 
         if (argc == i + 1) {
-            CLI_DEBUG_ONLY(cliprint(CLI_HINT, "ezcli: ", "%s -> NULL", tok));
-
             execopt(opt, NULL);
 
             any_option_seen = true;
