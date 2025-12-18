@@ -22,9 +22,8 @@ void runcli(cli_s *cli, int argc, char *argv[]) {
     if (argc == 1) {
         opt_s *opt_default = ot_match_any(cli, CLI_DEFAULT_OPT);
 
-        if (opt_default) {
+        if (opt_default)
             execopt(opt_default, NULL);
-        }
 
         return;
     }
