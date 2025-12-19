@@ -78,7 +78,7 @@ void commit_write(FILE *fptr, char *commit_name, char *version) {
  * gets and lists available tags to reference from.
  */
 void list_tags() {
-    printf("all available tags: \n\n");
+    printf("versioner > all available tags: \n\n");
     system("git tag");
     printf("\n");
 }
@@ -150,10 +150,15 @@ void cleanup(FILE *file_commits, FILE *file_output, char *vers_curr,
 void direct_to_abort(__attribute((unused)) int code) {
     clear_screen();
 
-    printf("you should write 'abort' to make sure versioner can correctly "
+    printf("versioner > you should write 'abort' to make sure versioner can "
+           "correctly "
            "clean up. press enter to continue. \n\n");
 }
 
+/*
+ * validates a file stream, returns `false` and prints error if it doesn't
+ * exist, and just returns `true` if it does.
+ */
 bool validate_file(FILE *fptr, char *path) {
     if (!fptr) {
         cliprint(CLI_ERROR, "versioner > ", "couldn't read file '%s'.", path);
