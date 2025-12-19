@@ -20,6 +20,7 @@ INCLUDE_DIR=include
 
 BUILD_DIR=build
 EXAMPLES_DIR=examples
+TOOLS_DIR = tools
 
 LIB_DIR=$(BUILD_DIR)/lib
 OBJ_DIR=$(BUILD_DIR)/obj

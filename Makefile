@@ -14,6 +14,9 @@ include mk/libezcli.mk
 # compilation of ezdocs 
 include mk/ezdocs.mk
 
+# compilation of tools 
+include mk/tools.mk
+
 # compilation of examples 
 include mk/examples.mk
 
@@ -26,7 +29,7 @@ include mk/install.mk
 
 ifeq ($(EMBEDDED),0)
 
-all: $(EZCLI_LIB_PATH) $(EZDOCS_BIN) $(EXAMPLE_BIN)
+all: $(EZCLI_LIB_PATH) $(EZDOCS_BIN) $(EXAMPLE_BIN) $(TOOLS_BIN)
 
 else
 
