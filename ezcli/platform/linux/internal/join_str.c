@@ -5,7 +5,7 @@
 #include <string.h>
 
 char *join_str(char *str1, char *str2) {
-    size_t size = strlen(str1) * strlen(str2) + sizeof('\0');
+    size_t size = strlen(str1) + strlen(str2) + sizeof('\0');
 
     char *str3 = malloc(size);
 
