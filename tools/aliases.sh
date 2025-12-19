@@ -1,7 +1,9 @@
 #!/usr/bin/sh
 
-# run source ./tools/loadaliases.sh from project root
-# to get aliases for the example programs
+# run source ./tools/aliases.sh from project root
+# to get aliases for ezcli-generated binaries.
+
+alias versioner="./build/tools/versioner"
 
 alias calc="./build/examples/calc"
 alias human="./build/examples/human"
