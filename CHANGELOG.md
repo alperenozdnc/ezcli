@@ -1,5 +1,24 @@
 # changelog
 
+## [v1.5.8](https://github.com/alperenozdnc/ezcli/releases/tag/v1.5.8) - 2025-12-20
+
+### add
+
+- a guideline talking about versioning for future contributors was added to `docs/VERSIONING.md`.
+- a script in `tools/` was added for easier 'iterative versioning'.
+- a build step that automatically runs when running `make` was added that builds all c source files in `tools/`.
+  you can run `make tools` to build seperately too. this doesn't run when doing `make embedded`.
+
+### modify
+
+- non-platform-agnostic code now lives in seperate directories as `platform/linux/` and `platform/embedded`.
+  almost no preprocesser checks (`#ifdef`, `#ifndef`) remain.
+- the bug where embedded mode wasn't compiling because of undefined symbols was fixed.
+- embedded mode will now hack around with the prefix in `cliprint()` to avoid using formatting on prints.
+- `tools/loadexamples.sh` -> `tools/aliases.sh` because it loads `versioner` too now.
+- `*` instead of `+` was used as the size calculation symbol in `internal/join_str` which was causing
+  features like `ezdocs` and `autocomp` to allocate way too much memory.
+
 ## [v1.5.0](https://github.com/alperenozdnc/ezcli/releases/tag/v1.5.0) - 2025-12-16
 
 ### add
