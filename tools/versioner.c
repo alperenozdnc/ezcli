@@ -225,6 +225,13 @@ ret_e body_start(CLI_IGNORE_ARGS) {
         bump_cnt++;
     }
 
+    if (commit_cnt == 0) {
+        cleanup(file_commits, file_output, vers_curr, vers_initial);
+        printf("versioner > no commits were found after this tag. aborting.\n");
+
+        return RET_FAIL;
+    }
+
     print_final_info(vers_initial, vers_curr, commit_cnt, bump_cnt);
 
     cleanup(file_commits, file_output, vers_curr, vers_initial);
@@ -238,6 +245,13 @@ opt_s opt_start = {
 };
 
 int main(int argc, char *argv[]) {
+    if (system("git --version > /dev/null 2>&1") != 0) {
+        cliprint(CLI_ERROR, "versioner > ",
+                 "git is required to run this program.");
+
+        exit(1);
+    }
+
     cli_s cli = {0};
     opt_s *opts[] = {&opt_start, NULL};
 
