@@ -17,6 +17,8 @@
 
 #define BUF_SIZE 256
 
+volatile sig_atomic_t sigint_seen = 0;
+
 /*
  * small helper for concatenating a variable amount of strings.
  */
@@ -54,17 +56,55 @@ char *_build_str(void *start, ...) {
 }
 
 /*
- * gets input from user and writes into `buf`.
+ * sets the flag `sigint_seen` to `true` if an interrupt signal is seen.
  */
-void get_input(char *buf) {
+void handle_sigint(__attribute((unused)) int code) {
+    sigint_seen = 1;
+}
+
+/*
+ * the cleanup ritual.
+ */
+void cleanup(FILE *file_commits, FILE *file_output, char *vers_curr,
+             char *vers_initial) {
+    fclose(file_commits);
+    fclose(file_output);
+
+    clear_screen();
+    clean_tmp_file();
+
+    free(vers_curr);
+    free(vers_initial);
+}
+
+/*
+ * aborts the program if an interrupt signal is received mid-run.
+ */
+void abort_loop(FILE *file_commits, FILE *file_output, char *vers_curr,
+                char *vers_initial) {
+    cleanup(file_commits, file_output, vers_curr, vers_initial);
+
+    printf("versioner > aborting.\n");
+
+    exit(EXIT_FAILURE);
+}
+
+/*
+ * gets input from user and writes into `buf`. returns `true` or `false` for
+ * indication of success.
+ */
+bool get_input(char *buf) {
     if (fgets(buf, BUF_SIZE, stdin) == NULL) {
         cliprint(CLI_ERROR, "versioner > ", "error reading input.");
-        exit(EXIT_FAILURE);
+
+        return false;
     }
 
     // fgets includes the \n for when return is pressed
     size_t trim_len = strcspn(buf, "\n");
     buf[trim_len] = '\0';
+
+    return true;
 }
 
 /*
@@ -92,6 +132,7 @@ char *get_ref_tag() {
     list_tags();
 
     printf("versioner > which tag do you want to compare? ");
+
     get_input(buf);
 
     char *cmd = build_str("git log", " ", buf,
@@ -129,33 +170,6 @@ void print_final_info(char *vers_initial, char *vers_curr, size_t commit_cnt,
 }
 
 /*
- * the cleanup ritual.
- */
-void cleanup(FILE *file_commits, FILE *file_output, char *vers_curr,
-             char *vers_initial) {
-    fclose(file_commits);
-    fclose(file_output);
-
-    clear_screen();
-    clean_tmp_file();
-
-    free(vers_curr);
-    free(vers_initial);
-}
-
-/*
- * this directs the user to type 'abort' instead of just `ctrl-c` to avoid
- * undeleted artifacts.
- */
-void direct_to_abort(__attribute((unused)) int code) {
-    clear_screen();
-
-    printf("versioner > you should write 'abort' to make sure versioner can "
-           "correctly "
-           "clean up. press enter to continue. \n\n");
-}
-
-/*
  * validates a file stream, returns `false` and prints error if it doesn't
  * exist, and just returns `true` if it does.
  */
@@ -173,7 +187,7 @@ bool validate_file(FILE *fptr, char *path) {
  * the main option that compiles querying, iterating, and cleanup together.
  */
 ret_e body_start(CLI_IGNORE_ARGS) {
-    signal(SIGINT, direct_to_abort);
+    signal(SIGINT, handle_sigint);
 
     char commit[BUF_SIZE];
     char tmp[BUF_SIZE];
@@ -199,7 +213,11 @@ ret_e body_start(CLI_IGNORE_ARGS) {
 
         print_curr_info(vers_curr, commit);
 
-        get_input(tmp);
+        if (!get_input(tmp))
+            abort_loop(file_commits, file_output, vers_curr, vers_initial);
+
+        if (sigint_seen)
+            abort_loop(file_commits, file_output, vers_curr, vers_initial);
 
         if (strcmp(tmp, "abort") == 0) {
             cleanup(file_commits, file_output, vers_curr, vers_initial);
@@ -250,7 +268,7 @@ int main(int argc, char *argv[]) {
         cliprint(CLI_ERROR, "versioner > ",
                  "git is required to run this program.");
 
-        exit(1);
+        exit(EXIT_FAILURE);
     }
 
     cli_s cli = {0};
