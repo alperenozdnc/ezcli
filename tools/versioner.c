@@ -227,7 +227,8 @@ ret_e body_start(CLI_IGNORE_ARGS) {
 
     if (commit_cnt == 0) {
         cleanup(file_commits, file_output, vers_curr, vers_initial);
-        printf("versioner > no commits were found after this tag. aborting.\n");
+        cliprint(CLI_ERROR, "versioner > ",
+                 "no commits were found after this tag. aborting.\n");
 
         return RET_FAIL;
     }
