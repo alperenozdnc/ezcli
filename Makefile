@@ -11,6 +11,9 @@ include mk/autocomp.mk
 # compilation and archiving of ezcli
 include mk/libezcli.mk
 
+# compilation of testing units
+include mk/test.mk
+
 # compilation of ezdocs 
 include mk/ezdocs.mk
 
