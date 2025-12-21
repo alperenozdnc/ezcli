@@ -1,0 +1,116 @@
+[34m[ezcli] validating cli[0m
+[34m[ezcli] initializing cli[0m
+[34m[ezcli] validating opt eat[0m
+[34m[ezcli] validating opt sleep[0m
+[34m[ezcli] validating opt secret[0m
+[34m[ezcli] validating opt -S[0m
+[34m[ezcli] validating opt NONOPT[0m
+[34m[ezcli] validating opt DEFAULT[0m
+[34m[ezcli] validating opt -U[0m
+[34m[ezcli] validating opt -UW[0m
+[34m[ezcli] executing default opt[0m
+[34mezcli: (null) -> (null)[0m
+wassup dawg
+[34m[ezcli] freeing all allocated memory[0m
+[34m[ezcli] validating cli[0m
+[34m[ezcli] initializing cli[0m
+[34m[ezcli] validating opt eat[0m
+[34m[ezcli] validating opt sleep[0m
+[34m[ezcli] validating opt secret[0m
+[34m[ezcli] validating opt -S[0m
+[34m[ezcli] validating opt NONOPT[0m
+[34m[ezcli] validating opt DEFAULT[0m
+[34m[ezcli] validating opt -U[0m
+[34m[ezcli] validating opt -UW[0m
+[34m[ezcli] executing help[0m
+[34m[USAGE]: human [command] [args][0m
+This program mimicks human-like behaviours.
+
+    [34mhelp, --help[0m -> prints this menu.
+    [34meat, --eat[0m -> every human needs something to consoom.
+    [34msleep, --sleep[0m -> zzzzzz. i'm always sleepy, man.
+    [34msecret, --secret[0m -> hey, lemme tell you b secret.
+    [34m-U, --unwanted[0m -> this is for when you feel unwanted.
+    [34m-UW, -unwanteed[0m -> this is for when you feel even more unwanted.
+
+For documentation: <https://github.com/alperenozdnc/ezcli>
+For license: <https://www.gnu.org/licenses/gpl-3.0.en.html>
+[34m[ezcli] freeing all allocated memory[0m
+[34m[ezcli] validating cli[0m
+[34m[ezcli] initializing cli[0m
+[34m[ezcli] validating opt eat[0m
+[34m[ezcli] validating opt sleep[0m
+[34m[ezcli] validating opt secret[0m
+[34m[ezcli] validating opt -S[0m
+[34m[ezcli] validating opt NONOPT[0m
+[34m[ezcli] validating opt DEFAULT[0m
+[34m[ezcli] validating opt -U[0m
+[34m[ezcli] validating opt -UW[0m
+[34m[ezcli] executing nonopt[0m
+[34mezcli: alperen -> alperen[0m
+alperen
+[34m[ezcli] executing nonopt[0m
+[34mezcli: ozdinc -> ozdinc[0m
+ozdinc
+[34m[ezcli] freeing all allocated memory[0m
+[34m[ezcli] validating cli[0m
+[34m[ezcli] initializing cli[0m
+[34m[ezcli] validating opt eat[0m
+[34m[ezcli] validating opt sleep[0m
+[34m[ezcli] validating opt secret[0m
+[34m[ezcli] validating opt -S[0m
+[34m[ezcli] validating opt NONOPT[0m
+[34m[ezcli] validating opt DEFAULT[0m
+[34m[ezcli] validating opt -U[0m
+[34m[ezcli] validating opt -UW[0m
+[34mezcli: sleep -> (null)[0m
+human: sleeping...
+[34mezcli: sleep -> NULL[0m
+[34mezcli: sleep -> (null)[0m
+human: sleeping...
+[34m[ezcli] freeing all allocated memory[0m
+[34m[ezcli] validating cli[0m
+[34m[ezcli] initializing cli[0m
+[34m[ezcli] validating opt eat[0m
+[34m[ezcli] validating opt sleep[0m
+[34m[ezcli] validating opt secret[0m
+[34m[ezcli] validating opt -S[0m
+[34m[ezcli] validating opt NONOPT[0m
+[34m[ezcli] validating opt DEFAULT[0m
+[34m[ezcli] validating opt -U[0m
+[34m[ezcli] validating opt -UW[0m
+[34mezcli: eat -> pizza[0m
+human: consuming pizza
+[34mezcli: secret -> yo[0m
+human: yo...
+i use contexts!
+[34mezcli: -U -> me[0m
+human: my name is me, and nobody wants me...
+[34m[ezcli] freeing all allocated memory[0m
+[34m[ezcli] validating cli[0m
+[34m[ezcli] initializing cli[0m
+[34m[ezcli] validating opt eat[0m
+[34m[ezcli] validating opt sleep[0m
+[34m[ezcli] validating opt secret[0m
+[34m[ezcli] validating opt -S[0m
+[34m[ezcli] validating opt NONOPT[0m
+[34m[ezcli] validating opt DEFAULT[0m
+[34m[ezcli] validating opt -U[0m
+[34m[ezcli] validating opt -UW[0m
+[34mezcli: eat -> food[0m
+human: consuming food
+[31mhuman: can't chain non-option 'food' after any options.[0m
+[34m[ezcli] validating cli[0m
+[34m[ezcli] initializing cli[0m
+[34m[ezcli] validating opt eat[0m
+[34m[ezcli] validating opt sleep[0m
+[34m[ezcli] validating opt secret[0m
+[34m[ezcli] validating opt -S[0m
+[34m[ezcli] validating opt NONOPT[0m
+[34m[ezcli] validating opt DEFAULT[0m
+[34m[ezcli] validating opt -U[0m
+[34m[ezcli] validating opt -UW[0m
+[31mhuman: 'eat' requires an argument.[0m
+[33mezcli: panicking[0m
+[31mhuman: exited with an error.[0m
+[34m[ezcli] freeing all allocated memory[0m

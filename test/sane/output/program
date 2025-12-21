@@ -1,0 +1,13 @@
+hey, i always run.
+hello, world
+[34m[USAGE]: program [option]/[name][0m
+This program is an example on ezcli.
+
+    [34mhelp, --help[0m -> prints this menu.
+    [34m-v, --version[0m -> prints out the version.
+
+And this is the footer.
+hey, i always run.
+my program is version, v1.0.0
+hey, i always run.
+my program is version, v1.0.0

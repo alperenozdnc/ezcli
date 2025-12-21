@@ -1,0 +1,33 @@
+[34m[USAGE]: calc x {operand} y[0m
+Mini calculator program to show off ezcli. (no order of operations)
+
+    [34mhelp, --help[0m -> prints this menu.
+    [34m+, ADD[0m -> Adds two numbers together.
+    [34m-, SUB[0m -> Subtracts two numbers.
+    [34mx, MUL[0m -> Multiplies two numbers.
+    [34m^, POW[0m -> Exponentiates first number to second.
+
+Check src/examples/calculator.c for source code.
+1 + 1 = 2
+
+Total sum is 2.
+32 * 32 = 1024
+
+Total sum is 1024.
+32 ^ 3 = 32768
+32768 ^ 0 = 1
+
+Total sum is 1.
+99 - 100 = -1
+
+Total sum is -1.
+32 + 32 = 64
+64 * 32 = 2048
+2048 * 0 = 0
+0 + 2323 = 2323
+2323 + 1 = 2324
+2324 - 1 = 2323
+2323 + 1 = 2324
+2324 - 1 = 2323
+
+Total sum is 2323.
