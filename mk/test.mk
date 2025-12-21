@@ -14,11 +14,12 @@ TEST_OBJ := $(TEST_SRC:%.c=$(OBJ_DIR)/%.o)
 
 $(TEST_OBJ_DIR)/%.o: $(TEST_DIR)/%.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(TEST_BIN): $(EZCLI_LIB_PATH) $(TEST_OBJ)
 	@mkdir -p $(dir $@)
 
-	$(CC) $(CFLAGS) $^ -L$(LIB_DIR) -lezcli -o $@
+	@$(CC) $(CFLAGS) $^ -L$(LIB_DIR) -lezcli -o $@
 
 test: $(TEST_BIN)
+	@$(TEST_BIN)
