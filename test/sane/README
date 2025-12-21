@@ -1,0 +1,15 @@
+think of this directory as a kind of 'snapshot' of ezcli that
+the new implementations are tested against.
+
+the bin/ directory tells the sanity checker where to find the binaries.
+the input/ directory tells the sanity checker which inputs to give to those binaries.
+the output/ directory tells the sanity checker what the sane outputs are.
+
+if any kind of fails were found running the sanity checker and 
+no changes were made to the binaries currently being sanity-tested,
+one of these must hold true:
+    - a bug was found,
+    - a change was made that requires a major version bump.
+
+paths in bin/ assumes that the sanity checking tests are run from the root
+of source.
