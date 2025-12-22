@@ -29,6 +29,9 @@ here are things that aren't included in embedded:
    - 'askbinary()' (see 'ezdocs askbinary')
    - 'genautocomp()' (see 'ezdocs autocomp')
    - 'delopt()' (see 'ezdocs delopt')
+   .
+   .
+   .
 
 in summary, anything that alters the 'cli_s' struct in runtime 
 or does heap allocation is not included.
