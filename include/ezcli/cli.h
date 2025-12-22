@@ -9,6 +9,8 @@
     if (CLI_MODE_DEBUG)                                                        \
         fn;
 
+#define CLI_EMPTY_OPTS ((opt_s *[]){})
+
 /*
  * keeps the information about the general command line interface.
  * `cmd`: name of the command. this is used for parsing and generating help
