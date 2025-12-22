@@ -15,6 +15,7 @@
 #define NO_ARGS_TOKEN "RUN_DEFAULT"
 
 #define INDENT "    " // 4 spaces
+#define PREFIX "[test/sanity] "
 
 /*
  * this is the struct that holds information about a reference source. it has a

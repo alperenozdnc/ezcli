@@ -230,7 +230,7 @@ void exec_injected_input(ref_file_s *ref_file, char *input) {
  * tested, and compares outputs.
  */
 void test_refs_io(sane_dir_s *sane_state) {
-    printf("test/sanity: %s\n\n", sane_state->ref_vers);
+    printf(PREFIX "%s\n\n", sane_state->ref_vers);
 
     size_t pass_cnt = 0;
     size_t fail_cnt = 0;
@@ -315,11 +315,11 @@ void test_refs_io(sane_dir_s *sane_state) {
         fclose(new_output_fptr);
     }
 
-    cliprint(CLI_HINT, "\ntest/sanity: ", "%ld total, %ld passed, %ld failed.",
+    cliprint(CLI_HINT, "\n" PREFIX, "%ld total, %ld passed, %ld failed.",
              pass_cnt + fail_cnt, pass_cnt, fail_cnt);
 
     if (fail_cnt > 0) {
-        cliprint(CLI_WARN, "test/sanity: ",
+        cliprint(CLI_WARN, PREFIX,
                  "all failing diffs were written to *_sanity.diff");
     }
 }
