@@ -164,6 +164,7 @@ sane_dir_s *compile_sane_state() {
         ref_file->binary_ref = file_read_first_line(bin_path);
         ref_file->input = fopen(input_path, "r");
         ref_file->output = fopen(output_path, "r");
+        ref_file->name = strdup(ref_filenames[i]);
 
         free(bin_path);
         free(input_path);
@@ -195,7 +196,9 @@ void free_sane_state(sane_dir_s *sane_dir) {
     for (size_t i = 0; i < sane_dir->refs_count; i++) {
         ref_file_s *ref_file = sane_dir->refs[i];
 
+        free(ref_file->name);
         free(ref_file->binary_ref);
+
         fclose(ref_file->input);
         fclose(ref_file->output);
 
@@ -286,6 +289,22 @@ void test_refs_io(sane_dir_s *sane_state) {
             cliprint(CLI_ERROR, INDENT "[ FAIL ] ", " %s",
                      ref_file->binary_ref);
 
+            char *output_path = join_str(SANE_DIR "output/", ref_file->name);
+            char *diff_path = join_str(ref_file->name, "_sanity.diff");
+
+            char *diff_cmd_lhs = join_str("diff ", output_path);
+            char *diff_cmd_rhs =
+                join_str(diff_cmd_lhs, " " TMP_FILENAME " >> ");
+            char *diff_cmd = join_str(diff_cmd_rhs, diff_path);
+
+            system(diff_cmd);
+
+            free(output_path);
+            free(diff_path);
+            free(diff_cmd_lhs);
+            free(diff_cmd_rhs);
+            free(diff_cmd);
+
             fail_cnt++;
         }
 
@@ -302,6 +321,11 @@ void test_refs_io(sane_dir_s *sane_state) {
 
     cliprint(CLI_HINT, CLI_EMPTY_PREFIX, "%ld total, %ld passed, %ld failed.",
              pass_cnt + fail_cnt, pass_cnt, fail_cnt);
+
+    if (fail_cnt > 0) {
+        cliprint(CLI_HINT, CLI_EMPTY_PREFIX,
+                 "all failing diffs were written to *_sanity.diff");
+    }
 }
 
 void check_sanity() {
