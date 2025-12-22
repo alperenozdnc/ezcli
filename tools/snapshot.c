@@ -63,6 +63,8 @@ ret_e snapshot_creator_body(void *_ctx, CLI_IGNORE_TOK) {
 
     bool both_inputs_are_valid = ctx->input_filename && ctx->binary_ref;
 
+    // the first next token is the argument passed to the current option,
+    // so 2 offsets gets the next option/lack thereof
     char *next_tok = gettok_offset(ctx->cli, 2);
 
     if (!both_inputs_are_valid && !next_tok && ctx->run_mode) {
