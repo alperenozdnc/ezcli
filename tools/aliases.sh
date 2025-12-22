@@ -4,6 +4,7 @@
 # to get aliases for ezcli-generated binaries.
 
 alias versioner="./build/tools/versioner"
+alias snapshot="./build/tools/snapshot"
 
 alias calc="./build/examples/calc"
 alias human="./build/examples/human"
