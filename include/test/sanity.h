@@ -18,12 +18,13 @@
 
 /*
  * this is the struct that holds information about a reference source. it has a
- * sane input, output, and binary path reference.
+ * sane input, output, binary path reference, and a name.
  */
 typedef struct {
     FILE *input;
     FILE *output;
     char *binary_ref;
+    char *name;
 } ref_file_s;
 
 #define REF_SIZE(n) sizeof(ref_file_s *) * (n)
