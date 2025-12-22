@@ -9,7 +9,7 @@
     if (CLI_MODE_DEBUG)                                                        \
         fn;
 
-#define CLI_EMPTY_OPTS ((opt_s *[]){})
+#define CLI_EMPTY_OPTS ((opt_s *[]){NULL})
 
 /*
  * keeps the information about the general command line interface.
