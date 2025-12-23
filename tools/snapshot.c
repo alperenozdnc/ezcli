@@ -91,9 +91,10 @@ ret_e snapshot_creator_body(void *_ctx, CLI_IGNORE_TOK) {
 
     _assert(input_fptr, "the input filename must exist on disk");
 
-    char buf[256];
+    size_t buf_size = 256;
+    char buf[buf_size];
 
-    while (fgets(buf, 256, input_fptr)) {
+    while (fgets(buf, buf_size, input_fptr)) {
         // this trims the newline
         size_t actual_len = strcspn(buf, "\n");
         buf[actual_len] = '\0';
