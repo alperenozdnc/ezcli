@@ -11,6 +11,7 @@
 
 #define RUN_NO_ARGS "RUN_DEFAULT"
 #define SNAPSHOT_FILENAME "ezcli.snapshot"
+#define PREFIX "ezcli/snapshot: "
 
 typedef struct {
     char *binary_ref;
@@ -69,15 +70,13 @@ ret_e snapshot_creator_body(void *_ctx, CLI_IGNORE_TOK) {
 
     if (!both_inputs_are_valid && !next_tok && ctx->run_mode) {
         if (!ctx->binary_ref) {
-            cliprint(CLI_ERROR,
-                     "ezcli/snapshot: ", "a binary reference must be given.");
+            cliprint(CLI_ERROR, PREFIX, "a binary reference must be given.");
 
             return RET_FAIL;
         }
 
         if (!ctx->input_filename) {
-            cliprint(CLI_ERROR,
-                     "ezcli/snapshot: ", "an input filename must be given.");
+            cliprint(CLI_ERROR, PREFIX, "an input filename must be given.");
 
             return RET_FAIL;
         }
@@ -118,7 +117,7 @@ ret_e snapshot_creator_body(void *_ctx, CLI_IGNORE_TOK) {
     free(ctx->input_filename);
     free(ctx->binary_ref);
 
-    cliprint(CLI_HINT, "ezcli/snapshot: ",
+    cliprint(CLI_HINT, PREFIX,
              "all outputs have been written to '" SNAPSHOT_FILENAME "'.");
 
     return RET_NORMAL;
