@@ -1,9 +1,5 @@
 #pragma once
 
-#ifndef CLI_EMBEDDED
-
-#include <stdio.h>
-
 #define CHECK_ALLOC(ptr)                                                       \
     do {                                                                       \
         if (!(ptr)) {                                                          \
@@ -11,11 +7,3 @@
             c_exit(1);                                                         \
         }                                                                      \
     } while (0)
-
-#else
-
-#define CHECK_ALLOC(ptr)                                                       \
-    do {                                                                       \
-    } while (0)
-
-#endif // CLI_EMBEDDED
