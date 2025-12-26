@@ -1,6 +1,5 @@
 #include <ezcli.h>
 
-#include "ezcli/print.h"
 #include "internal/assert.h"
 #include "internal/join_str.h"
 
