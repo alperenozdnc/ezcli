@@ -1,9 +1,9 @@
 # initialization
 include mk/base.mk
 
-# setting up debug/embedded modes
+# setting up debug/embedded/test modes
 include mk/debug.mk
-include mk/embedded.mk
+include mk/platform.mk
 
 # setting up autocompletions
 include mk/autocomp.mk
@@ -28,9 +28,9 @@ include mk/install.mk
 
 #============== generalization ==============
 
-.PHONY: all debug embedded debug-embedded
+.PHONY: all debug embedded debug-embedded test run-test
 
-ifeq ($(EMBEDDED),0)
+ifeq ($(PLATFORM),linux)
 
 all: $(EZCLI_LIB_PATH) $(EZDOCS_BIN) $(EXAMPLE_BIN) $(TOOLS_BIN)
 
@@ -44,7 +44,7 @@ debug:
 	$(MAKE) BUILD=debug
 
 embedded:
-	$(MAKE) EMBEDDED=1
+	$(MAKE) PLATFORM=embedded
 
 debug-embedded:
-	$(MAKE) BUILD=debug EMBEDDED=1
+	$(MAKE) BUILD=debug PLATFORM=embedded

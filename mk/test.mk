@@ -3,23 +3,45 @@
 TEST_DIR=test
 TEST_NAME=test
 
-TEST_BIN = $(BIN_DIR)/$(TEST_NAME)
+SANITY_BIN = $(BIN_DIR)/test/sanity
+INTEGRITY_BIN = $(BIN_DIR)/test/integrity
 
 TEST_SRC := $(shell find $(TEST_DIR) -name '*.c')
 
-TEST_OBJ_DIR = $(OBJ_DIR)/$(TEST_DIR)
-TEST_OBJ := $(TEST_SRC:%.c=$(OBJ_DIR)/%.o)
-
 #============== testing compilation ==============
 
-$(TEST_OBJ_DIR)/%.o: $(TEST_DIR)/%.c
+$(SANITY_BIN): $(TEST_DIR)/sanity.c
+	@echo ===== SANITY TEST =====
+	@echo
+
+	@$(MAKE) PLATFORM=linux --no-print-directory
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) $< -L$(LIB_DIR) -lezcli -o $@
+	
+	@$(SANITY_BIN)
 
-$(TEST_BIN): $(EZCLI_LIB_PATH) $(TEST_OBJ)
+	@$(MAKE) clean --no-print-directory
+
+	@echo
+	@echo ===== END SANITY TEST =====
+
+	@echo
+
+$(INTEGRITY_BIN): $(TEST_DIR)/integrity.c
+	@echo ===== INTEGRITY TEST =====
+	@echo
+
+	@$(MAKE) clean --no-print-directory
 	@mkdir -p $(dir $@)
+	@$(MAKE) PLATFORM=test --no-print-directory
 
-	@$(CC) $(CFLAGS) $^ -L$(LIB_DIR) -lezcli -o $@
+	@$(CC) $(CFLAGS) $< -L$(LIB_DIR) -lezcli -o $@
+	
+	@$(INTEGRITY_BIN)
 
-test: $(TEST_BIN)
-	@$(TEST_BIN)
+	@$(MAKE) clean --no-print-directory
+
+	@echo
+	@echo ===== END INTEGRITY TEST =====
+
+test: $(SANITY_BIN) $(INTEGRITY_BIN)
