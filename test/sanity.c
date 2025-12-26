@@ -324,7 +324,12 @@ void test_refs_io(sane_dir_s *sane_state) {
     }
 }
 
-void check_sanity() {
+/*
+ * this checks ezcli for sanity. all reference outputs in `sane/` is compared
+ * with the new outputs from the current ezcli implementation using reference
+ * inputs.
+ */
+int main() {
     sane_dir_s *sane_state = compile_sane_state();
 
     test_refs_io(sane_state);
