@@ -2,17 +2,21 @@
 
 PLATFORM_DIR = $(EZCLI_DIR)/platform
 
-EMBEDDED ?= 0
+PLATFORM ?= linux
 
-ifeq ($(EMBEDDED),0)
+ifeq ($(PLATFORM),linux)
 
 PLATFORM = linux
 
-else
-
+else ifeq ($(PLATFORM),embedded)
+	
 PLATFORM = embedded
 
 CFLAGS += -DCLI_EMBEDDED
+
+else
+
+PLATFORM = test 
 
 endif
 
