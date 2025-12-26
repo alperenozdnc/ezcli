@@ -2,6 +2,10 @@
 
 #include <stdint.h>
 
+/*
+ * all of the available signal types. human-readable string representations
+ * defined in extern `sig_names` can be found in `init_sig_arena()`.
+ */
 typedef enum {
     CLI_SIG_INIT_SELF,
     CLI_SIG_FREE_SELF,
@@ -25,6 +29,9 @@ typedef enum {
 
 extern char **sig_names;
 
+/*
+ * this is the struct that carries the type, line, and file info about a signal.
+ */
 typedef struct {
     sig_type_e type;
     uint16_t line;
