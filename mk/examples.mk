@@ -11,4 +11,4 @@ examples: $(EXAMPLE_BIN)
 $(BUILD_DIR)/$(EXAMPLES_DIR)/%: $(EXAMPLES_DIR)/%.c $(EZCLI_LIB_PATH)
 	@mkdir -p $(dir $@)
 
-	$(CC) $(CFLAGS) -lm $< -L$(LIB_DIR) -lezcli -o $@
+	@$(CC) $(CFLAGS) -lm $< -L$(LIB_DIR) -lezcli -o $@

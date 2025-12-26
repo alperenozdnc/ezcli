@@ -20,7 +20,7 @@ EZDOCS_COMPLETIONS_ZSH = $(HOME_LOCAL_SHARE_DIR)/zsh/site-functions/_ezdocs
 
 $(EZDOCS_OBJ_DIR)/%.o: $(EZDOCS_DIR)/%.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -Iinclude/ezdocs -c $< -o $@
+	@$(CC) $(CFLAGS) -Iinclude/ezdocs -c $< -o $@
 
 $(EZDOCS_BIN): $(EZCLI_LIB_PATH) $(EZDOCS_OBJ)
 	@mkdir -p $(dir $@)
@@ -28,4 +28,4 @@ $(EZDOCS_BIN): $(EZCLI_LIB_PATH) $(EZDOCS_OBJ)
 	@mkdir -p $(EZDOCS_CONTENT_DIR)
 	@cp -r $(_EZDOCS_CONTENT_DIR)/* $(EZDOCS_CONTENT_DIR)/
 
-	$(CC) $(CFLAGS) -Iinclude/ezdocs $^ -L$(LIB_DIR) -lezcli -o $@
+	@$(CC) $(CFLAGS) -Iinclude/ezdocs $^ -L$(LIB_DIR) -lezcli -o $@
