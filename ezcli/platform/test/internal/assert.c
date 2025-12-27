@@ -11,8 +11,6 @@ void __assert(bool expr, sig_arena_s *arena) {
     if (expr)
         return;
 
-    emit_signal(CLI_SIG_PRINT_ERR);
-
     c_exit(EXIT_FAILURE);
 }
 
