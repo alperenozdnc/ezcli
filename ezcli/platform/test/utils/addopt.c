@@ -2,9 +2,9 @@
 #include <test/integrity/emit_signal.h>
 #include <test/integrity/platform.h>
 #include <test/integrity/sig_arena_s.h>
+#include <test/integrity/validate.h>
 
 #include "internal/opts_size.h"
-#include "internal/validate.h"
 
 #include <stdarg.h>
 #include <stdbool.h>
