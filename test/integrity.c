@@ -11,6 +11,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/*
+ * prints signals in an array-like format `{ a, b, c, d }`.
+ * accepts either an arena or an array of signal types as its source of data.
+ * `use_arena` can be flipped `true` or `false` to determine behaviour.
+ */
 void print_signals(bool use_arena, sig_arena_s *arena, sig_type_e sigs[],
                    size_t sigs_size) {
     size_t size = use_arena ? arena->signals_size : sigs_size;
@@ -33,6 +38,10 @@ void print_signals(bool use_arena, sig_arena_s *arena, sig_type_e sigs[],
     printf(" }");
 }
 
+/*
+ * prints the expected and the actual array of signals, only triggers if a
+ * discrepancy is found.
+ */
 void compare_signals(sig_type_e assert_sigs[], size_t assert_size,
                      sig_arena_s *arena) {
     wrap_with_label("test/integrity: expected: ",
@@ -95,10 +104,19 @@ void exec_inj_args(cli_s *cli, sig_arena_s *arena, char *argv[]) {
     cli->tok_idx = 0;
 }
 
-int main() {
+/*
+ * test: base case.
+ *
+ * initializes a cli instance and uninitializes it.
+ */
+void test_base() {
     BEGIN_TEST(CLI_NO_OPTS, "base");
 
     sig_type_e signals[] = {CLI_SIG_INIT_SELF, CLI_SIG_FREE_SELF};
 
     END_TEST(signals);
+}
+
+int main() {
+    test_base();
 }
