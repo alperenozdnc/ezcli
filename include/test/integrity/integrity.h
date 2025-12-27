@@ -20,7 +20,7 @@
         assert_signals(signals);                                               \
         free_sig_arena(arena);                                                 \
         printf("test/integrity: success.\n");                                  \
-        printf("\n-------------- ENDING CASE '%s' --------------\n", label);   \
+        printf("\n-------------- ENDING CASE '%s' --------------\n\n", label); \
     } while (0)
 ;
 
@@ -45,3 +45,14 @@
         content;                                                               \
         printf("\n");                                                          \
     } while (0)
+
+#define DUMMY_BODY()                                                           \
+    ret_e dummy_body(CLI_IGNORE_ARGS) {                                        \
+        return RET_NORMAL;                                                     \
+    }
+
+#define DUMMY_OPT                                                              \
+    (opt_s) {                                                                  \
+        .aliases = CLI_ALIASES("dummy"), .body = dummy_body, .desc = "_",      \
+        .want_input = false                                                    \
+    }
