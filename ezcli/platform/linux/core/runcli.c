@@ -104,13 +104,16 @@ void runcli(cli_s *cli, int argc, char *argv[]) {
         any_option_seen = true;
     }
 
-    if (any_warnings) {
-        if (CLI_MODE_LAIDBACK) {
-            cliprint(CLI_WARN, CLI_EMPTY_PREFIX,
-                     "%s: there are some warnings/errors.", cli->cmd);
-        } else {
-            cliprint(CLI_WARN, CLI_EMPTY_PREFIX, "%s: there are some warnings.",
-                     cli->cmd);
-        }
+    if (!any_warnings)
+        return;
+
+    if (CLI_MODE_LAIDBACK) {
+        cliprint(CLI_WARN, CLI_EMPTY_PREFIX,
+                 "%s: there are some warnings/errors.", cli->cmd);
+
+        return;
     }
+
+    cliprint(CLI_WARN, CLI_EMPTY_PREFIX, "%s: there are some warnings.",
+             cli->cmd);
 }
