@@ -4,8 +4,13 @@
  * initializes a 'mock' cli instance with specified options.
  */
 #define BEGIN_TEST(opts, _label)                                               \
+    (void)__COUNTER__;                                                         \
     char *label = _label;                                                      \
-    printf("-------------- STARTING CASE '%s' --------------\n\n", label);     \
+    cliprint(CLI_HINT,                                                         \
+             "    "                                                            \
+             "[ TEST ]"                                                        \
+             "  ",                                                             \
+             "%s", label);                                                     \
     sig_arena_s *arena = init_sig_arena();                                     \
     cli_s cli = {0};                                                           \
     initcli(&cli, "test", "test", "test", "test", opts, CLI_ALIASES("help"),   \
@@ -19,8 +24,6 @@
         freecli(&cli);                                                         \
         assert_signals(signals);                                               \
         free_sig_arena(arena);                                                 \
-        printf("test/integrity: success.\n");                                  \
-        printf("\n-------------- ENDING CASE '%s' --------------\n\n", label); \
     } while (0)
 ;
 
@@ -41,7 +44,7 @@
 
 #define wrap_with_label(label, content)                                        \
     do {                                                                       \
-        printf(label);                                                         \
+        cliprint(CLI_HINT, label, "");                                         \
         content;                                                               \
         printf("\n");                                                          \
     } while (0)

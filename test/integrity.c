@@ -1,11 +1,13 @@
 #include <ezcli/cli.h>
 #include <ezcli/external.h>
 #include <ezcli/opt.h>
+#include <ezcli/print.h>
 
 #include <test/integrity/integrity.h>
 
 #include <test/integrity/addopt.h>
 #include <test/integrity/delopt.h>
+#include <test/integrity/external.h>
 #include <test/integrity/free_sig_arena.h>
 #include <test/integrity/freecli.h>
 #include <test/integrity/init_sig_arena.h>
@@ -25,6 +27,7 @@ void print_signals(bool use_arena, sig_arena_s *arena, sig_type_e sigs[],
                    size_t sigs_size) {
     size_t size = use_arena ? arena->signals_size : sigs_size;
 
+    printf(ANSI_BLUE);
     printf("{ ");
 
     for (size_t i = 0; i < size; i++) {
@@ -41,6 +44,9 @@ void print_signals(bool use_arena, sig_arena_s *arena, sig_type_e sigs[],
     }
 
     printf(" }");
+
+    printf(ANSI_RESET);
+    printf("\n");
 }
 
 /*
@@ -49,10 +55,10 @@ void print_signals(bool use_arena, sig_arena_s *arena, sig_type_e sigs[],
  */
 void compare_signals(sig_type_e assert_sigs[], size_t assert_size,
                      sig_arena_s *arena) {
-    wrap_with_label("test/integrity: expected: ",
+    wrap_with_label("[test/integrity] expected: ",
                     print_signals_asserted(assert_sigs, assert_size));
 
-    wrap_with_label("test/integrity: got: ", print_signals_arena());
+    wrap_with_label("[test/integrity] got: ", print_signals_arena());
 }
 
 /*
@@ -62,7 +68,8 @@ void compare_signals(sig_type_e assert_sigs[], size_t assert_size,
 void _assert_signals(sig_type_e sigs[], size_t assert_size,
                      sig_arena_s *arena) {
     if (assert_size != arena->signals_size) {
-        fprintf(stderr, "\ntest/integrity: wrong amount of signals emitted.\n");
+        cliprint(CLI_ERROR, "\n[test/integrity] ",
+                 "wrong amount of signals emitted.");
 
         compare_signals(sigs, assert_size, arena);
 
@@ -78,10 +85,11 @@ void _assert_signals(sig_type_e sigs[], size_t assert_size,
         if (assert_sig_type != actual_sig_type) {
             signals_match = false;
 
-            printf("\ntest/integrity: discrepancy found after signal '%s'\n"
-                   "emitted (%s:%d).\n\n",
-                   sig_names[arena->signals[i]->type], arena->signals[i]->file,
-                   arena->signals[i]->line);
+            cliprint(CLI_ERROR, "\n[test/integrity] ",
+                     "discrepancy found after signal '%s'\n"
+                     "emitted (%s:%d).\n",
+                     sig_names[arena->signals[i]->type],
+                     arena->signals[i]->file, arena->signals[i]->line);
 
             break;
         }
@@ -117,7 +125,7 @@ void exec_inj_args(cli_s *cli, sig_arena_s *arena, char *argv[]) {
 void test_base() {
     sig_type_e signals[] = {CLI_SIG_INIT_SELF, CLI_SIG_FREE_SELF};
 
-    BEGIN_TEST(CLI_NO_OPTS, "base");
+    BEGIN_TEST(CLI_NO_OPTS, "init/teardown lifecycle");
     END_TEST(signals);
 }
 
@@ -130,7 +138,7 @@ void test_help() {
     sig_type_e signals[] = {CLI_SIG_INIT_SELF, CLI_SIG_EXEC_HELP_OPT,
                             CLI_SIG_FREE_SELF};
 
-    BEGIN_TEST(CLI_NO_OPTS, "help");
+    BEGIN_TEST(CLI_NO_OPTS, "execution of the help option");
 
     exec_inj_args(&cli, arena, (char *[]){"test", "help", NULL});
 
@@ -148,7 +156,7 @@ void test_init_opt() {
     sig_type_e signals[] = {CLI_SIG_INIT_SELF, CLI_SIG_INIT_OPT,
                             CLI_SIG_FREE_SELF};
 
-    BEGIN_TEST(CLI_NO_OPTS, "initopt");
+    BEGIN_TEST(CLI_NO_OPTS, "initialization of an option");
 
     opt_s dummy = DUMMY_OPT;
     addopt(&cli, &dummy);
@@ -165,7 +173,7 @@ void test_init_del_opt() {
     sig_type_e signals[] = {CLI_SIG_INIT_SELF, CLI_SIG_INIT_OPT,
                             CLI_SIG_DEL_OPT, CLI_SIG_FREE_SELF};
 
-    BEGIN_TEST(CLI_NO_OPTS, "delopt");
+    BEGIN_TEST(CLI_NO_OPTS, "deletion of an option");
 
     opt_s dummy = DUMMY_OPT;
 
@@ -184,7 +192,7 @@ void test_del_nonexistent_opt() {
     sig_type_e signals[] = {CLI_SIG_INIT_SELF, CLI_SIG_WARN_DEL_NONEXISTENT_OPT,
                             CLI_SIG_FREE_SELF};
 
-    BEGIN_TEST(CLI_NO_OPTS, "delnonexistentopt");
+    BEGIN_TEST(CLI_NO_OPTS, "deletion of an option that doesn't exist");
 
     opt_s dummy = DUMMY_OPT;
 
@@ -205,7 +213,7 @@ void test_run_opt() {
     opt_s dummy = DUMMY_OPT;
     opt_s *opts[] = {&dummy, NULL};
 
-    BEGIN_TEST(opts, "execoptnoinput");
+    BEGIN_TEST(opts, "execution of an option with no input passed");
 
     exec_inj_args(&cli, arena, (char *[]){"test", "dummy", NULL});
 
@@ -226,7 +234,7 @@ void test_run_opt_with_input() {
 
     opt_s *opts[] = {&dummy, NULL};
 
-    BEGIN_TEST(opts, "execoptwithinput");
+    BEGIN_TEST(opts, "execution of an option with input passed");
 
     exec_inj_args(&cli, arena, (char *[]){"test", "dummy", "input", NULL});
 
@@ -250,7 +258,9 @@ void test_run_opt_with_no_input_but_wants_input_is_true() {
 
     opt_s *opts[] = {&dummy, NULL};
 
-    BEGIN_TEST(opts, "execoptwithnoinputbutinputisrequired");
+    BEGIN_TEST(
+        opts,
+        "execution of an option that requires input without input passed");
 
     exec_inj_args(&cli, arena, (char *[]){"test", "dummy", NULL});
 
@@ -275,7 +285,8 @@ void test_run_opt_with_input_but_wants_input_is_false() {
 
     opt_s *opts[] = {&dummy, NULL};
 
-    BEGIN_TEST(opts, "execoptwithinputbutinputisforbidden");
+    BEGIN_TEST(opts,
+               "execution of an option that forbids input with input passed");
 
     exec_inj_args(&cli, arena, (char *[]){"test", "dummy", "input", NULL});
 
@@ -300,7 +311,7 @@ void test_run_unrecognized_tok() {
 
     opt_s *opts[] = {&dummy, NULL};
 
-    BEGIN_TEST(opts, "execunrecognizedtok");
+    BEGIN_TEST(opts, "injection of an unrecognized token");
 
     exec_inj_args(&cli, arena, (char *[]){"test", "dommy", NULL});
 
@@ -318,6 +329,7 @@ void test_run_unrecognized_tok() {
  */
 void test_run_unallowed_tok() {
     CLI_MODE_LAIDBACK = true;
+
     sig_type_e signals[] = {CLI_SIG_INIT_SELF, CLI_SIG_ERR_UNALLOWED_ARG,
                             CLI_SIG_ERR_NOT_PASS_BUT_WANT_ARGS,
                             CLI_SIG_FREE_SELF};
@@ -327,7 +339,7 @@ void test_run_unallowed_tok() {
 
     opt_s *opts[] = {&dummy, NULL};
 
-    BEGIN_TEST(opts, "execunallowedarg");
+    BEGIN_TEST(opts, "injection of an unallowed argument");
 
     exec_inj_args(&cli, arena, (char *[]){"test", "dummy", "dummy", NULL});
 
@@ -352,7 +364,7 @@ void test_run_nonopt() {
 
     opt_s *opts[] = {&dummy, NULL};
 
-    BEGIN_TEST(opts, "execnonopt");
+    BEGIN_TEST(opts, "execution of the non-option option");
 
     exec_inj_args(&cli, arena, (char *[]){"test", "my_special_nonopt", NULL});
 
@@ -383,7 +395,8 @@ void test_run_nonopt_after_opt() {
 
     opt_s *opts[] = {&dummy, &nonopt, NULL};
 
-    BEGIN_TEST(opts, "execnonoptafteropt");
+    BEGIN_TEST(opts,
+               "execution of the non-option option after a parsed option");
 
     exec_inj_args(
         &cli, arena,
@@ -409,7 +422,7 @@ void test_run_default_opt() {
 
     opt_s *opts[] = {&default_opt, NULL};
 
-    BEGIN_TEST(opts, "execdefaultopt");
+    BEGIN_TEST(opts, "execution of the default option");
 
     exec_inj_args(&cli, arena, (char *[]){"test", NULL});
 
@@ -417,6 +430,8 @@ void test_run_default_opt() {
 }
 
 int main() {
+    CLI_SIG_PRINT = false;
+
     test_base();
     test_help();
 
@@ -436,4 +451,7 @@ int main() {
     test_run_nonopt_after_opt();
 
     test_run_default_opt();
+
+    cliprint(CLI_HINT, "\n[ezcli/integrity] ", "%d successful tests.",
+             __COUNTER__);
 }
