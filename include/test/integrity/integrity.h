@@ -3,7 +3,9 @@
 /*
  * initializes a 'mock' cli instance with specified options.
  */
-#define BEGIN_TEST(opts)                                                       \
+#define BEGIN_TEST(opts, _label)                                               \
+    char *label = _label;                                                      \
+    printf("-------------- STARTING CASE '%s' --------------\n\n", label);     \
     sig_arena_s *arena = init_sig_arena();                                     \
     cli_s cli = {0};                                                           \
     initcli(&cli, "test", "test", "test", "test", opts, CLI_ALIASES("help"),   \
@@ -12,11 +14,13 @@
 /*
  * kills a 'mock' cli instance and its corresponding signal arena.
  */
-#define END_TEST                                                               \
+#define END_TEST(signals)                                                      \
     do {                                                                       \
         freecli(&cli);                                                         \
+        assert_signals(signals);                                               \
         free_sig_arena(arena);                                                 \
         printf("test/integrity: success.\n");                                  \
+        printf("\n-------------- ENDING CASE '%s' --------------\n", label);   \
     } while (0)
 ;
 
@@ -29,3 +33,15 @@
 
 #define assert_signals(signals)                                                \
     _assert_signals(signals, ASSERTED_SIGNALS_SIZE(signals), arena)
+
+#define print_signals_asserted(sigs, size)                                     \
+    print_signals(false, NULL, sigs, size)
+
+#define print_signals_arena() print_signals(true, arena, NULL, 0)
+
+#define wrap_with_label(label, content)                                        \
+    do {                                                                       \
+        printf(label);                                                         \
+        content;                                                               \
+        printf("\n");                                                          \
+    } while (0)
