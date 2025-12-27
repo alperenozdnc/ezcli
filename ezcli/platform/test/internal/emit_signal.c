@@ -17,6 +17,7 @@ void _emit_signal(sig_arena_s *arena, sig_type_e type, uint16_t line,
     push_sig(arena, signal);
 
     if (CLI_SIG_PRINT) {
-        printf("test/integrity: emitted '%s'.\n", sig_names[signal.type]);
+        printf("test/integrity: emitted '%s' (%s:%d).\n",
+               sig_names[signal.type], file, line);
     }
 }
