@@ -1,3 +1,5 @@
+#include <ezcli/external.h>
+
 #include <test/integrity/emit_signal.h>
 #include <test/integrity/platform.h>
 #include <test/integrity/sig_arena_s.h>
@@ -18,6 +20,9 @@ void *c_realloc(void *ptr, size_t n) {
 
 void _c_exit(int status, sig_arena_s *arena) {
     emit_signal(CLI_SIG_EXIT);
+
+    if (CLI_MODE_LAIDBACK)
+        return;
 
     exit(status);
 }

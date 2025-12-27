@@ -21,12 +21,16 @@ bool handle_nonopt(cli_s *cli, bool is_unrecog, bool any_option_seen,
         emit_signal(CLI_SIG_ERR_UNRECOG_ARG);
 
         c_exit(EXIT_FAILURE);
+
+        return true;
     }
 
     if (any_option_seen) {
         emit_signal(CLI_SIG_ERR_CANT_CHAIN_NONOPT_AFTER_OPTS);
 
         c_exit(EXIT_FAILURE);
+
+        return true;
     }
 
     opt_s *nonopt = oa_match_first(cli, CLI_NONOPT);
