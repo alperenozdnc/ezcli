@@ -5,21 +5,21 @@ there exists three axes of testing:
 - integrity
 - sanity
 
-## memory:
+## memory
 this can be enforced with assertions, proper memory safety precautions,
 debuggers, and address sanitizers. that's why it doesn't belong in the test
 suite, and even if it did belong, incorrect memory operations means that
 the ezcli model can't be objectively judged without undefined behaviour,
 so the next two axes would automatically render incomplete.
 
-## integrity:
+## integrity
 this is enforced using a specific build of ezcli built for this exact purpose.
 in this 'test' platform of ezcli, all printing is removed and any execution/
 panicking behaviour is expressed as a signal instead and is pushed to a
 signal arena. finally, we can assert that specific code paths must be executed
 in artificially created, logically tight, axiomatic contexts.
 
-## sanity:
+## sanity
 this is enforced using a 'golden reference' approach. all the binaries
 that we wish to test and the inputs we want to pass are taken from the sane
 reference, then the sanity checker feeds all of the input into these binaries
